@@ -1,7 +1,0 @@
-onlyBuiltDependencies:
-  - '@hebilicious/form-actions-nuxt'
-  - '@parcel/watcher'
-  - esbuild
-  - sharp
-  - unrs-resolver
-  - vue-demi
