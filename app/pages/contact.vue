@@ -393,7 +393,7 @@
 <script setup lang="ts">
 import { useForm } from '@vorms/core';
 import z from 'zod';
-import { motion } from "motion-v"
+import { motion } from 'motion-v';
 
 // Validasi
 const contactSchema = z.object({

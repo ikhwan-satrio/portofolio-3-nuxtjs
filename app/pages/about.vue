@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { motion } from 'motion-v';
-import image from '~/assets/images/nishimiya.jpeg';
+import image from '~/assets/images/foto_kecil.jpg';
 
 // SEO Meta Tags
 useHead({

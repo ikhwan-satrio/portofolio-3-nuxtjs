@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  titleTemplate(title) {
+  titleTemplate(title: string) {
     return `ikhwan | ${title}`;
   },
   meta: [
