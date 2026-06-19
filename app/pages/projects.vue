@@ -281,7 +281,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { motion } from "motion-v"
+import { motion } from 'motion-v';
 
 // Data
 const categories = [
@@ -299,7 +299,6 @@ const projects = [
     description: 'My other portfolio with personal blog features',
     category: 'web',
     technologies: ['AstroJS', 'TypeScript', 'Tailwind CSS', 'SolidJS'],
-    demoUrl: 'https://portofolio-ikhwan.vercel.app',
     githubUrl: 'https://github.com/ikhwan-satrio/astro-portofolio',
     status: 'completed',
   },
@@ -319,6 +318,16 @@ const projects = [
     category: 'opensource',
     technologies: ['TypeScript', 'Deno', 'WebHook'],
     githubUrl: 'https://github.com/ikhwan-satrio/deno_telegrambot',
+    status: 'completed',
+  },
+  {
+    id: 4,
+    title: 'MyUangGwe',
+    description: 'tools for manage your money',
+    category: 'web',
+    technologies: ['TypeScript', 'Bun', 'Tailwind CSS', 'NuxtJs'],
+    githubUrl: 'https://github.com/ikhwan-satrio/myuanggwe-nuxt',
+    demoUrl: 'https://myuanggwe.vercel.app',
     status: 'completed',
   },
 ];
