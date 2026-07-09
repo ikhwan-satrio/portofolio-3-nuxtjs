@@ -284,12 +284,12 @@ import { ref, computed } from 'vue';
 import { motion } from 'motion-v';
 
 // Data
-const categories = [
-  { id: 'all', name: 'All Projects', count: 3 },
-  { id: 'web', name: 'Web Apps', count: 1 },
-  { id: 'mobile', name: 'Mobile', count: 0 },
-  { id: 'ui', name: 'UI/UX', count: 0 },
-  { id: 'opensource', name: 'Open Source', count: 2 },
+const categoryList = [
+  { id: 'all', name: 'All Projects' },
+  { id: 'web', name: 'Web Apps' },
+  { id: 'mobile', name: 'Mobile' },
+  { id: 'ui', name: 'UI/UX' },
+  { id: 'opensource', name: 'Open Source' },
 ];
 
 const projects = [
@@ -323,12 +323,43 @@ const projects = [
   {
     id: 4,
     title: 'MyUangGwe',
-    description: 'tools for manage your money',
+    description:
+      'Free, no-ad, multi-currency personal & collaborative finance tracker with multi-wallet, budgets, recurring transactions, and financial goals',
     category: 'web',
-    technologies: ['TypeScript', 'Bun', 'Tailwind CSS', 'NuxtJs'],
+    technologies: ['Nuxt 4', 'TypeScript', 'Drizzle ORM', 'Turso', 'GraphQL'],
     githubUrl: 'https://github.com/ikhwan-satrio/myuanggwe-nuxt',
     demoUrl: 'https://myuanggwe.vercel.app',
     status: 'completed',
+  },
+  {
+    id: 5,
+    title: 'TeddyPicker',
+    description:
+      'Fast, cross-platform desktop file manager with extension system for themes and functional plugins',
+    category: 'opensource',
+    technologies: ['Svelte 5', 'Tauri v2', 'Rust', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/ikhwan-satrio/teddypicker',
+    status: 'completed',
+  },
+  {
+    id: 6,
+    title: 'Gibterm',
+    description:
+      'Desktop terminal emulator with multi-tab PTY support, built-in file explorer, and git operations',
+    category: 'opensource',
+    technologies: ['Svelte 5', 'Tauri v2', 'Rust', 'xterm.js'],
+    githubUrl: 'https://github.com/ikhwan-satrio/gibterm',
+    status: 'completed',
+  },
+  {
+    id: 7,
+    title: 'MyUangGwe Mobile',
+    description:
+      'Mobile companion app for MyUangGwe finance tracker, built with Expo for Android and iOS',
+    category: 'mobile',
+    technologies: ['Expo', 'React Native', 'TypeScript', 'Tailwind CSS'],
+    githubUrl: 'https://github.com/ikhwan-satrio/myuanggwe-mobile',
+    status: 'in-progress',
   },
 ];
 
@@ -336,6 +367,13 @@ const projects = [
 const selectedCategory = ref('all');
 
 // Computed
+const categories = computed(() =>
+  categoryList.map(c => ({
+    ...c,
+    count: c.id === 'all' ? projects.length : projects.filter(p => p.category === c.id).length,
+  })),
+);
+
 const filteredProjects = computed(() => {
   return selectedCategory.value === 'all'
     ? projects
