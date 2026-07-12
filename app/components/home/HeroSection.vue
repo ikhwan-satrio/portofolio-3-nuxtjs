@@ -4,16 +4,16 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
 
 <template>
   <!-- Background Rays -->
-  <div class="absolute top-0 w-full h-full z-10">
-    <BitsBackgroundsLetterGlitch
-      :glitch-colors="['#2b4539', '#61dca3', '#61b3dc']"
-      :glitch-speed="50"
-      :center-vignette="true"
-      :outer-vignette="true"
-      :smooth="true"
-      class="w-full h-full"
-    />
-  </div>
+  <!-- <div class="absolute top-0 w-full h-full z-10"> -->
+  <!--   <BitsBackgroundsLetterGlitch -->
+  <!--     :glitch-colors="['#2b4539', '#61dca3', '#61b3dc']" -->
+  <!--     :glitch-speed="50" -->
+  <!--     :center-vignette="true" -->
+  <!--     :outer-vignette="true" -->
+  <!--     :smooth="true" -->
+  <!--     class="w-full h-full" -->
+  <!--   /> -->
+  <!-- </div> -->
 
   <!-- Profile Image with Circular Text -->
   <div class="relative flex items-center justify-center z-10">
@@ -48,6 +48,12 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
         'Frontend Developer',
         'Loves Qwik & Svelte',
         'Happy coding!',
+      ]"
+      :textColors="[
+        'var(--color-chart-1)',
+        'var(--color-chart-4)',
+        'var(--color-chart-3)',
+        'var(--color-chart-2)',
       ]"
       :typing-speed="75"
       :pause-duration="1500"
