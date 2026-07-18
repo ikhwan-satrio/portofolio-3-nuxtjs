@@ -21,14 +21,14 @@ useHead({
 
 // Skills data
 const skills = [
-  { name: 'JavaScript', level: 90, color: 'from-chart-4 to-chart-1' },
-  { name: 'TypeScript', level: 85, color: 'from-chart-3 to-chart-2' },
-  { name: 'React', level: 75, color: 'from-chart-2 to-chart-3' },
-  { name: 'Qwik', level: 80, color: 'from-chart-1 to-chart-4' },
-  { name: 'Svelte', level: 80, color: 'from-chart-4 to-chart-5' },
-  { name: 'Node.js', level: 85, color: 'from-chart-5 to-chart-3' },
-  { name: 'UI/UX Design', level: 70, color: 'from-chart-1 to-chart-5' },
-  { name: 'Database', level: 70, color: 'from-chart-3 to-chart-1' },
+  { name: 'JavaScript', level: 90, color: 'bg-foreground' },
+  { name: 'TypeScript', level: 85, color: 'bg-foreground/80' },
+  { name: 'React', level: 75, color: 'bg-foreground/70' },
+  { name: 'Qwik', level: 80, color: 'bg-foreground/75' },
+  { name: 'Svelte', level: 80, color: 'bg-foreground/75' },
+  { name: 'Node.js', level: 85, color: 'bg-foreground/80' },
+  { name: 'UI/UX Design', level: 70, color: 'bg-foreground/65' },
+  { name: 'Database', level: 70, color: 'bg-foreground/65' },
 ];
 
 // Interests data
@@ -74,7 +74,7 @@ const interests = [
         <ClientOnly>
           <BitsTextAnimationsSplitText
             text="About Ikhwan Satrio"
-            class-name="font-poppins text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight "
+            class-name="font-poppins text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
             ease="power3.out"
             split-type="chars"
             root-margin="-100px"
@@ -110,7 +110,7 @@ const interests = [
       <!-- Scroll Indicator -->
       <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <svg
-          class="w-6 h-6 text-muted-foreground"
+          class="w-5 h-5 text-muted-foreground"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -118,7 +118,7 @@ const interests = [
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
+            stroke-width="1.5"
             d="M19 14l-7 7m0 0l-7-7m7 7V3"
           />
         </svg>
@@ -128,16 +128,16 @@ const interests = [
     <!-- Content Sections -->
     <!-- Story Section -->
     <motion.section
-      class="w-full py-24 flex items-center border-t-2 border-border"
+      class="w-full py-28 flex items-center"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-6xl mx-auto px-6 w-full">
-        <div class="space-y-12">
+      <div class="max-w-5xl mx-auto px-6 w-full">
+        <div class="space-y-16">
           <div class="text-center">
             <h2
-              class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6 p-2"
+              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
             >
               My Story
             </h2>
@@ -146,7 +146,7 @@ const interests = [
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
               <div
-                class="space-y-4 text-muted-foreground leading-relaxed text-lg"
+                class="space-y-4 text-muted-foreground leading-relaxed text-base"
               >
                 <p>
                   My journey started with an old, barely functioning laptop. I
@@ -167,19 +167,19 @@ const interests = [
                 </p>
               </div>
 
-              <div class="flex flex-wrap gap-3 mt-8">
+              <div class="flex flex-wrap gap-2 mt-8">
                 <span
-                  class="px-4 py-2 bg-chart-1/20 text-chart-1 rounded-full text-sm border border-chart-1/30"
+                  class="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs"
                 >
                   Creative Thinker
                 </span>
                 <span
-                  class="px-4 py-2 bg-chart-4/20 text-chart-4 rounded-full text-sm border border-chart-4/30"
+                  class="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs"
                 >
                   Problem Solver
                 </span>
                 <span
-                  class="px-4 py-2 bg-chart-3/20 text-chart-3 rounded-full text-sm border border-chart-3/30"
+                  class="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs"
                 >
                   Team Player
                 </span>
@@ -188,17 +188,17 @@ const interests = [
 
             <div class="relative">
               <div
-                class="bg-linear-to-br from-chart-1/10 via-chart-4/10 to-chart-3/10 rounded-3xl p-8 backdrop-blur-sm border border-border/50"
+                class="bg-muted/50 rounded-2xl p-8"
               >
-                <div class="text-center space-y-6">
-                  <div class="text-6xl">💭</div>
+                <div class="text-center space-y-5">
+                  <div class="text-5xl">💭</div>
                   <h3
-                    class="text-2xl font-bold bg-linear-to-r from-chart-1 to-chart-3 bg-clip-text text-transparent"
+                    class="text-xl font-semibold text-foreground"
                   >
                     My Philosophy
                   </h3>
                   <blockquote
-                    class="text-muted-foreground text-lg italic leading-relaxed"
+                    class="text-muted-foreground text-base italic leading-relaxed"
                   >
                     "Code is my canvas, and ambition is my fuel."
                   </blockquote>
@@ -212,46 +212,45 @@ const interests = [
 
     <!-- Skills Section -->
     <motion.section
-      class="w-full py-24 flex items-center bg-muted/30 border-t-2 border-border"
+      class="w-full py-28 flex items-center bg-muted/30"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-6xl mx-auto px-6 w-full">
-        <div class="space-y-12">
+      <div class="max-w-5xl mx-auto px-6 w-full">
+        <div class="space-y-14">
           <div class="text-center">
             <h2
-              class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6 p-2"
+              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
             >
               Skills & Technologies
             </h2>
-            <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p class="text-muted-foreground text-base max-w-xl mx-auto">
               Here are the technologies I love working with and my proficiency
               levels
             </p>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-8">
+          <div class="grid md:grid-cols-2 gap-6">
             <div
-              v-for="(skill, index) in skills"
+              v-for="skill in skills"
               :key="skill.name"
-              class="bg-card/50 rounded-2xl p-6 border border-border/50 backdrop-blur-sm"
+              class="bg-card rounded-xl p-5 border border-border/50"
             >
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="font-semibold text-foreground text-lg">
+              <div class="flex justify-between items-center mb-3">
+                <h3 class="font-medium text-foreground text-sm">
                   {{ skill.name }}
                 </h3>
-                <span class="text-muted-foreground font-medium"
+                <span class="text-muted-foreground text-xs font-medium"
                   >{{ skill.level }}%</span
                 >
               </div>
-              <div class="w-full bg-muted rounded-full h-3 overflow-hidden">
+              <div class="w-full bg-muted rounded-full h-1.5 overflow-hidden">
                 <div
-                  class="h-full rounded-full transition-all duration-1000 ease-out bg-linear-to-r"
+                  class="h-full rounded-full transition-all duration-1000 ease-out"
                   :class="skill.color"
                   :style="{
                     width: `${skill.level}%`,
-                    animationDelay: `${index * 100}ms`,
                   }"
                 ></div>
               </div>
@@ -259,10 +258,10 @@ const interests = [
           </div>
 
           <div
-            class="text-center bg-linear-to-r from-chart-1/10 to-chart-4/10 rounded-2xl p-8 border border-border/50"
+            class="text-center bg-muted/50 rounded-2xl p-6 border border-border/30"
           >
-            <p class="text-muted-foreground text-lg">
-              🚀 Always learning new technologies and staying up-to-date with
+            <p class="text-muted-foreground text-sm">
+              Always learning new technologies and staying up-to-date with
               the latest trends in web development
             </p>
           </div>
@@ -272,20 +271,20 @@ const interests = [
 
     <!-- Journey Section -->
     <motion.section
-      class="w-full py-24 flex items-center border-t-2 border-border"
+      class="w-full py-28 flex items-center"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-6xl mx-auto px-6 w-full">
-        <div class="space-y-12">
+      <div class="max-w-5xl mx-auto px-6 w-full">
+        <div class="space-y-14">
           <div class="text-center">
             <h2
-              class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6 p-2"
+              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
             >
               My Journey
             </h2>
-            <p class="text-muted-foreground text-lg">
+            <p class="text-muted-foreground text-base">
               The path that led me to where I am today
             </p>
           </div>
@@ -293,10 +292,10 @@ const interests = [
           <div class="max-w-2xl mx-auto text-center py-16">
             <div class="space-y-6">
               <div
-                class="w-24 h-24 mx-auto bg-linear-to-r from-muted to-border rounded-full flex items-center justify-center"
+                class="w-20 h-20 mx-auto bg-muted rounded-full flex items-center justify-center"
               >
                 <svg
-                  class="w-12 h-12 text-muted-foreground"
+                  class="w-10 h-10 text-muted-foreground"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -304,29 +303,29 @@ const interests = [
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
+                    stroke-width="1.5"
                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
               </div>
 
-              <div class="space-y-4">
-                <h3 class="text-2xl font-bold text-foreground">
+              <div class="space-y-3">
+                <h3 class="text-xl font-semibold text-foreground">
                   Journey Coming Soon
                 </h3>
-                <p class="text-muted-foreground text-lg leading-relaxed">
+                <p class="text-muted-foreground text-base leading-relaxed">
                   I'm currently building my professional timeline. Check back
                   soon to see my journey unfold!
                 </p>
               </div>
 
-              <div class="pt-6">
+              <div class="pt-4">
                 <NuxtLink
                   to="/contact"
-                  class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl font-medium hover:shadow-lg transition-all duration-300"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300"
                 >
                   <svg
-                    class="w-5 h-5"
+                    class="w-4 h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -334,7 +333,7 @@ const interests = [
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="2"
+                      stroke-width="1.5"
                       d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-4.906-1.447l-3.077 1.028a.75.75 0 01-.97-.97l1.028-3.077A8.955 8.955 0 013 12C3 7.582 6.582 4 12 4s8 3.582 8 8z"
                     />
                   </svg>
@@ -349,58 +348,58 @@ const interests = [
 
     <!-- Interests Section -->
     <motion.section
-      class="w-full py-24 flex items-center bg-muted/30 border-t-2 border-border"
+      class="w-full py-28 flex items-center bg-muted/30"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-6xl mx-auto px-6 w-full">
-        <div class="space-y-12">
+      <div class="max-w-5xl mx-auto px-6 w-full">
+        <div class="space-y-14">
           <div class="text-center">
             <h2
-              class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6 p-2"
+              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
             >
               Beyond Code
             </h2>
-            <p class="text-muted-foreground text-lg">
+            <p class="text-muted-foreground text-base">
               What inspires and motivates me outside of programming
             </p>
           </div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div
               v-for="interest in interests"
               :key="interest.title"
-              class="bg-card/50 rounded-2xl p-6 text-center border border-border/50 backdrop-blur-sm hover:border-border transition-all duration-300 group"
+              class="bg-card rounded-xl p-5 text-center border border-border/50 hover:border-border transition-all duration-300 group"
             >
               <div
-                class="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300"
+                class="text-4xl mb-3 group-hover:scale-105 transition-transform duration-300"
               >
                 {{ interest.emoji }}
               </div>
-              <h3 class="text-xl font-bold text-foreground mb-2">
+              <h3 class="text-base font-semibold text-foreground mb-1">
                 {{ interest.title }}
               </h3>
-              <p class="text-muted-foreground">{{ interest.desc }}</p>
+              <p class="text-muted-foreground text-sm">{{ interest.desc }}</p>
             </div>
           </div>
 
           <div
-            class="bg-linear-to-r from-chart-1/10 via-chart-4/10 to-chart-3/10 rounded-3xl p-8 text-center border border-border/50 backdrop-blur-sm"
+            class="bg-muted/50 rounded-2xl p-8 text-center border border-border/30"
           >
-            <div class="text-4xl mb-4">🎯</div>
+            <div class="text-3xl mb-3">🎯</div>
             <h3
-              class="text-2xl font-bold bg-linear-to-r from-chart-1 to-chart-3 bg-clip-text text-transparent mb-4"
+              class="text-lg font-semibold text-foreground mb-3"
             >
               Current Focus
             </h3>
             <p
-              class="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto"
+              class="text-muted-foreground text-base leading-relaxed max-w-2xl mx-auto"
             >
               I'm currently diving deep into performance optimization with Nuxt
               and exploring the intersection of AI and web development. Always
               excited about pushing the boundaries of what's possible on the
-              web! 🚀
+              web!
             </p>
           </div>
         </div>
@@ -410,55 +409,55 @@ const interests = [
     <!-- Music -->
     <FavoriteMusicSection />
 
-    <!-- Fun fact section --->
+    <!-- Fun fact section -->
     <section
-      class="w-full min-h-screen h-fit p-6 bg-background flex items-center text-foreground border-t-2 border-border"
+      class="w-full min-h-screen h-fit p-6 bg-background flex items-center text-foreground"
     >
-      <div class="max-w-4xl mx-auto text-center px-4">
-        <h2 class="text-3xl font-bold mb-6 text-secondary-foreground">
-          🎉 Fun Facts About Me
+      <div class="max-w-3xl mx-auto text-center px-4">
+        <h2 class="text-2xl font-bold mb-8 text-foreground">
+          Fun Facts About Me
         </h2>
-        <ul class="text-lg space-y-4">
-          <li>👨‍💻 A young programmer with big ambition</li>
+        <ul class="text-base space-y-5 text-muted-foreground">
+          <li>A young programmer with big ambition</li>
           <li>
-            🎬 Huge fan of anime (especially slice-of-life and romance genres)
+            Huge fan of anime (especially slice-of-life and romance genres)
           </li>
-          <li>💪 Loves doing calisthenics every morning</li>
+          <li>Loves doing calisthenics every morning</li>
           <li>
-            🧩 Enjoys exploring new frameworks while listening to anime lo-fi
+            Enjoys exploring new frameworks while listening to anime lo-fi
           </li>
         </ul>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="w-full py-20 border-t-2 border-border">
-      <div class="max-w-4xl mx-auto text-center px-6">
+    <section class="w-full py-24">
+      <div class="max-w-3xl mx-auto text-center px-6">
         <div
-          class="bg-linear-to-br from-chart-1/10 via-chart-4/10 to-chart-3/10 rounded-3xl p-12 backdrop-blur-sm border border-border/50"
+          class="bg-muted/30 rounded-2xl p-10 border border-border/30"
         >
           <h2
-            class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6 p-2"
+            class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
           >
             Let's Build Something Amazing
           </h2>
           <p
-            class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto leading-relaxed"
+            class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
           >
             I'm always excited to work on interesting projects and collaborate
             with passionate people. Whether it's a challenging technical problem
             or an innovative idea, let's make it happen!
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
             <NuxtLink
               to="/projects"
-              class="min-w-37.5 text-center px-8 py-3 rounded-xl bg-primary text-primary-foreground font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              class="min-w-36 text-center px-6 py-2.5 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-all duration-300"
             >
               View My Work
             </NuxtLink>
             <NuxtLink
               to="/contact"
-              class="min-w-37.5 text-center px-8 py-3 rounded-xl border border-border text-muted-foreground font-medium hover:bg-muted hover:text-foreground transition-all duration-300"
+              class="min-w-36 text-center px-6 py-2.5 rounded-xl border border-border text-sm text-muted-foreground font-medium hover:bg-muted hover:text-foreground transition-all duration-300"
             >
               Get In Touch
             </NuxtLink>

@@ -24,7 +24,7 @@ useHead({
 </script>
 
 <template>
-  <BitsAnimationsTargetCursor :spin-duration="2" :hide-default-cursor="true" />
+  <DesktopTargetCursor />
   <main
     class="min-h-screen bg-background text-foreground py-16 px-4 sm:px-6 lg:px-8"
   >

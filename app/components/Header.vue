@@ -32,17 +32,17 @@ onMounted(() => {
   >
     <!-- Floating Bar -->
     <div
-      class="w-full h-15 border-2 border-border flex items-center justify-between px-6 bg-background/80 backdrop-blur-md rounded-2xl shadow-lg"
+      class="w-full h-14 border border-border/60 flex items-center justify-between px-5 bg-background/70 backdrop-blur-xl rounded-2xl shadow-sm"
     >
       <!-- Logo -->
-      <NuxtLink to="/" class="flex items-center gap-2">
+      <NuxtLink to="/" class="flex items-center gap-2.5">
         <img
           :src="icon"
           alt="Ikhwan Satrio Icon"
-          class="h-9 w-auto rounded-full"
+          class="h-8 w-auto rounded-full"
         />
         <span
-          class="hidden sm:inline font-poppins font-semibold text-foreground"
+          class="hidden sm:inline font-poppins font-medium text-sm text-foreground"
         >
           Ikhwan Satrio
         </span>
@@ -50,53 +50,53 @@ onMounted(() => {
 
       <!-- Desktop Nav -->
       <nav
-        class="hidden md:flex items-center gap-8 font-inter text-muted-foreground text-sm"
+        class="hidden md:flex items-center gap-1 font-inter text-muted-foreground text-sm"
       >
         <NuxtLink
           to="/"
-          class="hover:text-foreground transition-colors"
-          active-class="text-foreground font-semibold"
+          class="hover:text-foreground px-3 py-1.5 rounded-lg transition-colors"
+          active-class="text-foreground bg-muted"
         >
           Home
         </NuxtLink>
         <NuxtLink
           to="/about"
-          class="hover:text-foreground transition-colors"
-          active-class="text-foreground font-semibold"
+          class="hover:text-foreground px-3 py-1.5 rounded-lg transition-colors"
+          active-class="text-foreground bg-muted"
         >
           About
         </NuxtLink>
         <NuxtLink
           to="/projects"
-          class="hover:text-foreground transition-colors"
-          active-class="text-foreground font-semibold"
+          class="hover:text-foreground px-3 py-1.5 rounded-lg transition-colors"
+          active-class="text-foreground bg-muted"
         >
           Projects
         </NuxtLink>
         <NuxtLink
           to="/contact"
-          class="hover:text-foreground transition-colors"
-          active-class="text-foreground font-semibold"
+          class="hover:text-foreground px-3 py-1.5 rounded-lg transition-colors"
+          active-class="text-foreground bg-muted"
         >
           Contact
         </NuxtLink>
         <NuxtLink
           to="/blogs"
-          class="hover:text-foreground transition-colors"
-          active-class="text-foreground font-semibold"
+          class="hover:text-foreground px-3 py-1.5 rounded-lg transition-colors"
+          active-class="text-foreground bg-muted"
         >
           Blogs
         </NuxtLink>
       </nav>
 
       <!-- Actions (Desktop) -->
-      <div class="hidden md:flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-1">
         <ThemeToggle />
         <a
           href="https://github.com/ikhwan-satrio"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-linear-to-r from-blue-600 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity"
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
         >
           <Icon name="fa:github" />
           Github
@@ -104,16 +104,17 @@ onMounted(() => {
       </div>
 
       <!-- Mobile Toggle -->
-      <div class="md:hidden flex items-center gap-2">
+      <div class="md:hidden flex items-center gap-1">
         <ThemeToggle />
         <UiButton
-          variant="outline"
+          variant="ghost"
+          size="icon"
           class="hover:text-foreground p-2 transition-colors"
           @click="isOpen = !isOpen"
           :aria-label="isOpen ? 'Close menu' : 'Open menu'"
           :aria-expanded="isOpen"
         >
-          <Icon :name="isOpen ? 'lucide:x' : 'lucide:menu'" size="20" />
+          <Icon :name="isOpen ? 'lucide:x' : 'lucide:menu'" size="18" />
         </UiButton>
       </div>
     </div>
@@ -128,40 +129,40 @@ onMounted(() => {
     >
       <nav
         v-if="isOpen"
-        class="md:hidden absolute top-18 left-1/2 -translate-x-1/2 w-[90%] bg-background/95 backdrop-blur-md border border-border rounded-2xl shadow-lg flex flex-col items-center gap-4 py-6"
+        class="md:hidden absolute top-16 left-1/2 -translate-x-1/2 w-[90%] bg-background/90 backdrop-blur-xl border border-border/60 rounded-2xl shadow-lg flex flex-col items-center gap-1 py-4"
       >
         <NuxtLink
           to="/"
-          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2"
-          active-class="text-foreground font-semibold"
+          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2.5"
+          active-class="text-foreground"
         >
           Home
         </NuxtLink>
         <NuxtLink
           to="/about"
-          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2"
-          active-class="text-foreground font-semibold"
+          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2.5"
+          active-class="text-foreground"
         >
           About
         </NuxtLink>
         <NuxtLink
           to="/projects"
-          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2"
-          active-class="text-foreground font-semibold"
+          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2.5"
+          active-class="text-foreground"
         >
           Projects
         </NuxtLink>
         <NuxtLink
           to="/contact"
-          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2"
-          active-class="text-foreground font-semibold"
+          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2.5"
+          active-class="text-foreground"
         >
           Contact
         </NuxtLink>
         <NuxtLink
           to="/blogs"
-          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2"
-          active-class="text-foreground font-semibold"
+          class="text-muted-foreground hover:text-foreground font-medium transition-colors w-full text-center py-2.5"
+          active-class="text-foreground"
         >
           Blogs
         </NuxtLink>
@@ -169,7 +170,7 @@ onMounted(() => {
           href="https://github.com/ikhwan-satrio"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-2 px-5 py-2 rounded-xl bg-linear-to-r from-blue-600 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity mt-2"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-all mt-1"
         >
           <Icon name="fa:github" />
           Github

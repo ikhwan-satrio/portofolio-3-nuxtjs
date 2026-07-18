@@ -44,21 +44,21 @@ const formatDate = (date: string) => {
 </script>
 
 <template>
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-5xl mx-auto">
     <!-- Filter Section -->
     <div
-      class="mb-12 sticky top-20 z-20 bg-card/90 backdrop-blur-md py-4 rounded-xl shadow-lg px-4 border border-border"
+      class="mb-10 sticky top-20 z-20 bg-background/80 backdrop-blur-lg py-3 rounded-xl px-4 border border-border/50"
     >
-      <div class="grid gap-4 md:grid-cols-2 items-center">
+      <div class="grid gap-3 md:grid-cols-2 items-center">
         <input
           v-model="search"
           type="text"
           placeholder="Search by title..."
-          class="w-full border border-input bg-background rounded-lg px-4 py-2.5 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+          class="w-full border border-border/50 bg-muted/30 rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
         />
         <select
           v-model="selectedTag"
-          class="w-full border border-input bg-background rounded-lg px-4 py-2.5 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all"
+          class="w-full border border-border/50 bg-muted/30 rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
         >
           <option value="">All Tags</option>
           <option v-for="tag in tags" :key="tag" :value="tag">
@@ -70,7 +70,7 @@ const formatDate = (date: string) => {
 
     <!-- Blog Grid -->
     <div
-      class="grid gap-6"
+      class="grid gap-4"
       :class="
         filteredBlogs.length === 1
           ? 'grid-cols-1 place-items-center'
@@ -80,11 +80,10 @@ const formatDate = (date: string) => {
       <!-- No Results -->
       <div
         v-if="filteredBlogs.length === 0"
-        class="col-span-full text-center text-muted-foreground py-12"
+        class="col-span-full text-center text-muted-foreground py-16"
       >
-        <div class="text-6xl mb-4">🔍</div>
-        <p class="text-lg">
-          No results found for "<strong class="text-primary">{{
+        <p class="text-sm">
+          No results found for "<strong class="text-foreground">{{
             search
           }}</strong
           >"
@@ -108,24 +107,24 @@ const formatDate = (date: string) => {
               ease: 'easeOut',
             },
           }"
-          class="cursor-target cursor-none bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col w-full max-w-2xl group border-2 border-border"
+          class="cursor-target cursor-none bg-card rounded-xl overflow-hidden border border-border/50 hover:border-border transition-all duration-300 flex flex-col w-full max-w-2xl group"
         >
           <!-- Content -->
-          <div class="p-6 flex flex-col flex-1">
-            <div class="space-y-3">
+          <div class="p-5 flex flex-col flex-1">
+            <div class="space-y-2.5">
               <h2
-                class="text-xl font-bold text-foreground group-hover:text-primary transition-colors"
+                class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors"
               >
                 {{ blog.title }}
               </h2>
 
               <div
-                class="flex items-center gap-3 text-xs text-muted-foreground"
+                class="flex items-center gap-2 text-xs text-muted-foreground"
               >
                 <time>{{ formatDate(blog.date) }}</time>
-                <span v-if="blog.lang" class="text-primary font-medium">•</span>
-                <span v-if="blog.lang" class="text-primary"
-                  >lang: {{ blog.lang }}</span
+                <span v-if="blog.lang" class="text-foreground/40">·</span>
+                <span v-if="blog.lang" class="text-foreground/60"
+                  >{{ blog.lang }}</span
                 >
               </div>
 
@@ -138,12 +137,12 @@ const formatDate = (date: string) => {
               <!-- Tags -->
               <div
                 v-if="blog.tags && blog.tags.length > 0"
-                class="flex flex-wrap gap-2 pt-2"
+                class="flex flex-wrap gap-1.5 pt-1"
               >
                 <span
                   v-for="tag in blog.tags.slice(0, 3)"
                   :key="tag"
-                  class="px-3 py-1 text-xs font-medium rounded-full bg-secondary text-secondary-foreground border-2 border-border group-hover:border-primary/50 transition-colors"
+                  class="px-2 py-0.5 text-xs text-muted-foreground rounded bg-muted"
                 >
                   {{ tag }}
                 </span>
@@ -151,12 +150,12 @@ const formatDate = (date: string) => {
             </div>
 
             <p
-              class="mt-auto pt-4 text-primary text-sm group-hover:underline flex items-center gap-1 font-medium"
+              class="mt-auto pt-3 text-foreground/60 text-xs group-hover:text-foreground transition-colors flex items-center gap-1 font-medium"
             >
               Read more
               <Icon
                 name="lucide:arrow-right"
-                class="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
               />
             </p>
           </div>

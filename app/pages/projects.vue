@@ -9,7 +9,7 @@
         <ClientOnly>
           <BitsBackgroundsLightRays
             rays-origin="top-center"
-            rays-color="oklch(from var(--color-foreground) l c h / 0.2)"
+            rays-color="oklch(from var(--color-foreground) l c h / 0.15)"
             :rays-speed="1.0"
             :light-spread="0.5"
             :ray-length="0.8"
@@ -25,16 +25,16 @@
       <!-- Content -->
       <div class="relative z-10 space-y-8">
         <div
-          class="flex flex-col items-center justify-center text-center space-y-6"
+          class="flex flex-col items-center justify-center text-center space-y-5"
         >
           <h2
-            class="font-poppins text-center text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight bg-linear-to-r from-chart-1 via-chart-2 to-chart-3 bg-clip-text text-transparent p-3"
+            class="font-poppins text-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground p-3"
           >
             My Projects
           </h2>
 
           <p
-            class="font-inter text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+            class="font-inter text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
             A collection of projects I've worked on — from web apps to
             open-source tools, built with Astro, Svelte, Tauri, and more.
@@ -42,34 +42,34 @@
         </div>
 
         <!-- Stats -->
-        <div class="flex flex-wrap justify-center gap-8 mt-12">
+        <div class="flex flex-wrap justify-center gap-10 mt-12">
           <div class="text-center">
             <div
-              class="text-3xl font-bold bg-linear-to-r from-chart-1 to-chart-3 bg-clip-text text-transparent"
+              class="text-2xl font-bold text-foreground"
             >
               {{ projects.length }}+
             </div>
-            <div class="text-muted-foreground text-sm uppercase tracking-wide">
+            <div class="text-muted-foreground text-xs uppercase tracking-wider mt-1">
               Projects
             </div>
           </div>
           <div class="text-center">
             <div
-              class="text-3xl font-bold bg-linear-to-r from-chart-4 to-chart-1 bg-clip-text text-transparent"
+              class="text-2xl font-bold text-foreground"
             >
               6+
             </div>
-            <div class="text-muted-foreground text-sm uppercase tracking-wide">
+            <div class="text-muted-foreground text-xs uppercase tracking-wider mt-1">
               Technologies
             </div>
           </div>
           <div class="text-center">
             <div
-              class="text-3xl font-bold bg-linear-to-r from-chart-5 to-chart-2 bg-clip-text text-transparent"
+              class="text-2xl font-bold text-foreground"
             >
               2+
             </div>
-            <div class="text-muted-foreground text-sm uppercase tracking-wide">
+            <div class="text-muted-foreground text-xs uppercase tracking-wider mt-1">
               Years Experience
             </div>
           </div>
@@ -79,11 +79,11 @@
       <!-- Scroll Indicator -->
       <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
         <div class="flex flex-col items-center animate-bounce">
-          <span class="text-muted-foreground text-sm mb-2">
+          <span class="text-muted-foreground text-xs mb-2">
             Explore Projects
           </span>
           <svg
-            class="w-6 h-6 text-muted-foreground"
+            class="w-5 h-5 text-muted-foreground"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -91,7 +91,7 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              stroke-width="2"
+              stroke-width="1.5"
               d="M19 14l-7 7m0 0l-7-7m7 7V3"
             />
           </svg>
@@ -101,57 +101,57 @@
 
     <!-- All Projects Section -->
     <motion.section
-      class="w-full py-20"
+      class="w-full py-24"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-14">
           <h2
-            class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6"
+            class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
           >
             All Projects
           </h2>
-          <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p class="text-muted-foreground text-base max-w-xl mx-auto">
             Browse through all my projects by category
           </p>
         </div>
 
-        <!-- Category Filter (inline) -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12">
+        <!-- Category Filter -->
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
           <button
             v-for="category in categories"
             :key="category.id"
             @click="selectedCategory = category.id"
-            class="px-6 py-3 rounded-xl font-medium transition-all duration-300"
+            class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
             :class="[
               selectedCategory === category.id
-                ? 'bg-primary text-primary-foreground shadow-lg'
-                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground',
+                ? 'bg-foreground text-background'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted',
             ]"
           >
             {{ category.name }}
-            <span class="ml-2 px-2 py-0.5 bg-black/20 rounded-full text-xs">
+            <span class="ml-1.5 text-xs opacity-60">
               {{ category.count }}
             </span>
           </button>
         </div>
 
-        <!-- Projects Grid (inline) -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           <motion.div
             v-for="(project, index) in filteredProjects"
             :key="project.id"
             :initial="{ opacity: 0, y: 30 }"
             :whileInView="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }"
-            class="group bg-card/50 rounded-2xl overflow-hidden border border-border/50 backdrop-blur-sm hover:border-border transition-all duration-500 hover:transform hover:-translate-y-2 flex flex-col"
+            class="group bg-card rounded-xl overflow-hidden border border-border/50 hover:border-border transition-all duration-300 flex flex-col"
           >
             <!-- Project Image Placeholder -->
-            <div class="relative h-48 bg-linear-to-br from-muted to-card">
+            <div class="relative h-44 bg-muted/50">
               <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-4xl opacity-30">
+                <div class="text-3xl opacity-20">
                   {{
                     project.category === 'web'
                       ? '🌐'
@@ -167,7 +167,7 @@
               <!-- Status Indicator -->
               <div class="absolute top-3 left-3">
                 <div
-                  class="w-3 h-3 rounded-full"
+                  class="w-2 h-2 rounded-full"
                   :class="{
                     'bg-chart-5': project.status === 'completed',
                     'bg-chart-4': project.status === 'in-progress',
@@ -179,10 +179,10 @@
             </div>
 
             <!-- Content -->
-            <div class="p-6 flex flex-col h-full">
-              <div class="flex-1 space-y-4">
+            <div class="p-5 flex flex-col h-full">
+              <div class="flex-1 space-y-3">
                 <h3
-                  class="text-lg font-bold text-foreground group-hover:text-primary transition-colors duration-300"
+                  class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors duration-200"
                 >
                   {{ project.title }}
                 </h3>
@@ -196,13 +196,13 @@
                   <span
                     v-for="tech in project.technologies.slice(0, 3)"
                     :key="tech"
-                    class="px-2 py-1 bg-muted text-muted-foreground text-xs rounded"
+                    class="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded"
                   >
                     {{ tech }}
                   </span>
                   <span
                     v-if="project.technologies.length > 3"
-                    class="px-2 py-1 bg-muted text-muted-foreground/70 text-xs rounded"
+                    class="px-2 py-0.5 text-muted-foreground/60 text-xs"
                   >
                     +{{ project.technologies.length - 3 }}
                   </span>
@@ -210,13 +210,13 @@
               </div>
 
               <!-- Links -->
-              <div class="flex gap-2 mt-6">
+              <div class="flex gap-2 mt-5">
                 <a
                   v-if="project.demoUrl"
                   :href="project.demoUrl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex-1 text-center px-3 py-2 bg-primary text-primary-foreground text-sm rounded-lg transition-colors duration-200 hover:bg-primary/90"
+                  class="flex-1 text-center px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-lg transition-opacity duration-200 hover:opacity-90"
                 >
                   Demo
                 </a>
@@ -225,7 +225,7 @@
                   :href="project.githubUrl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="px-3 py-2 border border-border text-muted-foreground hover:bg-muted hover:text-foreground text-sm rounded-lg transition-all duration-200"
+                  class="px-3 py-1.5 border border-border text-muted-foreground hover:text-foreground hover:bg-muted text-xs rounded-lg transition-all duration-200"
                   :class="{ 'flex-1 text-center': !project.demoUrl }"
                 >
                   Code
@@ -239,36 +239,36 @@
 
     <!-- CTA Section -->
     <motion.section
-      class="w-full py-20"
+      class="w-full py-24"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-4xl mx-auto text-center px-6">
+      <div class="max-w-3xl mx-auto text-center px-6">
         <div
-          class="bg-linear-to-br from-chart-1/10 via-chart-4/10 to-chart-3/10 rounded-3xl p-12 backdrop-blur-sm border border-border/50"
+          class="bg-muted/30 rounded-2xl p-10 border border-border/30"
         >
           <h2
-            class="text-4xl font-bold bg-linear-to-r from-chart-1 via-chart-4 to-chart-3 bg-clip-text text-transparent mb-6"
+            class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
           >
             Have a Project in Mind?
           </h2>
           <p
-            class="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto leading-relaxed"
+            class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
           >
             I'm always excited to work on interesting projects and collaborate
             with passionate people. Let's bring your ideas to life!
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
             <NuxtLink
               to="/contact"
-              class="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              class="px-6 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300"
             >
               Start a Project
             </NuxtLink>
             <NuxtLink
               to="/about"
-              class="px-8 py-3 border border-border text-muted-foreground rounded-xl font-medium hover:bg-muted hover:text-foreground transition-all duration-300"
+              class="px-6 py-2.5 border border-border text-muted-foreground rounded-xl text-sm font-medium hover:bg-muted hover:text-foreground transition-all duration-300"
             >
               Learn More About Me
             </NuxtLink>

@@ -8,7 +8,7 @@
         <ClientOnly>
           <BitsBackgroundsLightRays
             rays-origin="top-center"
-            rays-color="hsl(var(--primary))"
+            rays-color="oklch(from var(--color-foreground) l c h / 0.15)"
             :rays-speed="0.8"
             :light-spread="0.4"
             :ray-length="0.6"
@@ -25,17 +25,17 @@
         class="relative z-10 w-full max-w-7xl mx-auto text-center space-y-6 sm:space-y-8"
       >
         <div
-          class="flex flex-col items-center justify-center text-center space-y-4 sm:space-y-6"
+          class="flex flex-col items-center justify-center text-center space-y-4 sm:space-y-5"
         >
           <h2
-            class="font-poppins text-center text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-linear-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent leading-tight"
+            class="font-poppins text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight"
           >
             Let's Work Together
           </h2>
         </div>
 
         <p
-          class="font-inter text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed px-2"
+          class="font-inter text-base sm:text-lg text-muted-foreground max-w-xs sm:max-w-lg md:max-w-2xl mx-auto leading-relaxed px-2"
         >
           Have a project in mind? I'd love to hear from you. Let's discuss how
           we can bring your ideas to life
@@ -47,11 +47,11 @@
       >
         <a
           href="mailto:ikwansatria3974@gmail.com"
-          class="z-10 w-full sm:w-auto px-6 sm:px-8 py-3 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-center"
+          class="z-10 w-full sm:w-auto px-6 sm:px-8 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 text-center"
         >
           Send me an Email
         </a>
-        <div class="text-muted-foreground text-xs sm:text-sm text-center">
+        <div class="text-muted-foreground text-xs text-center">
           or fill out the form below
         </div>
       </div>
@@ -61,12 +61,12 @@
         class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block"
       >
         <div class="flex flex-col items-center animate-bounce">
-          <span class="text-muted-foreground text-xs sm:text-sm mb-2">
+          <span class="text-muted-foreground text-xs mb-2">
             Get in Touch
           </span>
           <Icon
             name="lucide:arrow-down"
-            size="24"
+            size="20"
             class="text-muted-foreground"
           />
         </div>
@@ -75,33 +75,33 @@
 
     <!-- Contact Form & Info Section -->
     <motion.section
-      class="w-full bg-linear-to-b from-background to-sidebar py-12 sm:py-16 md:py-20"
+      class="w-full bg-background py-16 sm:py-20"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-14">
           <!-- Form -->
-          <div class="space-y-6 sm:space-y-8 order-2 lg:order-1">
+          <div class="space-y-6 order-2 lg:order-1">
             <div>
               <h2
-                class="text-2xl sm:text-3xl font-bold text-primary mb-3 sm:mb-4"
+                class="text-2xl font-semibold text-foreground mb-2"
               >
                 Send me a Message
               </h2>
-              <p class="text-muted-foreground text-base sm:text-lg">
+              <p class="text-muted-foreground text-sm">
                 Fill out this form and I'll get back to you within 24 hours
               </p>
             </div>
 
-            <form @submit.prevent="handleSubmit" class="space-y-4 sm:space-y-6">
+            <form @submit.prevent="handleSubmit" class="space-y-4">
               <!-- Name & Email -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label
                     for="name"
-                    class="block text-sm font-medium text-foreground mb-2"
+                    class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
                   >
                     Name *
                   </label>
@@ -109,7 +109,7 @@
                     id="name"
                     v-model="name"
                     v-bind="nameAtt"
-                    class="w-full px-3 sm:px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-sm sm:text-base"
+                    class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all text-sm"
                     placeholder="Your name"
                   />
                   <p v-if="errors.name" class="text-destructive text-xs mt-1">
@@ -120,7 +120,7 @@
                 <div>
                   <label
                     for="email"
-                    class="block text-sm font-medium text-foreground mb-2"
+                    class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
                   >
                     Email *
                   </label>
@@ -129,7 +129,7 @@
                     v-model="email"
                     v-bind="emailAtt"
                     type="email"
-                    class="w-full px-3 sm:px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-sm sm:text-base"
+                    class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all text-sm"
                     placeholder="your@email.com"
                   />
                   <p v-if="errors.email" class="text-destructive text-xs mt-1">
@@ -142,7 +142,7 @@
               <div>
                 <label
                   for="subject"
-                  class="block text-sm font-medium text-foreground mb-2"
+                  class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
                 >
                   Subject *
                 </label>
@@ -150,7 +150,7 @@
                   id="subject"
                   v-model="subject"
                   v-bind="subjectAtt"
-                  class="w-full px-3 sm:px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-sm sm:text-base"
+                  class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all text-sm"
                   placeholder="Project discussion, collaboration, etc."
                 />
                 <p v-if="errors.subject" class="text-destructive text-xs mt-1">
@@ -162,7 +162,7 @@
               <div>
                 <label
                   for="message"
-                  class="block text-sm font-medium text-foreground mb-2"
+                  class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
                 >
                   Message *
                 </label>
@@ -171,7 +171,7 @@
                   v-model="message"
                   v-bind="messageAtt"
                   rows="5"
-                  class="w-full px-3 sm:px-4 py-3 bg-secondary border border-border rounded-lg text-foreground placeholder-muted-foreground focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none text-sm sm:text-base"
+                  class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all resize-none text-sm"
                   placeholder="Tell me about your project, ideas, or just say hello..."
                 ></textarea>
                 <p v-if="errors.message" class="text-destructive text-xs mt-1">
@@ -184,11 +184,10 @@
                 <button
                   type="submit"
                   :disabled="isSubmitting"
-                  class="w-full px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-medium text-primary-foreground transition-all duration-300 text-sm sm:text-base"
+                  class="w-full px-6 py-2.5 rounded-xl font-medium text-sm transition-all duration-300"
                   :class="{
-                    'bg-muted cursor-not-allowed': isSubmitting,
-                    'bg-chart-5 hover:bg-chart-5/90': formResponse.success,
-                    'bg-primary hover:shadow-lg hover:scale-105':
+                    'bg-muted text-muted-foreground cursor-not-allowed': isSubmitting,
+                    'bg-foreground text-background hover:opacity-90':
                       !isSubmitting && !formResponse.success,
                   }"
                 >
@@ -198,7 +197,7 @@
                   >
                     <Icon
                       name="lucide:loader-2"
-                      size="20"
+                      size="18"
                       class="animate-spin"
                     />
                     Sending...
@@ -207,7 +206,7 @@
                     v-else-if="formResponse.success"
                     class="flex items-center justify-center gap-2"
                   >
-                    <Icon name="lucide:check" size="20" />
+                    <Icon name="lucide:check" size="18" />
                     Message Sent!
                   </div>
                   <span v-else>Send Message</span>
@@ -217,13 +216,13 @@
               <!-- Feedback -->
               <div
                 v-if="formResponse.success"
-                class="p-3 sm:p-4 bg-chart-5/20 border border-chart-5/50 rounded-lg text-chart-5 text-xs sm:text-sm"
+                class="p-3 bg-muted text-foreground text-xs rounded-lg"
               >
                 Thanks for reaching out! I'll get back to you soon.
               </div>
               <div
                 v-else-if="formResponse.error"
-                class="p-3 sm:p-4 bg-destructive/20 border border-destructive/50 rounded-lg text-destructive text-xs sm:text-sm"
+                class="p-3 bg-destructive/10 text-destructive text-xs rounded-lg"
               >
                 {{ formResponse.error }}
               </div>
@@ -231,20 +230,20 @@
           </div>
 
           <!-- Contact Methods -->
-          <div class="space-y-6 sm:space-y-8 order-1 lg:order-2">
+          <div class="space-y-6 order-1 lg:order-2">
             <div>
               <h2
-                class="text-2xl sm:text-3xl font-bold text-primary mb-3 sm:mb-4"
+                class="text-2xl font-semibold text-foreground mb-2"
               >
                 Get in Touch
               </h2>
-              <p class="text-muted-foreground text-base sm:text-lg">
+              <p class="text-muted-foreground text-sm">
                 Prefer to reach out directly? Here are the best ways to contact
                 me
               </p>
             </div>
 
-            <div class="space-y-3 sm:space-y-4">
+            <div class="space-y-2.5">
               <a
                 v-for="method in contactMethods"
                 :key="method.title"
@@ -253,35 +252,35 @@
                 :rel="
                   method.href.startsWith('mailto:') ? '' : 'noopener noreferrer'
                 "
-                class="group block p-4 sm:p-6 bg-secondary/50 rounded-xl sm:rounded-2xl border border-border backdrop-blur-sm hover:border-primary/50 transition-all duration-300"
+                class="group block p-4 bg-muted/30 rounded-xl border border-border/30 hover:border-border/60 transition-all duration-200"
               >
-                <div class="flex items-start gap-3 sm:gap-4">
+                <div class="flex items-start gap-3">
                   <div
-                    class="w-10 h-10 sm:w-12 sm:h-12 bg-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary/30 transition-all duration-300 shrink-0"
+                    class="w-9 h-9 bg-muted rounded-lg flex items-center justify-center text-muted-foreground group-hover:text-foreground transition-colors duration-200 shrink-0"
                   >
-                    <Icon :name="method.icon" size="20" />
+                    <Icon :name="method.icon" size="16" />
                   </div>
                   <div class="flex-1 min-w-0">
                     <h3
-                      class="font-semibold text-foreground group-hover:text-primary transition-colors duration-300 text-sm sm:text-base"
+                      class="font-medium text-foreground text-sm"
                     >
                       {{ method.title }}
                     </h3>
                     <p
-                      class="text-muted-foreground group-hover:text-foreground transition-colors duration-300 mb-1 text-sm sm:text-base wrap-break-word"
+                      class="text-muted-foreground text-sm mb-0.5 break-all"
                     >
                       {{ method.value }}
                     </p>
-                    <p class="text-muted-foreground/70 text-xs sm:text-sm">
+                    <p v-if="method.description" class="text-muted-foreground/60 text-xs">
                       {{ method.description }}
                     </p>
                   </div>
                   <div
-                    class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
+                    class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 mt-1"
                   >
                     <Icon
                       name="lucide:external-link"
-                      size="16"
+                      size="14"
                       class="text-muted-foreground"
                     />
                   </div>
@@ -290,17 +289,17 @@
             </div>
 
             <div
-              class="p-4 sm:p-6 bg-chart-5/10 rounded-xl sm:rounded-2xl border border-chart-5/30"
+              class="p-4 bg-muted/30 rounded-xl border border-border/30"
             >
-              <div class="flex items-center gap-3 mb-2 sm:mb-3">
+              <div class="flex items-center gap-2.5 mb-2">
                 <div
-                  class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-chart-5 rounded-full animate-pulse shrink-0"
+                  class="w-2 h-2 bg-chart-5 rounded-full animate-pulse shrink-0"
                 ></div>
-                <h3 class="font-semibold text-foreground text-sm sm:text-base">
+                <h3 class="font-medium text-foreground text-sm">
                   Currently Available
                 </h3>
               </div>
-              <p class="text-foreground/80 text-xs sm:text-sm leading-relaxed">
+              <p class="text-muted-foreground text-xs leading-relaxed">
                 I'm currently taking on new projects and collaborations.
                 Response time is typically within 24 hours.
               </p>
@@ -312,34 +311,34 @@
 
     <!-- FAQ Section -->
     <motion.section
-      class="w-full bg-linear-to-b from-sidebar to-background py-12 sm:py-16 md:py-20"
+      class="w-full bg-muted/20 py-16 sm:py-20"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 sm:mb-16">
-          <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-4 sm:mb-6">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-bold text-foreground mb-3">
             Frequently Asked Questions
           </h2>
-          <p class="text-muted-foreground text-base sm:text-lg">
+          <p class="text-muted-foreground text-sm">
             Quick answers to common questions about working together
           </p>
         </div>
 
-        <div class="space-y-4 sm:space-y-6">
+        <div class="space-y-3">
           <div
             v-for="(faq, index) in faqs"
             :key="index"
-            class="bg-secondary/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-border backdrop-blur-sm"
+            class="bg-card rounded-xl p-5 border border-border/50"
           >
             <h3
-              class="text-base sm:text-lg font-semibold text-foreground mb-2 sm:mb-3 leading-snug"
+              class="text-sm font-semibold text-foreground mb-2 leading-snug"
             >
               {{ faq.question }}
             </h3>
             <p
-              class="text-muted-foreground leading-relaxed text-sm sm:text-base"
+              class="text-muted-foreground leading-relaxed text-sm"
             >
               {{ faq.answer }}
             </p>
@@ -350,36 +349,36 @@
 
     <!-- Final CTA -->
     <motion.section
-      class="w-full bg-linear-to-b from-background to-sidebar py-12 sm:py-16 md:py-20"
+      class="w-full bg-background py-16 sm:py-20"
       :initial="{ opacity: 0, y: 50 }"
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         <div
-          class="bg-primary/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm border border-border"
+          class="bg-muted/30 rounded-2xl p-8 sm:p-10 border border-border/30"
         >
-          <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-4 sm:mb-6">
+          <h2 class="text-2xl sm:text-3xl font-bold text-foreground mb-3">
             Ready to Start Your Project?
           </h2>
           <p
-            class="text-foreground/80 text-base sm:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed"
+            class="text-muted-foreground text-sm mb-6 sm:mb-8 max-w-lg mx-auto leading-relaxed"
           >
             Whether you have a clear vision or just an idea, I'm here to help
             bring it to life. Let's create something amazing together.
           </p>
           <div
-            class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto"
+            class="flex flex-col sm:flex-row gap-3 justify-center max-w-md sm:max-w-none mx-auto"
           >
             <a
               href="mailto:ikwansatria3974@gmail.com"
-              class="px-6 sm:px-8 py-3 bg-primary text-primary-foreground rounded-xl font-medium shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 text-sm sm:text-base"
+              class="px-6 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300"
             >
               Start the Conversation
             </a>
             <NuxtLink
               to="/projects"
-              class="px-6 sm:px-8 py-3 border border-border text-foreground rounded-xl font-medium hover:bg-secondary transition-all duration-300 text-sm sm:text-base"
+              class="px-6 py-2.5 border border-border text-foreground rounded-xl text-sm font-medium hover:bg-muted transition-all duration-300"
             >
               View My Work
             </NuxtLink>
@@ -432,20 +431,6 @@ const contactMethods = [
     href: 'https://www.reddit.com/user/Gusionajjh',
     description: 'Join the discussion',
   },
-  // {
-  //   icon: 'fa:linkedin',
-  //   title: 'LinkedIn',
-  //   value: 'Ikhwan Satrio',
-  //   href: 'https://linkedin.com/in/ikhwan-satrio',
-  //   description: "Let's connect professionally",
-  // },
-  // {
-  //   icon: 'fa:twitter',
-  //   title: 'Twitter',
-  //   value: '@ikhwansatrio',
-  //   href: 'https://twitter.com/ikhwansatrio',
-  //   description: 'Follow me for updates',
-  // },
 ];
 
 const faqs = [

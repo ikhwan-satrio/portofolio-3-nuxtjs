@@ -3,18 +3,6 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
 </script>
 
 <template>
-  <!-- Background Rays -->
-  <!-- <div class="absolute top-0 w-full h-full z-10"> -->
-  <!--   <BitsBackgroundsLetterGlitch -->
-  <!--     :glitch-colors="['#2b4539', '#61dca3', '#61b3dc']" -->
-  <!--     :glitch-speed="50" -->
-  <!--     :center-vignette="true" -->
-  <!--     :outer-vignette="true" -->
-  <!--     :smooth="true" -->
-  <!--     class="w-full h-full" -->
-  <!--   /> -->
-  <!-- </div> -->
-
   <!-- Profile Image with Circular Text -->
   <div class="relative flex items-center justify-center z-10">
     <BitsTextAnimationsCircularText
@@ -26,18 +14,18 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
       <img
         :src="profileImage"
         alt="Profile"
-        class="h-32.5 w-32.5 rounded-full object-cover shadow-lg"
+        class="h-32 w-32 rounded-full object-cover shadow-lg"
       />
     </div>
   </div>
 
   <!-- Text Block -->
-  <div class="flex flex-col items-center gap-4 p-3 z-10">
+  <div class="flex flex-col items-center gap-5 p-3 z-10">
     <!-- Heading -->
     <h2
-      class="font-poppins text-center text-4xl sm:text-5xl md:text-6xl font-extrabold"
+      class="font-poppins text-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
     >
-      hello, i'm Ikhwan satrio
+      hello, i'm Ikhwan Satrio
     </h2>
 
     <!-- Typing Text -->
@@ -63,10 +51,10 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
   </div>
 
   <!-- Call to Action -->
-  <div class="mt-8 flex flex-wrap gap-4 justify-center z-10">
+  <div class="mt-10 flex flex-wrap gap-3 justify-center z-10">
     <NuxtLink
       to="/projects"
-      class="min-w-37.5 text-center px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+      class="min-w-36 text-center px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300"
     >
       View Projects
     </NuxtLink>
@@ -74,9 +62,9 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
       href="https://github.com/ikhwan-satrio"
       target="_blank"
       rel="noopener noreferrer"
-      class="min-w-37.5 text-center px-6 py-3 rounded-xl border border-border text-foreground font-medium hover:bg-secondary transition-all duration-300 flex items-center justify-center gap-2"
+      class="min-w-36 text-center px-6 py-2.5 rounded-xl border border-border text-sm text-foreground font-medium hover:bg-muted transition-all duration-300 flex items-center justify-center gap-2"
     >
-      <Icon name="fa:github" size="20" />
+      <Icon name="fa:github" size="18" />
       Github
     </a>
   </div>
