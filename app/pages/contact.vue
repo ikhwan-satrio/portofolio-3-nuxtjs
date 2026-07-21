@@ -421,8 +421,8 @@ const contactMethods = [
   {
     icon: 'fa:instagram',
     title: 'Instagram',
-    value: '@wantoobrrrrrr',
-    href: 'https://www.instagram.com/wantoobrrrrrr',
+    value: '@wann_strioo',
+    href: 'https://www.instagram.com/wann_strioo',
   },
   {
     icon: 'fa:reddit',
