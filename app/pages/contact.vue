@@ -61,9 +61,7 @@
         class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block"
       >
         <div class="flex flex-col items-center animate-bounce">
-          <span class="text-muted-foreground text-xs mb-2">
-            Get in Touch
-          </span>
+          <span class="text-muted-foreground text-xs mb-2"> Get in Touch </span>
           <Icon
             name="lucide:arrow-down"
             size="20"
@@ -85,9 +83,7 @@
           <!-- Form -->
           <div class="space-y-6 order-2 lg:order-1">
             <div>
-              <h2
-                class="text-2xl font-semibold text-foreground mb-2"
-              >
+              <h2 class="text-2xl font-semibold text-foreground mb-2">
                 Send me a Message
               </h2>
               <p class="text-muted-foreground text-sm">
@@ -186,7 +182,8 @@
                   :disabled="isSubmitting"
                   class="w-full px-6 py-2.5 rounded-xl font-medium text-sm transition-all duration-300"
                   :class="{
-                    'bg-muted text-muted-foreground cursor-not-allowed': isSubmitting,
+                    'bg-muted text-muted-foreground cursor-not-allowed':
+                      isSubmitting,
                     'bg-foreground text-background hover:opacity-90':
                       !isSubmitting && !formResponse.success,
                   }"
@@ -232,9 +229,7 @@
           <!-- Contact Methods -->
           <div class="space-y-6 order-1 lg:order-2">
             <div>
-              <h2
-                class="text-2xl font-semibold text-foreground mb-2"
-              >
+              <h2 class="text-2xl font-semibold text-foreground mb-2">
                 Get in Touch
               </h2>
               <p class="text-muted-foreground text-sm">
@@ -261,17 +256,16 @@
                     <Icon :name="method.icon" size="16" />
                   </div>
                   <div class="flex-1 min-w-0">
-                    <h3
-                      class="font-medium text-foreground text-sm"
-                    >
+                    <h3 class="font-medium text-foreground text-sm">
                       {{ method.title }}
                     </h3>
-                    <p
-                      class="text-muted-foreground text-sm mb-0.5 break-all"
-                    >
+                    <p class="text-muted-foreground text-sm mb-0.5 break-all">
                       {{ method.value }}
                     </p>
-                    <p v-if="method.description" class="text-muted-foreground/60 text-xs">
+                    <p
+                      v-if="method.description"
+                      class="text-muted-foreground/60 text-xs"
+                    >
                       {{ method.description }}
                     </p>
                   </div>
@@ -288,9 +282,7 @@
               </a>
             </div>
 
-            <div
-              class="p-4 bg-muted/30 rounded-xl border border-border/30"
-            >
+            <div class="p-4 bg-muted/30 rounded-xl border border-border/30">
               <div class="flex items-center gap-2.5 mb-2">
                 <div
                   class="w-2 h-2 bg-chart-5 rounded-full animate-pulse shrink-0"
@@ -332,14 +324,10 @@
             :key="index"
             class="bg-card rounded-xl p-5 border border-border/50"
           >
-            <h3
-              class="text-sm font-semibold text-foreground mb-2 leading-snug"
-            >
+            <h3 class="text-sm font-semibold text-foreground mb-2 leading-snug">
               {{ faq.question }}
             </h3>
-            <p
-              class="text-muted-foreground leading-relaxed text-sm"
-            >
+            <p class="text-muted-foreground leading-relaxed text-sm">
               {{ faq.answer }}
             </p>
           </div>
@@ -354,7 +342,9 @@
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div
+        class="border-2 border-border max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
+      >
         <div
           class="bg-muted/30 rounded-2xl p-8 sm:p-10 border border-border/30"
         >

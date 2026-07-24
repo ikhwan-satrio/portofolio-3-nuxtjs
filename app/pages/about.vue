@@ -432,7 +432,7 @@ const interests = [
 
     <!-- CTA Section -->
     <section class="w-full py-24">
-      <div class="max-w-3xl mx-auto text-center px-6">
+      <div class=" border-2 border-border max-w-3xl mx-auto text-center px-6">
         <div
           class="bg-muted/30 rounded-2xl p-10 border border-border/30"
         >

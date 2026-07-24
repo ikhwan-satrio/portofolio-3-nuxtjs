@@ -4,7 +4,9 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
 
 <template>
   <!-- Profile Image -->
-  <div class="relative flex items-center justify-center z-10 scale-75 sm:scale-85 md:scale-100">
+  <div
+    class="relative flex items-center justify-center z-10 scale-75 sm:scale-85 md:scale-100"
+  >
     <img
       :src="profileImage"
       alt="Profile"
@@ -13,14 +15,21 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
   </div>
 
   <!-- Text Block -->
-  <div class="flex flex-col items-center gap-4 sm:gap-5 px-4 z-10 w-full max-w-3xl mx-auto">
+  <div
+    class="flex flex-col items-center gap-4 sm:gap-5 px-4 z-10 w-full max-w-3xl mx-auto"
+  >
     <!-- Heading -->
-    <h2 class="font-poppins text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight flex flex-col sm:flex-row sm:flex-nowrap items-center justify-center gap-x-2 sm:gap-x-3 gap-y-0 sm:whitespace-nowrap">
+    <h2
+      class="font-poppins text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight flex flex-col sm:flex-row sm:flex-nowrap items-center justify-center gap-x-2 sm:gap-x-3 gap-y-0 sm:whitespace-nowrap"
+    >
       <span class="flex items-center gap-x-2 sm:gap-x-3">
         <BitsTextAnimationsRotatingText
           :texts="['hello', 'おはよう', 'holla']"
           main-class-name="px-2 sm:px-3 py-0.5 sm:py-1 justify-center rounded-lg"
-          :style="{ backgroundColor: 'var(--foreground)', color: 'var(--background)' }"
+          :style="{
+            backgroundColor: 'var(--foreground)',
+            color: 'var(--background)',
+          }"
           stagger-from="last"
           :initial="{ y: '100%' }"
           :animate="{ y: 0 }"
@@ -58,7 +67,9 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
   </div>
 
   <!-- Call to Action -->
-  <div class="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row flex-wrap gap-3 justify-center w-full px-4 z-10">
+  <div
+    class="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row flex-wrap gap-3 justify-center w-full px-4 z-10"
+  >
     <NuxtLink
       to="/projects"
       class="w-full sm:w-auto min-w-0 sm:min-w-36 text-center px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300"

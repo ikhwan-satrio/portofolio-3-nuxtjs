@@ -44,32 +44,28 @@
         <!-- Stats -->
         <div class="flex flex-wrap justify-center gap-10 mt-12">
           <div class="text-center">
-            <div
-              class="text-2xl font-bold text-foreground"
-            >
+            <div class="text-2xl font-bold text-foreground">
               {{ projects.length }}+
             </div>
-            <div class="text-muted-foreground text-xs uppercase tracking-wider mt-1">
+            <div
+              class="text-muted-foreground text-xs uppercase tracking-wider mt-1"
+            >
               Projects
             </div>
           </div>
           <div class="text-center">
+            <div class="text-2xl font-bold text-foreground">6+</div>
             <div
-              class="text-2xl font-bold text-foreground"
+              class="text-muted-foreground text-xs uppercase tracking-wider mt-1"
             >
-              6+
-            </div>
-            <div class="text-muted-foreground text-xs uppercase tracking-wider mt-1">
               Technologies
             </div>
           </div>
           <div class="text-center">
+            <div class="text-2xl font-bold text-foreground">2+</div>
             <div
-              class="text-2xl font-bold text-foreground"
+              class="text-muted-foreground text-xs uppercase tracking-wider mt-1"
             >
-              2+
-            </div>
-            <div class="text-muted-foreground text-xs uppercase tracking-wider mt-1">
               Years Experience
             </div>
           </div>
@@ -108,9 +104,7 @@
     >
       <div class="max-w-6xl mx-auto px-6">
         <div class="text-center mb-14">
-          <h2
-            class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-          >
+          <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             All Projects
           </h2>
           <p class="text-muted-foreground text-base max-w-xl mx-auto">
@@ -244,13 +238,9 @@
       :whileInView="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="max-w-3xl mx-auto text-center px-6">
-        <div
-          class="bg-muted/30 rounded-2xl p-10 border border-border/30"
-        >
-          <h2
-            class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-          >
+      <div class="border-2 border-border max-w-3xl mx-auto text-center px-6">
+        <div class="bg-muted/30 rounded-2xl p-10 border border-border/30">
+          <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
             Have a Project in Mind?
           </h2>
           <p
@@ -370,8 +360,11 @@ const selectedCategory = ref('all');
 const categories = computed(() =>
   categoryList.map(c => ({
     ...c,
-    count: c.id === 'all' ? projects.length : projects.filter(p => p.category === c.id).length,
-  })),
+    count:
+      c.id === 'all'
+        ? projects.length
+        : projects.filter(p => p.category === c.id).length,
+  }))
 );
 
 const filteredProjects = computed(() => {
