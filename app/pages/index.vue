@@ -18,7 +18,9 @@ useHead({
       <ClientOnly>
         <template #fallback>
           <div class="flex flex-col items-center gap-6 animate-pulse">
-            <div class="h-32 w-32 rounded-full bg-muted/50 border border-border" />
+            <div
+              class="h-32 w-32 rounded-full bg-muted/50 border border-border"
+            />
             <div class="h-8 w-72 rounded-lg bg-muted/50" />
             <div class="h-6 w-48 rounded-md bg-muted/50" />
             <div class="flex gap-3 mt-8">

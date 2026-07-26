@@ -1,10 +1,11 @@
 ---
-title: "Resolving Qt Wayland Symbol Lookup Error After System Update"
-date: "2025-08-31"
+title: 'Resolving Qt Wayland Symbol Lookup Error After System Update'
+date: '2025-08-31'
 description: "How to fix 'qs: symbol lookup error: qs: undefined symbol: *ZN15QtWaylandClient17QWaylandShmBufferC1EPNS*15QWaylandDisplayERK5QSize' after updating Arch Linux and Qt packages"
 tags: [Tech, Error-solving, Linux]
-lang: "en"
+lang: 'en'
 ---
+
 ## The Problem
 
 After updating Arch Linux and Qt packages, I encountered this error when trying to reload my Caelestia shell:
@@ -25,6 +26,7 @@ This error occurs due to an **ABI (Application Binary Interface) incompatibility
 3. **The conflict**: The compiled binary expects the old function signature, but the new library has additional parameters
 
 Looking at the symbol names:
+
 - **Expected by quickshell**: `QWaylandShmBufferC1EPNS*15QWaylandDisplayERK5QSize`
 - **Available in new Qt6**: `QWaylandShmBufferC1EPNS*15QWaylandDisplayERK5QSizeN6QImage6FormatEdP14wl_event_queue`
 
@@ -43,6 +45,7 @@ paru -S quickshell-git --rebuild
 ```
 
 Or if you're using `yay`:
+
 ```bash
 yay -S quickshell-git --rebuild
 ```
@@ -60,6 +63,7 @@ caelestia shell -d
 ```
 
 You should see successful output like:
+
 ```
 No running instances for "/etc/xdg/quickshell/caelestia/shell.qml"
 INFO: Launching config: "/etc/xdg/quickshell/caelestia/shell.qml"
@@ -72,6 +76,7 @@ INFO: Configuration Loaded
 To avoid this issue in the future:
 
 1. **Rebuild AUR packages after major Qt updates**:
+
    ```bash
    # Check which AUR packages might need rebuilding
    pacman -Qm | grep -E "(qt|wayland)"
@@ -84,6 +89,7 @@ To avoid this issue in the future:
 ## Related Issues
 
 This same pattern can affect other Qt-based AUR packages after system updates. The key indicators are:
+
 - Symbol lookup errors mentioning Qt classes
 - Version suffixes like `@@Qt_6_PRIVATE_API`
 - Mangled C++ symbol names (starting with `_ZN`)

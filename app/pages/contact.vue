@@ -47,9 +47,11 @@
       >
         <a
           href="mailto:ikwansatria3974@gmail.com"
-          class="z-10 w-full sm:w-auto px-6 sm:px-8 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 text-center"
+          class="z-10 w-full sm:w-auto"
         >
-          Send me an Email
+          <UiButton class="w-full sm:w-auto" size="lg">
+            Send me an Email
+          </UiButton>
         </a>
         <div class="text-muted-foreground text-xs text-center">
           or fill out the form below
@@ -75,7 +77,7 @@
     <motion.section
       class="w-full bg-background py-16 sm:py-20"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,21 +93,15 @@
               </p>
             </div>
 
-            <form @submit.prevent="handleSubmit" class="space-y-4">
+            <form class="space-y-4" @submit.prevent="handleSubmit">
               <!-- Name & Email -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    for="name"
-                    class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
-                  >
-                    Name *
-                  </label>
-                  <input
+                <div class="space-y-1.5">
+                  <Label for="name">Name *</Label>
+                  <UiInput
                     id="name"
                     v-model="name"
                     v-bind="nameAtt"
-                    class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all text-sm"
                     placeholder="Your name"
                   />
                   <p v-if="errors.name" class="text-destructive text-xs mt-1">
@@ -113,19 +109,13 @@
                   </p>
                 </div>
 
-                <div>
-                  <label
-                    for="email"
-                    class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
-                  >
-                    Email *
-                  </label>
-                  <input
+                <div class="space-y-1.5">
+                  <Label for="email">Email *</Label>
+                  <UiInput
                     id="email"
                     v-model="email"
                     v-bind="emailAtt"
                     type="email"
-                    class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all text-sm"
                     placeholder="your@email.com"
                   />
                   <p v-if="errors.email" class="text-destructive text-xs mt-1">
@@ -135,18 +125,12 @@
               </div>
 
               <!-- Subject -->
-              <div>
-                <label
-                  for="subject"
-                  class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
-                >
-                  Subject *
-                </label>
-                <input
+              <div class="space-y-1.5">
+                <Label for="subject">Subject *</Label>
+                <UiInput
                   id="subject"
                   v-model="subject"
                   v-bind="subjectAtt"
-                  class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all text-sm"
                   placeholder="Project discussion, collaboration, etc."
                 />
                 <p v-if="errors.subject" class="text-destructive text-xs mt-1">
@@ -155,21 +139,16 @@
               </div>
 
               <!-- Message -->
-              <div>
-                <label
-                  for="message"
-                  class="block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider"
-                >
-                  Message *
-                </label>
-                <textarea
+              <div class="space-y-1.5">
+                <Label for="message">Message *</Label>
+                <UiTextarea
                   id="message"
                   v-model="message"
                   v-bind="messageAtt"
                   rows="5"
-                  class="w-full px-3 py-2.5 bg-muted/50 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 outline-none transition-all resize-none text-sm"
                   placeholder="Tell me about your project, ideas, or just say hello..."
-                ></textarea>
+                  class="resize-none"
+                />
                 <p v-if="errors.message" class="text-destructive text-xs mt-1">
                   {{ errors.message }}
                 </p>
@@ -177,16 +156,11 @@
 
               <!-- Submit -->
               <div>
-                <button
+                <UiButton
                   type="submit"
                   :disabled="isSubmitting"
-                  class="w-full px-6 py-2.5 rounded-xl font-medium text-sm transition-all duration-300"
-                  :class="{
-                    'bg-muted text-muted-foreground cursor-not-allowed':
-                      isSubmitting,
-                    'bg-foreground text-background hover:opacity-90':
-                      !isSubmitting && !formResponse.success,
-                  }"
+                  class="w-full"
+                  :variant="isSubmitting ? 'outline' : 'default'"
                 >
                   <div
                     v-if="isSubmitting"
@@ -207,22 +181,20 @@
                     Message Sent!
                   </div>
                   <span v-else>Send Message</span>
-                </button>
+                </UiButton>
               </div>
 
               <!-- Feedback -->
-              <div
-                v-if="formResponse.success"
-                class="p-3 bg-muted text-foreground text-xs rounded-lg"
-              >
-                Thanks for reaching out! I'll get back to you soon.
-              </div>
-              <div
-                v-else-if="formResponse.error"
-                class="p-3 bg-destructive/10 text-destructive text-xs rounded-lg"
-              >
-                {{ formResponse.error }}
-              </div>
+              <UiAlert v-if="formResponse.success" variant="default">
+                <UiAlertDescription>
+                  Thanks for reaching out! I'll get back to you soon.
+                </UiAlertDescription>
+              </UiAlert>
+              <UiAlert v-else-if="formResponse.error" variant="destructive">
+                <UiAlertDescription>
+                  {{ formResponse.error }}
+                </UiAlertDescription>
+              </UiAlert>
             </form>
           </div>
 
@@ -239,15 +211,16 @@
             </div>
 
             <div class="space-y-2.5">
-              <a
+              <UiCard
                 v-for="method in contactMethods"
                 :key="method.title"
+                as="a"
                 :href="method.href"
                 :target="method.href.startsWith('mailto:') ? '_self' : '_blank'"
                 :rel="
                   method.href.startsWith('mailto:') ? '' : 'noopener noreferrer'
                 "
-                class="group block p-4 bg-muted/30 rounded-xl border border-border/30 hover:border-border/60 transition-all duration-200"
+                class="group block p-4 bg-muted/30 border-border/30 hover:border-border/60 transition-all duration-200 cursor-pointer"
               >
                 <div class="flex items-start gap-3">
                   <div
@@ -279,14 +252,14 @@
                     />
                   </div>
                 </div>
-              </a>
+              </UiCard>
             </div>
 
-            <div class="p-4 bg-muted/30 rounded-xl border border-border/30">
+            <UiCard class="p-4 bg-muted/30 border-border/30">
               <div class="flex items-center gap-2.5 mb-2">
                 <div
                   class="w-2 h-2 bg-chart-5 rounded-full animate-pulse shrink-0"
-                ></div>
+                />
                 <h3 class="font-medium text-foreground text-sm">
                   Currently Available
                 </h3>
@@ -295,7 +268,7 @@
                 I'm currently taking on new projects and collaborations.
                 Response time is typically within 24 hours.
               </p>
-            </div>
+            </UiCard>
           </div>
         </div>
       </div>
@@ -305,7 +278,7 @@
     <motion.section
       class="w-full bg-muted/20 py-16 sm:py-20"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -319,18 +292,14 @@
         </div>
 
         <div class="space-y-3">
-          <div
-            v-for="(faq, index) in faqs"
-            :key="index"
-            class="bg-card rounded-xl p-5 border border-border/50"
-          >
+          <UiCard v-for="(faq, index) in faqs" :key="index" class="p-5">
             <h3 class="text-sm font-semibold text-foreground mb-2 leading-snug">
               {{ faq.question }}
             </h3>
             <p class="text-muted-foreground leading-relaxed text-sm">
               {{ faq.answer }}
             </p>
-          </div>
+          </UiCard>
         </div>
       </div>
     </motion.section>
@@ -339,41 +308,37 @@
     <motion.section
       class="w-full bg-background py-16 sm:py-20"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div
-        class="border-2 border-border max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8"
-      >
-        <div
-          class="bg-muted/30 rounded-2xl p-8 sm:p-10 border border-border/30"
-        >
-          <h2 class="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-            Ready to Start Your Project?
-          </h2>
-          <p
-            class="text-muted-foreground text-sm mb-6 sm:mb-8 max-w-lg mx-auto leading-relaxed"
-          >
-            Whether you have a clear vision or just an idea, I'm here to help
-            bring it to life. Let's create something amazing together.
-          </p>
-          <div
-            class="flex flex-col sm:flex-row gap-3 justify-center max-w-md sm:max-w-none mx-auto"
-          >
-            <a
-              href="mailto:ikwansatria3974@gmail.com"
-              class="px-6 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300"
+      <div class="max-w-3xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+        <UiCard class="bg-muted/30">
+          <UiCardContent class="pt-6 p-8 sm:p-10">
+            <h2 class="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+              Ready to Start Your Project?
+            </h2>
+            <p
+              class="text-muted-foreground text-sm mb-6 sm:mb-8 max-w-lg mx-auto leading-relaxed"
             >
-              Start the Conversation
-            </a>
-            <NuxtLink
-              to="/projects"
-              class="px-6 py-2.5 border border-border text-foreground rounded-xl text-sm font-medium hover:bg-muted transition-all duration-300"
+              Whether you have a clear vision or just an idea, I'm here to help
+              bring it to life. Let's create something amazing together.
+            </p>
+            <div
+              class="flex flex-col sm:flex-row gap-3 justify-center max-w-md sm:max-w-none mx-auto"
             >
-              View My Work
-            </NuxtLink>
-          </div>
-        </div>
+              <a href="mailto:ikwansatria3974@gmail.com">
+                <UiButton class="w-full sm:w-auto">
+                  Start the Conversation
+                </UiButton>
+              </a>
+              <NuxtLink to="/projects">
+                <UiButton variant="outline" class="w-full sm:w-auto">
+                  View My Work
+                </UiButton>
+              </NuxtLink>
+            </div>
+          </UiCardContent>
+        </UiCard>
       </div>
     </motion.section>
   </main>
@@ -383,6 +348,7 @@
 import { useForm } from '@vorms/core';
 import z from 'zod';
 import { motion } from 'motion-v';
+import { Label } from '~/components/ui/label';
 
 // Validasi
 const contactSchema = z.object({

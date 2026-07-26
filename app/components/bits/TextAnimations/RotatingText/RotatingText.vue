@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<RotatingTextProps>(), {
     ({
       type: 'spring',
       damping: 25,
-      stiffness: 300
+      stiffness: 300,
     }) as TransitionType,
   initial: () => ({ y: '100%', opacity: 0 }) as InitialType,
   animate: () => ({ y: 0, opacity: 1 }) as AnimateType,
@@ -57,7 +57,7 @@ const props = withDefaults(defineProps<RotatingTextProps>(), {
   staggerFrom: 'first',
   loop: true,
   auto: true,
-  splitBy: 'characters'
+  splitBy: 'characters',
 });
 
 const currentTextIndex = ref(0);
@@ -73,7 +73,9 @@ const splitIntoCharacters = (text: string): string[] => {
         segment: (text: string) => Iterable<{ segment: string }>;
       };
     };
-    const segmenter = new IntlWithSegmenter.Segmenter('en', { granularity: 'grapheme' });
+    const segmenter = new IntlWithSegmenter.Segmenter('en', {
+      granularity: 'grapheme',
+    });
     return [...segmenter.segment(text)].map(({ segment }) => segment);
   }
 
@@ -87,28 +89,28 @@ const elements = computed((): WordElement[] => {
       const words = currentText.split(' ');
       return words.map((word, i) => ({
         characters: splitIntoCharacters(word),
-        needsSpace: i !== words.length - 1
+        needsSpace: i !== words.length - 1,
       }));
     }
     case 'words': {
       const words = currentText.split(' ');
       return words.map((word, i) => ({
         characters: [word],
-        needsSpace: i !== words.length - 1
+        needsSpace: i !== words.length - 1,
       }));
     }
     case 'lines': {
       const lines = currentText.split('\n');
       return lines.map((line, i) => ({
         characters: [line],
-        needsSpace: i !== lines.length - 1
+        needsSpace: i !== lines.length - 1,
       }));
     }
     default: {
       const parts = currentText.split(props.splitBy!);
       return parts.map((part, i) => ({
         characters: [part],
-        needsSpace: i !== parts.length - 1
+        needsSpace: i !== parts.length - 1,
       }));
     }
   }
@@ -142,7 +144,11 @@ const handleIndexChange = (newIndex: number): void => {
 
 const next = (): void => {
   const isAtEnd = currentTextIndex.value === props.texts.length - 1;
-  const nextIndex = isAtEnd ? (props.loop ? 0 : currentTextIndex.value) : currentTextIndex.value + 1;
+  const nextIndex = isAtEnd
+    ? props.loop
+      ? 0
+      : currentTextIndex.value
+    : currentTextIndex.value + 1;
 
   if (nextIndex !== currentTextIndex.value) {
     handleIndexChange(nextIndex);
@@ -192,7 +198,7 @@ defineExpose({
   next,
   previous,
   jumpTo,
-  reset
+  reset,
 });
 
 watch(
@@ -224,15 +230,28 @@ onUnmounted(() => {
       {{ texts[currentTextIndex] }}
     </span>
 
-    <AnimatePresence :mode="animatePresenceMode" :initial="animatePresenceInitial">
+    <AnimatePresence
+      :mode="animatePresenceMode"
+      :initial="animatePresenceInitial"
+    >
       <Motion
         :key="currentTextIndex"
         tag="span"
-        :class="cn(splitBy === 'lines' ? 'flex flex-col w-full' : 'flex flex-wrap whitespace-pre-wrap relative')"
+        :class="
+          cn(
+            splitBy === 'lines'
+              ? 'flex flex-col w-full'
+              : 'flex flex-wrap whitespace-pre-wrap relative'
+          )
+        "
         aria-hidden="true"
         layout
       >
-        <span v-for="(wordObj, wordIndex) in elements" :key="wordIndex" :class="cn('inline-flex', splitLevelClassName)">
+        <span
+          v-for="(wordObj, wordIndex) in elements"
+          :key="wordIndex"
+          :class="cn('inline-flex', splitLevelClassName)"
+        >
           <Motion
             v-for="(char, charIndex) in wordObj.characters"
             :key="charIndex"
@@ -243,15 +262,18 @@ onUnmounted(() => {
             :transition="{
               ...transition,
               delay: getStaggerDelay(
-                elements.slice(0, wordIndex).reduce((sum, word) => sum + word.characters.length, 0) + charIndex,
+                elements
+                  .slice(0, wordIndex)
+                  .reduce((sum, word) => sum + word.characters.length, 0) +
+                  charIndex,
                 elements.reduce((sum, word) => sum + word.characters.length, 0)
-              )
+              ),
             }"
             :class="cn('inline-block', elementLevelClassName)"
           >
             {{ char }}
           </Motion>
-          <span v-if="wordObj.needsSpace" class="whitespace-pre"></span>
+          <span v-if="wordObj.needsSpace" class="whitespace-pre" />
         </span>
       </Motion>
     </AnimatePresence>

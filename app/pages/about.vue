@@ -87,7 +87,7 @@ const interests = [
           />
           <BitsTextAnimationsTextType
             class="font-inter text-lg sm:text-xl md:text-2xl"
-            :textColors="[
+            :text-colors="[
               'var(--color-chart-1)',
               'var(--color-chart-4)',
               'var(--color-chart-3)',
@@ -130,15 +130,13 @@ const interests = [
     <motion.section
       class="w-full py-28 flex items-center"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-5xl mx-auto px-6 w-full">
         <div class="space-y-16">
           <div class="text-center">
-            <h2
-              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-            >
+            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               My Story
             </h2>
           </div>
@@ -168,33 +166,17 @@ const interests = [
               </div>
 
               <div class="flex flex-wrap gap-2 mt-8">
-                <span
-                  class="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs"
-                >
-                  Creative Thinker
-                </span>
-                <span
-                  class="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs"
-                >
-                  Problem Solver
-                </span>
-                <span
-                  class="px-3 py-1.5 bg-muted text-muted-foreground rounded-full text-xs"
-                >
-                  Team Player
-                </span>
+                <UiBadge variant="secondary">Creative Thinker</UiBadge>
+                <UiBadge variant="secondary">Problem Solver</UiBadge>
+                <UiBadge variant="secondary">Team Player</UiBadge>
               </div>
             </div>
 
             <div class="relative">
-              <div
-                class="bg-muted/50 rounded-2xl p-8"
-              >
-                <div class="text-center space-y-5">
+              <UiCard class="bg-muted/50">
+                <UiCardContent class="text-center space-y-5 pt-6">
                   <div class="text-5xl">💭</div>
-                  <h3
-                    class="text-xl font-semibold text-foreground"
-                  >
+                  <h3 class="text-xl font-semibold text-foreground">
                     My Philosophy
                   </h3>
                   <blockquote
@@ -202,8 +184,8 @@ const interests = [
                   >
                     "Code is my canvas, and ambition is my fuel."
                   </blockquote>
-                </div>
-              </div>
+                </UiCardContent>
+              </UiCard>
             </div>
           </div>
         </div>
@@ -214,15 +196,13 @@ const interests = [
     <motion.section
       class="w-full py-28 flex items-center bg-muted/30"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-5xl mx-auto px-6 w-full">
         <div class="space-y-14">
           <div class="text-center">
-            <h2
-              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-            >
+            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Skills & Technologies
             </h2>
             <p class="text-muted-foreground text-base max-w-xl mx-auto">
@@ -232,11 +212,7 @@ const interests = [
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div
-              v-for="skill in skills"
-              :key="skill.name"
-              class="bg-card rounded-xl p-5 border border-border/50"
-            >
+            <UiCard v-for="skill in skills" :key="skill.name" class="p-5">
               <div class="flex justify-between items-center mb-3">
                 <h3 class="font-medium text-foreground text-sm">
                   {{ skill.name }}
@@ -245,26 +221,18 @@ const interests = [
                   >{{ skill.level }}%</span
                 >
               </div>
-              <div class="w-full bg-muted rounded-full h-1.5 overflow-hidden">
-                <div
-                  class="h-full rounded-full transition-all duration-1000 ease-out"
-                  :class="skill.color"
-                  :style="{
-                    width: `${skill.level}%`,
-                  }"
-                ></div>
-              </div>
-            </div>
+              <UiProgress :model-value="skill.level" class="h-1.5" />
+            </UiCard>
           </div>
 
-          <div
-            class="text-center bg-muted/50 rounded-2xl p-6 border border-border/30"
-          >
-            <p class="text-muted-foreground text-sm">
-              Always learning new technologies and staying up-to-date with
-              the latest trends in web development
-            </p>
-          </div>
+          <UiCard class="text-center bg-muted/50 p-6">
+            <UiCardContent class="pt-6">
+              <p class="text-muted-foreground text-sm">
+                Always learning new technologies and staying up-to-date with the
+                latest trends in web development
+              </p>
+            </UiCardContent>
+          </UiCard>
         </div>
       </div>
     </motion.section>
@@ -273,15 +241,13 @@ const interests = [
     <motion.section
       class="w-full py-28 flex items-center"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-5xl mx-auto px-6 w-full">
         <div class="space-y-14">
           <div class="text-center">
-            <h2
-              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-            >
+            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               My Journey
             </h2>
             <p class="text-muted-foreground text-base">
@@ -320,24 +286,11 @@ const interests = [
               </div>
 
               <div class="pt-4">
-                <NuxtLink
-                  to="/contact"
-                  class="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300"
-                >
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-4.906-1.447l-3.077 1.028a.75.75 0 01-.97-.97l1.028-3.077A8.955 8.955 0 013 12C3 7.582 6.582 4 12 4s8 3.582 8 8z"
-                    />
-                  </svg>
-                  Let's Connect
+                <NuxtLink to="/contact">
+                  <UiButton>
+                    <Icon name="lucide:message-circle" size="16" class="mr-2" />
+                    Let's Connect
+                  </UiButton>
                 </NuxtLink>
               </div>
             </div>
@@ -350,15 +303,13 @@ const interests = [
     <motion.section
       class="w-full py-28 flex items-center bg-muted/30"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-5xl mx-auto px-6 w-full">
         <div class="space-y-14">
           <div class="text-center">
-            <h2
-              class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-            >
+            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
               Beyond Code
             </h2>
             <p class="text-muted-foreground text-base">
@@ -367,41 +318,41 @@ const interests = [
           </div>
 
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div
+            <UiCard
               v-for="interest in interests"
               :key="interest.title"
-              class="bg-card rounded-xl p-5 text-center border border-border/50 hover:border-border transition-all duration-300 group"
+              class="p-5 text-center hover:border-border transition-all duration-300 group cursor-default"
             >
-              <div
-                class="text-4xl mb-3 group-hover:scale-105 transition-transform duration-300"
-              >
-                {{ interest.emoji }}
-              </div>
-              <h3 class="text-base font-semibold text-foreground mb-1">
-                {{ interest.title }}
-              </h3>
-              <p class="text-muted-foreground text-sm">{{ interest.desc }}</p>
-            </div>
+              <UiCardContent class="pt-6">
+                <div
+                  class="text-4xl mb-3 group-hover:scale-105 transition-transform duration-300"
+                >
+                  {{ interest.emoji }}
+                </div>
+                <h3 class="text-base font-semibold text-foreground mb-1">
+                  {{ interest.title }}
+                </h3>
+                <p class="text-muted-foreground text-sm">{{ interest.desc }}</p>
+              </UiCardContent>
+            </UiCard>
           </div>
 
-          <div
-            class="bg-muted/50 rounded-2xl p-8 text-center border border-border/30"
-          >
-            <div class="text-3xl mb-3">🎯</div>
-            <h3
-              class="text-lg font-semibold text-foreground mb-3"
-            >
-              Current Focus
-            </h3>
-            <p
-              class="text-muted-foreground text-base leading-relaxed max-w-2xl mx-auto"
-            >
-              I'm currently diving deep into performance optimization with Nuxt
-              and exploring the intersection of AI and web development. Always
-              excited about pushing the boundaries of what's possible on the
-              web!
-            </p>
-          </div>
+          <UiCard class="bg-muted/50 p-8 text-center">
+            <UiCardContent class="pt-6">
+              <div class="text-3xl mb-3">🎯</div>
+              <h3 class="text-lg font-semibold text-foreground mb-3">
+                Current Focus
+              </h3>
+              <p
+                class="text-muted-foreground text-base leading-relaxed max-w-2xl mx-auto"
+              >
+                I'm currently diving deep into performance optimization with
+                Nuxt and exploring the intersection of AI and web development.
+                Always excited about pushing the boundaries of what's possible
+                on the web!
+              </p>
+            </UiCardContent>
+          </UiCard>
         </div>
       </div>
     </motion.section>
@@ -432,37 +383,31 @@ const interests = [
 
     <!-- CTA Section -->
     <section class="w-full py-24">
-      <div class=" border-2 border-border max-w-3xl mx-auto text-center px-6">
-        <div
-          class="bg-muted/30 rounded-2xl p-10 border border-border/30"
-        >
-          <h2
-            class="text-3xl sm:text-4xl font-bold text-foreground mb-4"
-          >
-            Let's Build Something Amazing
-          </h2>
-          <p
-            class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
-          >
-            I'm always excited to work on interesting projects and collaborate
-            with passionate people. Whether it's a challenging technical problem
-            or an innovative idea, let's make it happen!
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <NuxtLink
-              to="/projects"
-              class="min-w-36 text-center px-6 py-2.5 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-all duration-300"
+      <div class="max-w-3xl mx-auto text-center px-6">
+        <UiCard class="bg-muted/30">
+          <UiCardContent class="pt-6">
+            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              Let's Build Something Amazing
+            </h2>
+            <p
+              class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
             >
-              View My Work
-            </NuxtLink>
-            <NuxtLink
-              to="/contact"
-              class="min-w-36 text-center px-6 py-2.5 rounded-xl border border-border text-sm text-muted-foreground font-medium hover:bg-muted hover:text-foreground transition-all duration-300"
-            >
-              Get In Touch
-            </NuxtLink>
-          </div>
-        </div>
+              I'm always excited to work on interesting projects and collaborate
+              with passionate people. Whether it's a challenging technical
+              problem or an innovative idea, let's make it happen!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <NuxtLink to="/projects">
+                <UiButton class="min-w-36">View My Work</UiButton>
+              </NuxtLink>
+              <NuxtLink to="/contact">
+                <UiButton variant="outline" class="min-w-36">
+                  Get In Touch
+                </UiButton>
+              </NuxtLink>
+            </div>
+          </UiCardContent>
+        </UiCard>
       </div>
     </section>
   </main>

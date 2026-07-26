@@ -11,7 +11,7 @@ interface TargetCursorProps {
 const props = withDefaults(defineProps<TargetCursorProps>(), {
   targetSelector: '.cursor-target',
   spinDuration: 2,
-  hideDefaultCursor: true
+  hideDefaultCursor: true,
 });
 
 const cursorRef = useTemplateRef('cursorRef');
@@ -21,7 +21,7 @@ const spinTl = ref<gsap.core.Timeline | null>(null);
 const constants = {
   borderWidth: 3,
   cornerSize: 12,
-  parallaxStrength: 0.00005
+  parallaxStrength: 0.00005,
 };
 
 const moveCursor = (x: number, y: number) => {
@@ -31,7 +31,7 @@ const moveCursor = (x: number, y: number) => {
     x,
     y,
     duration: 0.1,
-    ease: 'power3.out'
+    ease: 'power3.out',
   });
 };
 
@@ -46,7 +46,9 @@ const setupAnimation = () => {
   }
 
   const cursor = cursorRef.value;
-  cornersRef.value = cursor.querySelectorAll<HTMLDivElement>('.target-cursor-corner');
+  cornersRef.value = cursor.querySelectorAll<HTMLDivElement>(
+    '.target-cursor-corner'
+  );
 
   let activeTarget: Element | null = null;
   let currentTargetMove: ((ev: Event) => void) | null = null;
@@ -71,7 +73,7 @@ const setupAnimation = () => {
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
     opacity: 1,
-    display: 'block'
+    display: 'block',
   });
 
   const createSpinTimeline = () => {
@@ -81,7 +83,7 @@ const setupAnimation = () => {
     spinTl.value = gsap.timeline({ repeat: -1 }).to(cursor, {
       rotation: '+=360',
       duration: props.spinDuration,
-      ease: 'none'
+      ease: 'none',
     });
   };
 
@@ -139,19 +141,19 @@ const setupAnimation = () => {
 
       const tlOffset = {
         x: rect.left - cursorCenterX - borderWidth,
-        y: rect.top - cursorCenterY - borderWidth
+        y: rect.top - cursorCenterY - borderWidth,
       };
       const trOffset = {
         x: rect.right - cursorCenterX + borderWidth - cornerSize,
-        y: rect.top - cursorCenterY - borderWidth
+        y: rect.top - cursorCenterY - borderWidth,
       };
       const brOffset = {
         x: rect.right - cursorCenterX + borderWidth - cornerSize,
-        y: rect.bottom - cursorCenterY + borderWidth - cornerSize
+        y: rect.bottom - cursorCenterY + borderWidth - cornerSize,
       };
       const blOffset = {
         x: rect.left - cursorCenterX - borderWidth,
-        y: rect.bottom - cursorCenterY + borderWidth - cornerSize
+        y: rect.bottom - cursorCenterY + borderWidth - cornerSize,
       };
 
       if (mouseX !== undefined && mouseY !== undefined) {
@@ -183,7 +185,7 @@ const setupAnimation = () => {
             x: offset.x,
             y: offset.y,
             duration: 0.2,
-            ease: 'power2.out'
+            ease: 'power2.out',
           },
           0
         );
@@ -220,7 +222,7 @@ const setupAnimation = () => {
           { x: -cornerSize * 1.5, y: -cornerSize * 1.5 },
           { x: cornerSize * 0.5, y: -cornerSize * 1.5 },
           { x: cornerSize * 0.5, y: cornerSize * 0.5 },
-          { x: -cornerSize * 1.5, y: cornerSize * 0.5 }
+          { x: -cornerSize * 1.5, y: cornerSize * 0.5 },
         ];
 
         const tl = gsap.timeline();
@@ -233,7 +235,7 @@ const setupAnimation = () => {
               x: pos.x,
               y: pos.y,
               duration: 0.3,
-              ease: 'power3.out'
+              ease: 'power3.out',
             },
             0
           );
@@ -242,14 +244,17 @@ const setupAnimation = () => {
 
       resumeTimeout = setTimeout(() => {
         if (!activeTarget && cursorRef.value && spinTl.value) {
-          const currentRotation = gsap.getProperty(cursorRef.value, 'rotation') as number;
+          const currentRotation = gsap.getProperty(
+            cursorRef.value,
+            'rotation'
+          ) as number;
           const normalizedRotation = currentRotation % 360;
 
           spinTl.value.kill();
           spinTl.value = gsap.timeline({ repeat: -1 }).to(cursorRef.value, {
             rotation: '+=360',
             duration: props.spinDuration,
-            ease: 'none'
+            ease: 'none',
           });
 
           gsap.to(cursorRef.value, {
@@ -258,7 +263,7 @@ const setupAnimation = () => {
             ease: 'none',
             onComplete: () => {
               spinTl.value?.restart();
-            }
+            },
           });
         }
         resumeTimeout = null;
@@ -305,7 +310,7 @@ const setupAnimation = () => {
         y: 0,
         rotation: 0,
         opacity: 0,
-        display: 'none'
+        display: 'none',
       });
     }
 
@@ -340,7 +345,7 @@ watch(
       spinTl.value = gsap.timeline({ repeat: -1 }).to(cursorRef.value, {
         rotation: '+=360',
         duration: props.spinDuration,
-        ease: 'none'
+        ease: 'none',
       });
     }
   },

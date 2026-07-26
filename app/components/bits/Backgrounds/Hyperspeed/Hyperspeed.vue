@@ -9,7 +9,14 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, watch, useTemplateRef } from 'vue';
 import * as THREE from 'three';
-import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
+import {
+  BloomEffect,
+  EffectComposer,
+  EffectPass,
+  RenderPass,
+  SMAAEffect,
+  SMAAPreset,
+} from 'postprocessing';
 
 interface Distortion {
   uniforms: Record<string, { value: unknown }>;
@@ -67,10 +74,12 @@ interface HyperspeedProps {
 }
 
 const props = withDefaults(defineProps<HyperspeedProps>(), {
-  effectOptions: () => ({})
+  effectOptions: () => ({}),
 });
 
-const hyperspeedContainer = useTemplateRef<HTMLDivElement>('hyperspeedContainer');
+const hyperspeedContainer = useTemplateRef<HTMLDivElement>(
+  'hyperspeedContainer'
+);
 let appRef: App | null = null;
 
 const defaultOptions: HyperspeedOptions = {
@@ -107,8 +116,8 @@ const defaultOptions: HyperspeedOptions = {
     brokenLines: 0xffffff,
     leftCars: [0xd856bf, 0x6750a2, 0xc247ac],
     rightCars: [0x03b3c3, 0x0e5ea5, 0x324555],
-    sticks: 0x03b3c3
-  }
+    sticks: 0x03b3c3,
+  },
 };
 
 function nsin(val: number) {
@@ -117,28 +126,28 @@ function nsin(val: number) {
 
 const mountainUniforms = {
   uFreq: { value: new THREE.Vector3(3, 6, 10) },
-  uAmp: { value: new THREE.Vector3(30, 30, 20) }
+  uAmp: { value: new THREE.Vector3(30, 30, 20) },
 };
 
 const xyUniforms = {
   uFreq: { value: new THREE.Vector2(5, 2) },
-  uAmp: { value: new THREE.Vector2(25, 15) }
+  uAmp: { value: new THREE.Vector2(25, 15) },
 };
 
 const LongRaceUniforms = {
   uFreq: { value: new THREE.Vector2(2, 3) },
-  uAmp: { value: new THREE.Vector2(35, 10) }
+  uAmp: { value: new THREE.Vector2(35, 10) },
 };
 
 const turbulentUniforms = {
   uFreq: { value: new THREE.Vector4(4, 8, 8, 1) },
-  uAmp: { value: new THREE.Vector4(25, 5, 10, 10) }
+  uAmp: { value: new THREE.Vector4(25, 5, 10, 10) },
 };
 
 const deepUniforms = {
   uFreq: { value: new THREE.Vector2(4, 8) },
   uAmp: { value: new THREE.Vector2(10, 20) },
-  uPowY: { value: new THREE.Vector2(20, 2) }
+  uPowY: { value: new THREE.Vector2(20, 2) },
 };
 
 const distortions: Distortions = {
@@ -175,7 +184,7 @@ const distortions: Distortions = {
       const lookAtAmp = new THREE.Vector3(2, 2, 2);
       const lookAtOffset = new THREE.Vector3(0, 0, -5);
       return distortion.multiply(lookAtAmp).add(lookAtOffset);
-    }
+    },
   },
   xyDistortion: {
     uniforms: xyUniforms,
@@ -200,13 +209,16 @@ const distortions: Distortions = {
         Math.cos(progress * Math.PI * uFreq.x + time) * uAmp.x -
           Math.cos(movementProgressFix * Math.PI * uFreq.x + time) * uAmp.x,
         Math.sin(progress * Math.PI * uFreq.y + time + Math.PI / 2) * uAmp.y -
-          Math.sin(movementProgressFix * Math.PI * uFreq.y + time + Math.PI / 2) * uAmp.y,
+          Math.sin(
+            movementProgressFix * Math.PI * uFreq.y + time + Math.PI / 2
+          ) *
+            uAmp.y,
         0
       );
       const lookAtAmp = new THREE.Vector3(2, 0.4, 1);
       const lookAtOffset = new THREE.Vector3(0, 0, -3);
       return distortion.multiply(lookAtAmp).add(lookAtOffset);
-    }
+    },
   },
   LongRaceDistortion: {
     uniforms: LongRaceUniforms,
@@ -237,7 +249,7 @@ const distortions: Distortions = {
       const lookAtAmp = new THREE.Vector3(1, 1, 0);
       const lookAtOffset = new THREE.Vector3(0, 0, -5);
       return distortion.multiply(lookAtAmp).add(lookAtOffset);
-    }
+    },
   },
   turbulentDistortion: {
     uniforms: turbulentUniforms,
@@ -274,11 +286,16 @@ const distortions: Distortions = {
 
       const getX = (p: number) =>
         Math.cos(Math.PI * p * uFreq.x + time) * uAmp.x +
-        Math.pow(Math.cos(Math.PI * p * uFreq.y + time * (uFreq.y / uFreq.x)), 2) * uAmp.y;
+        Math.pow(
+          Math.cos(Math.PI * p * uFreq.y + time * (uFreq.y / uFreq.x)),
+          2
+        ) *
+          uAmp.y;
 
       const getY = (p: number) =>
         -nsin(Math.PI * p * uFreq.z + time) * uAmp.z -
-        Math.pow(nsin(Math.PI * p * uFreq.w + time / (uFreq.z / uFreq.w)), 5) * uAmp.w;
+        Math.pow(nsin(Math.PI * p * uFreq.w + time / (uFreq.z / uFreq.w)), 5) *
+          uAmp.w;
 
       const distortion = new THREE.Vector3(
         getX(progress) - getX(progress + 0.007),
@@ -288,7 +305,7 @@ const distortions: Distortions = {
       const lookAtAmp = new THREE.Vector3(-2, -5, 0);
       const lookAtOffset = new THREE.Vector3(0, 0, -10);
       return distortion.multiply(lookAtAmp).add(lookAtOffset);
-    }
+    },
   },
   turbulentDistortionStill: {
     uniforms: turbulentUniforms,
@@ -318,7 +335,7 @@ const distortions: Distortions = {
           0.
         );
       }
-    `
+    `,
   },
   deepDistortionStill: {
     uniforms: deepUniforms,
@@ -347,7 +364,7 @@ const distortions: Distortions = {
           0.
         );
       }
-    `
+    `,
   },
   deepDistortion: {
     uniforms: deepUniforms,
@@ -382,8 +399,11 @@ const distortions: Distortions = {
       const uAmp = deepUniforms.uAmp.value;
       const uPowY = deepUniforms.uPowY.value;
 
-      const getX = (p: number) => Math.sin(p * Math.PI * uFreq.x + time) * uAmp.x;
-      const getY = (p: number) => Math.pow(p * uPowY.x, uPowY.y) + Math.sin(p * Math.PI * uFreq.y + time) * uAmp.y;
+      const getX = (p: number) =>
+        Math.sin(p * Math.PI * uFreq.x + time) * uAmp.x;
+      const getY = (p: number) =>
+        Math.pow(p * uPowY.x, uPowY.y) +
+        Math.sin(p * Math.PI * uFreq.y + time) * uAmp.y;
 
       const distortion = new THREE.Vector3(
         getX(progress) - getX(progress + 0.01),
@@ -393,13 +413,13 @@ const distortions: Distortions = {
       const lookAtAmp = new THREE.Vector3(-2, -4, 0);
       const lookAtOffset = new THREE.Vector3(0, 0, -10);
       return distortion.multiply(lookAtAmp).add(lookAtOffset);
-    }
-  }
+    },
+  },
 };
 
 const distortion_uniforms = {
   uDistortionX: { value: new THREE.Vector2(80, 3) },
-  uDistortionY: { value: new THREE.Vector2(-40, 2.5) }
+  uDistortionY: { value: new THREE.Vector2(-40, 2.5) },
 };
 
 const distortion_vertex = `
@@ -437,7 +457,12 @@ function pickRandom<T>(arr: T | T[]): T {
   return arr;
 }
 
-function lerp(current: number, target: number, speed = 0.1, limit = 0.001): number {
+function lerp(
+  current: number,
+  target: number,
+  speed = 0.1,
+  limit = 0.001
+): number {
   let change = (target - current) * speed;
   if (Math.abs(change) < limit) {
     change = target - current;
@@ -469,7 +494,10 @@ class CarLights {
 
   init() {
     const options = this.options;
-    const curve = new THREE.LineCurve3(new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, -1));
+    const curve = new THREE.LineCurve3(
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, 0, -1)
+    );
     const geometry = new THREE.TubeGeometry(curve, 40, 1, 8, false);
 
     const instanced = new THREE.InstancedBufferGeometry();
@@ -536,9 +564,18 @@ class CarLights {
       aColor.push(color.b);
     }
 
-    instanced.setAttribute('aOffset', new THREE.InstancedBufferAttribute(new Float32Array(aOffset), 3, false));
-    instanced.setAttribute('aMetrics', new THREE.InstancedBufferAttribute(new Float32Array(aMetrics), 3, false));
-    instanced.setAttribute('aColor', new THREE.InstancedBufferAttribute(new Float32Array(aColor), 3, false));
+    instanced.setAttribute(
+      'aOffset',
+      new THREE.InstancedBufferAttribute(new Float32Array(aOffset), 3, false)
+    );
+    instanced.setAttribute(
+      'aMetrics',
+      new THREE.InstancedBufferAttribute(new Float32Array(aMetrics), 3, false)
+    );
+    instanced.setAttribute(
+      'aColor',
+      new THREE.InstancedBufferAttribute(new Float32Array(aColor), 3, false)
+    );
 
     const material = new THREE.ShaderMaterial({
       fragmentShader: carLightsFragment,
@@ -548,17 +585,21 @@ class CarLights {
         {
           uTime: { value: 0 },
           uTravelLength: { value: options.length },
-          uFade: { value: this.fade }
+          uFade: { value: this.fade },
         },
         this.webgl.fogUniforms,
-        (typeof this.options.distortion === 'object' ? this.options.distortion.uniforms : {}) || {}
-      )
+        (typeof this.options.distortion === 'object'
+          ? this.options.distortion.uniforms
+          : {}) || {}
+      ),
     });
 
     material.onBeforeCompile = shader => {
       shader.vertexShader = shader.vertexShader.replace(
         '#include <getDistortion_vertex>',
-        typeof this.options.distortion === 'object' ? this.options.distortion.getDistortion : ''
+        typeof this.options.distortion === 'object'
+          ? this.options.distortion.getDistortion
+          : ''
       );
     };
 
@@ -674,9 +715,18 @@ class LightsSticks {
       aMetrics.push(height);
     }
 
-    instanced.setAttribute('aOffset', new THREE.InstancedBufferAttribute(new Float32Array(aOffset), 1, false));
-    instanced.setAttribute('aColor', new THREE.InstancedBufferAttribute(new Float32Array(aColor), 3, false));
-    instanced.setAttribute('aMetrics', new THREE.InstancedBufferAttribute(new Float32Array(aMetrics), 2, false));
+    instanced.setAttribute(
+      'aOffset',
+      new THREE.InstancedBufferAttribute(new Float32Array(aOffset), 1, false)
+    );
+    instanced.setAttribute(
+      'aColor',
+      new THREE.InstancedBufferAttribute(new Float32Array(aColor), 3, false)
+    );
+    instanced.setAttribute(
+      'aMetrics',
+      new THREE.InstancedBufferAttribute(new Float32Array(aMetrics), 2, false)
+    );
 
     const material = new THREE.ShaderMaterial({
       fragmentShader: sideSticksFragment,
@@ -685,17 +735,21 @@ class LightsSticks {
       uniforms: Object.assign(
         {
           uTravelLength: { value: options.length },
-          uTime: { value: 0 }
+          uTime: { value: 0 },
         },
         this.webgl.fogUniforms,
-        (typeof options.distortion === 'object' ? options.distortion.uniforms : {}) || {}
-      )
+        (typeof options.distortion === 'object'
+          ? options.distortion.uniforms
+          : {}) || {}
+      ),
     });
 
     material.onBeforeCompile = shader => {
       shader.vertexShader = shader.vertexShader.replace(
         '#include <getDistortion_vertex>',
-        typeof this.options.distortion === 'object' ? this.options.distortion.getDistortion : ''
+        typeof this.options.distortion === 'object'
+          ? this.options.distortion.getDistortion
+          : ''
       );
     };
 
@@ -791,29 +845,31 @@ class Road {
     let uniforms: Record<string, { value: unknown }> = {
       uTravelLength: { value: options.length },
       uColor: {
-        value: new THREE.Color(isRoad ? options.colors.roadColor : options.colors.islandColor)
+        value: new THREE.Color(
+          isRoad ? options.colors.roadColor : options.colors.islandColor
+        ),
       },
-      uTime: this.uTime
+      uTime: this.uTime,
     };
 
     if (isRoad) {
       uniforms = Object.assign(uniforms, {
         uLanes: { value: options.lanesPerRoad },
         uBrokenLinesColor: {
-          value: new THREE.Color(options.colors.brokenLines)
+          value: new THREE.Color(options.colors.brokenLines),
         },
         uShoulderLinesColor: {
-          value: new THREE.Color(options.colors.shoulderLines)
+          value: new THREE.Color(options.colors.shoulderLines),
         },
         uShoulderLinesWidthPercentage: {
-          value: options.shoulderLinesWidthPercentage
+          value: options.shoulderLinesWidthPercentage,
         },
         uBrokenLinesLengthPercentage: {
-          value: options.brokenLinesLengthPercentage
+          value: options.brokenLinesLengthPercentage,
         },
         uBrokenLinesWidthPercentage: {
-          value: options.brokenLinesWidthPercentage
-        }
+          value: options.brokenLinesWidthPercentage,
+        },
       });
     }
 
@@ -824,21 +880,26 @@ class Road {
       uniforms: Object.assign(
         uniforms,
         this.webgl.fogUniforms,
-        (typeof options.distortion === 'object' ? options.distortion.uniforms : {}) || {}
-      )
+        (typeof options.distortion === 'object'
+          ? options.distortion.uniforms
+          : {}) || {}
+      ),
     });
 
     material.onBeforeCompile = shader => {
       shader.vertexShader = shader.vertexShader.replace(
         '#include <getDistortion_vertex>',
-        typeof this.options.distortion === 'object' ? this.options.distortion.getDistortion : ''
+        typeof this.options.distortion === 'object'
+          ? this.options.distortion.getDistortion
+          : ''
       );
     };
 
     const mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = -Math.PI / 2;
     mesh.position.z = -options.length / 2;
-    mesh.position.x += (this.options.islandWidth / 2 + options.roadWidth / 2) * side;
+    mesh.position.x +=
+      (this.options.islandWidth / 2 + options.roadWidth / 2) * side;
 
     this.webgl.scene.add(mesh);
     return mesh;
@@ -974,14 +1035,14 @@ class App {
     if (!this.options.distortion) {
       this.options.distortion = {
         uniforms: distortion_uniforms,
-        getDistortion: distortion_vertex
+        getDistortion: distortion_vertex,
       };
     }
     this.container = container;
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: false,
-      alpha: true
+      alpha: true,
     });
     this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -992,7 +1053,12 @@ class App {
     this.composer = new EffectComposer(this.renderer);
     container.appendChild(this.renderer.domElement);
 
-    this.camera = new THREE.PerspectiveCamera(options.fov, container.offsetWidth / container.offsetHeight, 0.1, 10000);
+    this.camera = new THREE.PerspectiveCamera(
+      options.fov,
+      container.offsetWidth / container.offsetHeight,
+      0.1,
+      10000
+    );
     this.camera.position.z = -5;
     this.camera.position.y = 8;
     this.camera.position.x = 0;
@@ -1000,13 +1066,17 @@ class App {
     this.scene = new THREE.Scene();
     this.scene.background = null;
 
-    const fog = new THREE.Fog(options.colors.background, options.length * 0.2, options.length * 500);
+    const fog = new THREE.Fog(
+      options.colors.background,
+      options.length * 0.2,
+      options.length * 500
+    );
     this.scene.fog = fog;
 
     this.fogUniforms = {
       fogColor: { value: fog.color },
       fogNear: { value: fog.near },
-      fogFar: { value: fog.far }
+      fogFar: { value: fog.far },
     };
 
     this.clock = new THREE.Clock();
@@ -1071,14 +1141,14 @@ class App {
       new BloomEffect({
         luminanceThreshold: 0.2,
         luminanceSmoothing: 0,
-        resolutionScale: 1
+        resolutionScale: 1,
       })
     );
 
     const smaaPass = new EffectPass(
       this.camera,
       new SMAAEffect({
-        preset: SMAAPreset.MEDIUM
+        preset: SMAAPreset.MEDIUM,
       })
     );
     this.renderPass.renderToScreen = false;
@@ -1091,7 +1161,9 @@ class App {
   }
 
   loadAssets(): Promise<void> {
-    const assets = this.assets as { smaa: { search?: HTMLImageElement; area?: HTMLImageElement } };
+    const assets = this.assets as {
+      smaa: { search?: HTMLImageElement; area?: HTMLImageElement };
+    };
     return new Promise(resolve => {
       const manager = new THREE.LoadingManager(resolve);
 
@@ -1122,13 +1194,19 @@ class App {
     const options = this.options;
     this.road.init();
     this.leftCarLights.init();
-    this.leftCarLights.mesh.position.setX(-options.roadWidth / 2 - options.islandWidth / 2);
+    this.leftCarLights.mesh.position.setX(
+      -options.roadWidth / 2 - options.islandWidth / 2
+    );
 
     this.rightCarLights.init();
-    this.rightCarLights.mesh.position.setX(options.roadWidth / 2 + options.islandWidth / 2);
+    this.rightCarLights.mesh.position.setX(
+      options.roadWidth / 2 + options.islandWidth / 2
+    );
 
     this.leftSticks.init();
-    this.leftSticks.mesh.position.setX(-(options.roadWidth + options.islandWidth / 2));
+    this.leftSticks.mesh.position.setX(
+      -(options.roadWidth + options.islandWidth / 2)
+    );
 
     this.container.addEventListener('mousedown', this.onMouseDown);
     this.container.addEventListener('mouseup', this.onMouseUp);
@@ -1151,7 +1229,12 @@ class App {
 
   update(delta: number) {
     const lerpPercentage = Math.exp(-(-60 * Math.log2(1 - 0.1)) * delta);
-    this.speedUp += lerp(this.speedUp, this.speedUpTarget, lerpPercentage, 0.00001);
+    this.speedUp += lerp(
+      this.speedUp,
+      this.speedUpTarget,
+      lerpPercentage,
+      0.00001
+    );
     this.timeOffset += this.speedUp * delta;
     const time = this.clock.elapsedTime + this.timeOffset;
 
@@ -1167,7 +1250,10 @@ class App {
       updateCamera = true;
     }
 
-    if (typeof this.options.distortion === 'object' && this.options.distortion.getJS) {
+    if (
+      typeof this.options.distortion === 'object' &&
+      this.options.distortion.getJS
+    ) {
       const distortion = this.options.distortion.getJS(0.025, time);
       this.camera.lookAt(
         new THREE.Vector3(
@@ -1252,7 +1338,7 @@ const initHyperspeed = async () => {
 
   const mergedOptions: HyperspeedOptions = {
     ...defaultOptions,
-    ...props.effectOptions
+    ...props.effectOptions,
   };
 
   const options = { ...mergedOptions };

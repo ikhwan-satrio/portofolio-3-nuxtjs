@@ -1,5 +1,5 @@
-import { defineContentConfig, defineCollection } from '@nuxt/content'
-import { z } from 'zod'
+import { defineContentConfig, defineCollection } from '@nuxt/content';
+import { z } from 'zod';
 
 export default defineContentConfig({
   collections: {
@@ -12,8 +12,8 @@ export default defineContentConfig({
         description: z.string(),
         tags: z.array(z.string()).optional(),
         thumbnail: z.string().optional(),
-        lang: z.enum(['en', 'id'])
+        lang: z.enum(['en', 'id']),
       }),
     }),
   },
-})
+});

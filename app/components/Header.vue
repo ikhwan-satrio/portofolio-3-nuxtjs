@@ -110,9 +110,9 @@ onMounted(() => {
           variant="ghost"
           size="icon"
           class="hover:text-foreground p-2 transition-colors"
-          @click="isOpen = !isOpen"
           :aria-label="isOpen ? 'Close menu' : 'Open menu'"
           :aria-expanded="isOpen"
+          @click="isOpen = !isOpen"
         >
           <Icon :name="isOpen ? 'lucide:x' : 'lucide:menu'" size="18" />
         </UiButton>

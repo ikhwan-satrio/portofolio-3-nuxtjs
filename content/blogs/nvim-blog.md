@@ -1,10 +1,10 @@
 ---
-title: "Why I Love Neovim (Even When It Fights Me)"
-date: "2025-04-12"
-description: "My journey with Neovim"
+title: 'Why I Love Neovim (Even When It Fights Me)'
+date: '2025-04-12'
+description: 'My journey with Neovim'
 tags: [Journey, Tech]
-thumbnail: "/blog/nvim.png"
-lang: "en"
+thumbnail: '/blog/nvim.png'
+lang: 'en'
 ---
 
 I love Neovim.

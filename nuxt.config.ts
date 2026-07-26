@@ -1,10 +1,10 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   compatibilityDate: '2024-04-03',
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css'],
   modules: [
     '@nuxt/content',
     '@nuxt/fonts',
@@ -15,14 +15,14 @@ export default defineNuxtConfig({
     'nuxt-resend',
     '@nuxtjs/sitemap',
     '@nuxt/eslint',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
   ],
   future: {
     compatibilityVersion: 4,
   },
   colorMode: {
-    preference: "system",
-    classSuffix: ''
+    preference: 'system',
+    classSuffix: '',
   },
   vite: {
     plugins: [tailwindcss()],
@@ -32,17 +32,17 @@ export default defineNuxtConfig({
         'reka-ui',
         'clsx',
         'tailwind-merge',
-      ]
-    }
+      ],
+    },
   },
   content: {
     database: {
-      type: "libsql",
+      type: 'libsql',
       url: process.env.TURSO_DATABASE_URL!,
       authToken: process.env.TURSO_AUTH_TOKEN!,
     },
     experimental: {
-      sqliteConnector: "native",
-    }
-  }
-})
+      sqliteConnector: 'native',
+    },
+  },
+});

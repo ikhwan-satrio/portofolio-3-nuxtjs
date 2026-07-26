@@ -53,7 +53,7 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
         'Loves Qwik & Svelte',
         'Happy coding!',
       ]"
-      :textColors="[
+      :text-colors="[
         'var(--color-chart-1)',
         'var(--color-chart-4)',
         'var(--color-chart-3)',
@@ -70,20 +70,25 @@ import profileImage from '~/assets/images/foto_kecil.jpg';
   <div
     class="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row flex-wrap gap-3 justify-center w-full px-4 z-10"
   >
-    <NuxtLink
-      to="/projects"
-      class="w-full sm:w-auto min-w-0 sm:min-w-36 text-center px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300"
-    >
-      View Projects
+    <NuxtLink to="/projects" class="w-full sm:w-auto">
+      <UiButton class="w-full sm:w-auto min-w-0 sm:min-w-36" size="lg">
+        View Projects
+      </UiButton>
     </NuxtLink>
     <a
       href="https://github.com/ikhwan-satrio"
       target="_blank"
       rel="noopener noreferrer"
-      class="w-full sm:w-auto min-w-0 sm:min-w-36 text-center px-6 py-2.5 rounded-xl border border-border text-sm text-foreground font-medium hover:bg-muted transition-all duration-300 flex items-center justify-center gap-2"
+      class="w-full sm:w-auto"
     >
-      <Icon name="fa:github" size="18" />
-      Github
+      <UiButton
+        variant="outline"
+        class="w-full sm:w-auto min-w-0 sm:min-w-36"
+        size="lg"
+      >
+        <Icon name="fa:github" size="18" class="mr-2" />
+        Github
+      </UiButton>
     </a>
   </div>
 </template>

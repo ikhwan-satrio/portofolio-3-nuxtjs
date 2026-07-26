@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<GlareHoverProps>(), {
   transitionDuration: 650,
   playOnce: false,
   className: '',
-  style: () => ({})
+  style: () => ({}),
 });
 
 const overlayRef = useTemplateRef<HTMLDivElement>('overlayRef');
@@ -68,7 +68,7 @@ const overlayStyle = computed(() => ({
   backgroundSize: `${props.glareSize}% ${props.glareSize}%, 100% 100%`,
   backgroundRepeat: 'no-repeat',
   backgroundPosition: '-100% -100%, 0 0',
-  pointerEvents: 'none' as const
+  pointerEvents: 'none' as const,
 }));
 
 const animateIn = () => {
@@ -105,7 +105,7 @@ const animateOut = () => {
       background: props.background,
       borderRadius: props.borderRadius,
       borderColor: props.borderColor,
-      ...props.style
+      ...props.style,
     }"
     @mouseenter="animateIn"
     @mouseleave="animateOut"

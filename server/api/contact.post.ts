@@ -1,17 +1,17 @@
-import { useContactTemplate } from "~/composables/contactTemplate"
+import { useContactTemplate } from '~/composables/contactTemplate';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async event => {
   try {
     // readBody() sudah return object, langsung destructure saja
-    const { name, email, subject, message } = await readBody(event) as {
-      name: string,
-      email: string,
-      subject: string,
-      message: string
-    }
+    const { name, email, subject, message } = (await readBody(event)) as {
+      name: string;
+      email: string;
+      subject: string;
+      message: string;
+    };
 
     const resend = useResend();
-    const emailHtml = useContactTemplate()
+    const emailHtml = useContactTemplate();
 
     // Kirim email ke penerima (Anda)
     await resend.emails.send({
@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
 
     return { success: true };
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return { success: false, error: 'Failed to send email. Please try again.' };
   }
-})
+});

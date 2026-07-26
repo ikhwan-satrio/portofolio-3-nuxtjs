@@ -99,7 +99,7 @@
     <motion.section
       class="w-full py-24"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
       <div class="max-w-6xl mx-auto px-6">
@@ -114,22 +114,18 @@
 
         <!-- Category Filter -->
         <div class="flex flex-wrap justify-center gap-2 mb-12">
-          <button
+          <UiButton
             v-for="category in categories"
             :key="category.id"
+            :variant="selectedCategory === category.id ? 'default' : 'outline'"
+            size="sm"
             @click="selectedCategory = category.id"
-            class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
-            :class="[
-              selectedCategory === category.id
-                ? 'bg-foreground text-background'
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted',
-            ]"
           >
             {{ category.name }}
-            <span class="ml-1.5 text-xs opacity-60">
+            <UiBadge variant="secondary" class="ml-1.5 text-xs">
               {{ category.count }}
-            </span>
-          </button>
+            </UiBadge>
+          </UiButton>
         </div>
 
         <!-- Projects Grid -->
@@ -138,94 +134,100 @@
             v-for="(project, index) in filteredProjects"
             :key="project.id"
             :initial="{ opacity: 0, y: 30 }"
-            :whileInView="{ opacity: 1, y: 0 }"
+            :while-in-view="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }"
-            class="group bg-card rounded-xl overflow-hidden border border-border/50 hover:border-border transition-all duration-300 flex flex-col"
+            class="group flex flex-col"
           >
-            <!-- Project Image Placeholder -->
-            <div class="relative h-44 bg-muted/50">
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-3xl opacity-20">
-                  {{
-                    project.category === 'web'
-                      ? '🌐'
-                      : project.category === 'mobile'
-                        ? '📱'
-                        : project.category === 'ui'
-                          ? '🎨'
-                          : '🔧'
-                  }}
+            <UiCard
+              class="h-full overflow-hidden hover:border-border transition-all duration-300 flex flex-col"
+            >
+              <!-- Project Image Placeholder -->
+              <div class="relative h-44 bg-muted/50">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="text-3xl opacity-20">
+                    {{
+                      project.category === 'web'
+                        ? '🌐'
+                        : project.category === 'mobile'
+                          ? '📱'
+                          : project.category === 'ui'
+                            ? '🎨'
+                            : '🔧'
+                    }}
+                  </div>
+                </div>
+
+                <!-- Status Indicator -->
+                <div class="absolute top-3 left-3">
+                  <UiBadge
+                    :variant="
+                      project.status === 'completed' ? 'default' : 'secondary'
+                    "
+                    class="text-xs"
+                  >
+                    {{ project.status }}
+                  </UiBadge>
                 </div>
               </div>
 
-              <!-- Status Indicator -->
-              <div class="absolute top-3 left-3">
-                <div
-                  class="w-2 h-2 rounded-full"
-                  :class="{
-                    'bg-chart-5': project.status === 'completed',
-                    'bg-chart-4': project.status === 'in-progress',
-                    'bg-chart-1': project.status === 'planning',
-                    'bg-muted': !project.status,
-                  }"
-                ></div>
-              </div>
-            </div>
-
-            <!-- Content -->
-            <div class="p-5 flex flex-col h-full">
-              <div class="flex-1 space-y-3">
-                <h3
-                  class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors duration-200"
-                >
-                  {{ project.title }}
-                </h3>
-
-                <p class="text-muted-foreground text-sm leading-relaxed">
-                  {{ project.description }}
-                </p>
-
-                <!-- Tech Stack -->
-                <div class="flex flex-wrap gap-1">
-                  <span
-                    v-for="tech in project.technologies.slice(0, 3)"
-                    :key="tech"
-                    class="px-2 py-0.5 bg-muted text-muted-foreground text-xs rounded"
+              <!-- Content -->
+              <UiCardContent class="p-5 flex flex-col h-full">
+                <div class="flex-1 space-y-3">
+                  <h3
+                    class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors duration-200"
                   >
-                    {{ tech }}
-                  </span>
-                  <span
-                    v-if="project.technologies.length > 3"
-                    class="px-2 py-0.5 text-muted-foreground/60 text-xs"
-                  >
-                    +{{ project.technologies.length - 3 }}
-                  </span>
+                    {{ project.title }}
+                  </h3>
+
+                  <p class="text-muted-foreground text-sm leading-relaxed">
+                    {{ project.description }}
+                  </p>
+
+                  <!-- Tech Stack -->
+                  <div class="flex flex-wrap gap-1">
+                    <UiBadge
+                      v-for="tech in project.technologies.slice(0, 3)"
+                      :key="tech"
+                      variant="outline"
+                      class="text-xs"
+                    >
+                      {{ tech }}
+                    </UiBadge>
+                    <span
+                      v-if="project.technologies.length > 3"
+                      class="px-2 py-0.5 text-muted-foreground/60 text-xs"
+                    >
+                      +{{ project.technologies.length - 3 }}
+                    </span>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Links -->
-              <div class="flex gap-2 mt-5">
-                <a
-                  v-if="project.demoUrl"
-                  :href="project.demoUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex-1 text-center px-3 py-1.5 bg-foreground text-background text-xs font-medium rounded-lg transition-opacity duration-200 hover:opacity-90"
-                >
-                  Demo
-                </a>
-                <a
-                  v-if="project.githubUrl"
-                  :href="project.githubUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="px-3 py-1.5 border border-border text-muted-foreground hover:text-foreground hover:bg-muted text-xs rounded-lg transition-all duration-200"
-                  :class="{ 'flex-1 text-center': !project.demoUrl }"
-                >
-                  Code
-                </a>
-              </div>
-            </div>
+                <!-- Links -->
+                <div class="flex gap-2 mt-5">
+                  <a
+                    v-if="project.demoUrl"
+                    :href="project.demoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1"
+                  >
+                    <UiButton size="sm" class="w-full"> Demo </UiButton>
+                  </a>
+                  <a
+                    v-if="project.githubUrl"
+                    :href="project.githubUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1"
+                    :class="{ 'flex-1 text-center': !project.demoUrl }"
+                  >
+                    <UiButton size="sm" variant="outline" class="w-full">
+                      Code
+                    </UiButton>
+                  </a>
+                </div>
+              </UiCardContent>
+            </UiCard>
           </motion.div>
         </div>
       </div>
@@ -235,35 +237,33 @@
     <motion.section
       class="w-full py-24"
       :initial="{ opacity: 0, y: 50 }"
-      :whileInView="{ opacity: 1, y: 0 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
       :transition="{ duration: 0.8, ease: 'easeOut' }"
     >
-      <div class="border-2 border-border max-w-3xl mx-auto text-center px-6">
-        <div class="bg-muted/30 rounded-2xl p-10 border border-border/30">
-          <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Have a Project in Mind?
-          </h2>
-          <p
-            class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
-          >
-            I'm always excited to work on interesting projects and collaborate
-            with passionate people. Let's bring your ideas to life!
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <NuxtLink
-              to="/contact"
-              class="px-6 py-2.5 bg-foreground text-background rounded-xl text-sm font-medium hover:opacity-90 transition-all duration-300"
+      <div class="max-w-3xl mx-auto text-center px-6">
+        <UiCard class="bg-muted/30">
+          <UiCardContent class="pt-6">
+            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              Have a Project in Mind?
+            </h2>
+            <p
+              class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
             >
-              Start a Project
-            </NuxtLink>
-            <NuxtLink
-              to="/about"
-              class="px-6 py-2.5 border border-border text-muted-foreground rounded-xl text-sm font-medium hover:bg-muted hover:text-foreground transition-all duration-300"
-            >
-              Learn More About Me
-            </NuxtLink>
-          </div>
-        </div>
+              I'm always excited to work on interesting projects and collaborate
+              with passionate people. Let's bring your ideas to life!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <NuxtLink to="/contact">
+                <UiButton class="min-w-36">Start a Project</UiButton>
+              </NuxtLink>
+              <NuxtLink to="/about">
+                <UiButton variant="outline" class="min-w-36">
+                  Learn More About Me
+                </UiButton>
+              </NuxtLink>
+            </div>
+          </UiCardContent>
+        </UiCard>
       </div>
     </motion.section>
   </main>

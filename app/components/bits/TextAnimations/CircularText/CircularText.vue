@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<CircularTextProps>(), {
   text: '',
   spinDuration: 20,
   onHover: 'speedUp',
-  className: ''
+  className: '',
 });
 
 const letters = computed(() => Array.from(props.text));
@@ -63,7 +63,8 @@ const animate = () => {
   const smoothingFactor = Math.min(1, deltaTime * 5);
   rotationSpeed.value += speedDiff * smoothingFactor;
 
-  currentRotation.value = (currentRotation.value + rotationSpeed.value * deltaTime) % 360;
+  currentRotation.value =
+    (currentRotation.value + rotationSpeed.value * deltaTime) % 360;
 
   animationId.value = requestAnimationFrame(animate);
 };
@@ -110,17 +111,17 @@ const getLetterTransform = (index: number) => {
   <Motion
     :animate="{
       rotate: currentRotation,
-      scale: getCurrentScale()
+      scale: getCurrentScale(),
     }"
     :transition="{
       rotate: {
-        duration: 0
+        duration: 0,
       },
       scale: {
         type: 'spring',
         damping: 20,
-        stiffness: 300
-      }
+        stiffness: 300,
+      },
     }"
     :class="`m-0 mx-auto rounded-full w-[200px] h-[200px] relative font-black text-white text-center cursor-pointer origin-center ${props.className}`"
     @mouseenter="handleHoverStart"
@@ -132,7 +133,7 @@ const getLetterTransform = (index: number) => {
       class="absolute inline-block inset-0 text-2xl transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
       :style="{
         transform: getLetterTransform(i),
-        WebkitTransform: getLetterTransform(i)
+        WebkitTransform: getLetterTransform(i),
       }"
     >
       {{ letter }}

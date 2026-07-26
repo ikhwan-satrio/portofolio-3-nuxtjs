@@ -1,10 +1,10 @@
 ---
-title: "How I Started with Scratch and Became a Fullstack Dev"
-description: "From a dusty laptop and colorful blocks to mastering Nuxt, SvelteKit, and NeoVim."
-date: "2025-6-23"
+title: 'How I Started with Scratch and Became a Fullstack Dev'
+description: 'From a dusty laptop and colorful blocks to mastering Nuxt, SvelteKit, and NeoVim.'
+date: '2025-6-23'
 thumbnail: /blog/coding.jpg
 tags: [Journey, DevLife, Scratch, Tech]
-lang: "en"
+lang: 'en'
 ---
 
 My journey began with an old, slow laptop...

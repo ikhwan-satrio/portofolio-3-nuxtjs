@@ -46,27 +46,28 @@ const formatDate = (date: string) => {
 <template>
   <div class="max-w-5xl mx-auto">
     <!-- Filter Section -->
-    <div
-      class="mb-10 sticky top-20 z-20 bg-background/80 backdrop-blur-lg py-3 rounded-xl px-4 border border-border/50"
-    >
-      <div class="grid gap-3 md:grid-cols-2 items-center">
-        <input
-          v-model="search"
-          type="text"
-          placeholder="Search by title..."
-          class="w-full border border-border/50 bg-muted/30 rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
-        />
-        <select
-          v-model="selectedTag"
-          class="w-full border border-border/50 bg-muted/30 rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20 focus:border-foreground/20 transition-all"
-        >
-          <option value="">All Tags</option>
-          <option v-for="tag in tags" :key="tag" :value="tag">
-            {{ tag }}
-          </option>
-        </select>
-      </div>
-    </div>
+    <UiCard class="mb-10 sticky top-20 z-20 bg-background/80 backdrop-blur-lg">
+      <UiCardContent class="pt-6 p-4">
+        <div class="grid gap-3 md:grid-cols-2 items-center">
+          <UiInput
+            v-model="search"
+            type="text"
+            placeholder="Search by title..."
+          />
+          <UiSelect v-model="selectedTag">
+            <UiSelectTrigger class="w-full">
+              <UiSelectValue placeholder="All Tags" />
+            </UiSelectTrigger>
+            <UiSelectContent>
+              <UiSelectItem value="">All Tags</UiSelectItem>
+              <UiSelectItem v-for="tag in tags" :key="tag" :value="tag">
+                {{ tag }}
+              </UiSelectItem>
+            </UiSelectContent>
+          </UiSelect>
+        </div>
+      </UiCardContent>
+    </UiCard>
 
     <!-- Blog Grid -->
     <div
@@ -95,8 +96,8 @@ const formatDate = (date: string) => {
         <NuxtLink
           v-for="(blog, index) in filteredBlogs"
           :key="blog.path"
-          :to="blog.path"
           v-motion
+          :to="blog.path"
           :initial="{ opacity: 0, y: 30 }"
           :enter="{
             opacity: 1,
@@ -107,58 +108,63 @@ const formatDate = (date: string) => {
               ease: 'easeOut',
             },
           }"
-          class="cursor-target cursor-none bg-card rounded-xl overflow-hidden border border-border/50 hover:border-border transition-all duration-300 flex flex-col w-full max-w-2xl group"
+          class="cursor-target cursor-none w-full max-w-2xl group"
         >
-          <!-- Content -->
-          <div class="p-5 flex flex-col flex-1">
-            <div class="space-y-2.5">
-              <h2
-                class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors"
-              >
-                {{ blog.title }}
-              </h2>
-
-              <div
-                class="flex items-center gap-2 text-xs text-muted-foreground"
-              >
-                <time>{{ formatDate(blog.date) }}</time>
-                <span v-if="blog.lang" class="text-foreground/40">·</span>
-                <span v-if="blog.lang" class="text-foreground/60"
-                  >{{ blog.lang }}</span
+          <UiCard
+            class="overflow-hidden hover:border-border transition-all duration-300 flex flex-col h-full"
+          >
+            <!-- Content -->
+            <UiCardContent class="p-5 flex flex-col flex-1">
+              <div class="space-y-2.5">
+                <h2
+                  class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors"
                 >
+                  {{ blog.title }}
+                </h2>
+
+                <div
+                  class="flex items-center gap-2 text-xs text-muted-foreground"
+                >
+                  <time>{{ formatDate(blog.date) }}</time>
+                  <span v-if="blog.lang" class="text-foreground/40">·</span>
+                  <span v-if="blog.lang" class="text-foreground/60">{{
+                    blog.lang
+                  }}</span>
+                </div>
+
+                <p
+                  class="text-sm text-muted-foreground line-clamp-3 leading-relaxed"
+                >
+                  {{ blog.description }}
+                </p>
+
+                <!-- Tags -->
+                <div
+                  v-if="blog.tags && blog.tags.length > 0"
+                  class="flex flex-wrap gap-1.5 pt-1"
+                >
+                  <UiBadge
+                    v-for="tag in blog.tags.slice(0, 3)"
+                    :key="tag"
+                    variant="secondary"
+                    class="text-xs"
+                  >
+                    {{ tag }}
+                  </UiBadge>
+                </div>
               </div>
 
               <p
-                class="text-sm text-muted-foreground line-clamp-3 leading-relaxed"
+                class="mt-auto pt-3 text-foreground/60 text-xs group-hover:text-foreground transition-colors flex items-center gap-1 font-medium"
               >
-                {{ blog.description }}
+                Read more
+                <Icon
+                  name="lucide:arrow-right"
+                  class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
+                />
               </p>
-
-              <!-- Tags -->
-              <div
-                v-if="blog.tags && blog.tags.length > 0"
-                class="flex flex-wrap gap-1.5 pt-1"
-              >
-                <span
-                  v-for="tag in blog.tags.slice(0, 3)"
-                  :key="tag"
-                  class="px-2 py-0.5 text-xs text-muted-foreground rounded bg-muted"
-                >
-                  {{ tag }}
-                </span>
-              </div>
-            </div>
-
-            <p
-              class="mt-auto pt-3 text-foreground/60 text-xs group-hover:text-foreground transition-colors flex items-center gap-1 font-medium"
-            >
-              Read more
-              <Icon
-                name="lucide:arrow-right"
-                class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
-              />
-            </p>
-          </div>
+            </UiCardContent>
+          </UiCard>
         </NuxtLink>
       </template>
     </div>

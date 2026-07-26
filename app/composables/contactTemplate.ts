@@ -1,4 +1,3 @@
-
 export function useContactTemplate() {
   const renderContactEmail = ({
     name,
@@ -6,10 +5,10 @@ export function useContactTemplate() {
     subject,
     message,
   }: {
-    name: string
-    email: string
-    subject: string
-    message: string
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
   }): string => {
     return `
 <!DOCTYPE html>
@@ -60,10 +59,10 @@ ${message.trim()}
   </div>
 </body>
 </html>
-    `.trim()
-  }
+    `.trim();
+  };
 
   return {
     renderContactEmail,
-  }
+  };
 }

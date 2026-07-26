@@ -8,7 +8,7 @@
     :class="`split-parent overflow-hidden inline-block whitespace-normal ${className}`"
     :style="{
       textAlign,
-      wordWrap: 'break-word'
+      wordWrap: 'break-word',
     }"
   >
     {{ text }}
@@ -16,7 +16,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, nextTick, useTemplateRef } from 'vue';
+import {
+  ref,
+  onMounted,
+  onUnmounted,
+  watch,
+  nextTick,
+  useTemplateRef,
+} from 'vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
@@ -48,7 +55,7 @@ const props = withDefaults(defineProps<SplitTextProps>(), {
   to: () => ({ opacity: 1, y: 0 }),
   threshold: 0.1,
   rootMargin: '-100px',
-  textAlign: 'center'
+  textAlign: 'center',
 });
 
 const emit = defineEmits<{
@@ -78,7 +85,7 @@ const initializeAnimation = async () => {
     splitter = new GSAPSplitText(el, {
       type: props.splitType,
       absolute: absoluteLines,
-      linesClass: 'split-line'
+      linesClass: 'split-line',
     });
     splitterRef.value = splitter;
   } catch (error) {
@@ -112,10 +119,15 @@ const initializeAnimation = async () => {
   });
 
   const startPct = (1 - props.threshold) * 100;
-  const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(props.rootMargin);
+  const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(
+    props.rootMargin
+  );
   const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
   const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
-  const sign = marginValue < 0 ? `-=${Math.abs(marginValue)}${marginUnit}` : `+=${marginValue}${marginUnit}`;
+  const sign =
+    marginValue < 0
+      ? `-=${Math.abs(marginValue)}${marginUnit}`
+      : `+=${marginValue}${marginUnit}`;
   const start = `top ${startPct}%${sign}`;
 
   const tl = gsap.timeline({
@@ -126,7 +138,7 @@ const initializeAnimation = async () => {
       once: true,
       onToggle: self => {
         scrollTriggerRef.value = self;
-      }
+      },
     },
     smoothChildTiming: true,
     onComplete: () => {
@@ -134,11 +146,11 @@ const initializeAnimation = async () => {
       gsap.set(targets, {
         ...props.to,
         clearProps: 'willChange',
-        immediateRender: true
+        immediateRender: true,
       });
       props.onLetterAnimationComplete?.();
       emit('animation-complete');
-    }
+    },
   });
 
   timelineRef.value = tl;
@@ -149,7 +161,7 @@ const initializeAnimation = async () => {
     duration: props.duration,
     ease: props.ease,
     stagger: props.delay / 1000,
-    force3D: true
+    force3D: true,
   });
 };
 
@@ -188,7 +200,7 @@ watch(
     () => props.to,
     () => props.threshold,
     () => props.rootMargin,
-    () => props.onLetterAnimationComplete
+    () => props.onLetterAnimationComplete,
   ],
   () => {
     cleanup();

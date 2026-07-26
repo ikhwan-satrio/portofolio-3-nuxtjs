@@ -3,7 +3,14 @@
 -->
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch, computed, useTemplateRef } from 'vue';
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  computed,
+  useTemplateRef,
+} from 'vue';
 import { gsap } from 'gsap';
 
 interface TextTypeProps {
@@ -41,7 +48,7 @@ const props = withDefaults(defineProps<TextTypeProps>(), {
   cursorBlinkDuration: 0.5,
   textColors: () => [],
   startOnVisible: false,
-  reverseMode: false
+  reverseMode: false,
 });
 
 const displayedText = ref('');
@@ -52,7 +59,9 @@ const isVisible = ref(!props.startOnVisible);
 const cursorRef = useTemplateRef('cursorRef');
 const containerRef = useTemplateRef('containerRef');
 
-const textArray = computed(() => (Array.isArray(props.text) ? props.text : [props.text]));
+const textArray = computed(() =>
+  Array.isArray(props.text) ? props.text : [props.text]
+);
 
 const getRandomSpeed = () => {
   if (!props.variableSpeed) return props.typingSpeed;
@@ -73,16 +82,23 @@ const clearTimeoutIfNeeded = () => {
 
 const executeTypingAnimation = () => {
   const currentText = textArray.value[currentTextIndex.value];
-  const processedText = props.reverseMode ? currentText.split('').reverse().join('') : currentText;
+  const processedText = props.reverseMode
+    ? currentText.split('').reverse().join('')
+    : currentText;
 
   if (isDeleting.value) {
     if (displayedText.value === '') {
       isDeleting.value = false;
-      if (currentTextIndex.value === textArray.value.length - 1 && !props.loop) return;
+      if (currentTextIndex.value === textArray.value.length - 1 && !props.loop)
+        return;
 
-      props.onSentenceComplete?.(textArray.value[currentTextIndex.value], currentTextIndex.value);
+      props.onSentenceComplete?.(
+        textArray.value[currentTextIndex.value],
+        currentTextIndex.value
+      );
 
-      currentTextIndex.value = (currentTextIndex.value + 1) % textArray.value.length;
+      currentTextIndex.value =
+        (currentTextIndex.value + 1) % textArray.value.length;
       currentCharIndex.value = 0;
       timeout = setTimeout(() => {}, props.pauseDuration);
     } else {
@@ -113,7 +129,11 @@ watch(
     if (!isVisible.value) return;
     clearTimeoutIfNeeded();
 
-    if (currentCharIndex.value === 0 && !isDeleting.value && displayedText.value === '') {
+    if (
+      currentCharIndex.value === 0 &&
+      !isDeleting.value &&
+      displayedText.value === ''
+    ) {
       timeout = setTimeout(() => {
         executeTypingAnimation();
       }, props.initialDelay);
@@ -132,7 +152,7 @@ onMounted(() => {
       duration: props.cursorBlinkDuration,
       repeat: -1,
       yoyo: true,
-      ease: 'power2.inOut'
+      ease: 'power2.inOut',
     });
   }
 
@@ -171,7 +191,10 @@ onBeforeUnmount(() => {
       v-if="showCursor"
       ref="cursorRef"
       :class="`ml-1 inline-block opacity-100 ${
-        hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting) ? 'hidden' : ''
+        hideCursorWhileTyping &&
+        (currentCharIndex < textArray[currentTextIndex].length || isDeleting)
+          ? 'hidden'
+          : ''
       } ${cursorClassName}`"
     >
       {{ cursorCharacter }}
