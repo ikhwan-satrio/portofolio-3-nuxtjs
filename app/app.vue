@@ -22,7 +22,7 @@ useHead({
 </script>
 
 <template>
-  <NuxtLoadingIndicator />
+  <SplashScreen />
   <Header />
   <NuxtPage />
   <RespectTooltip />
