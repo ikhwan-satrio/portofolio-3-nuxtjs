@@ -16,13 +16,11 @@
         "@nuxtjs/sitemap": "7.4.7",
         "@tailwindcss/vite": "^4.1.17",
         "@vorms/core": "^1.1.0",
-        "@vorms/resolvers": "^1.1.0",
         "@vueuse/core": "^14.3.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "eslint": "^9.39.1",
         "gsap": "^3.13.0",
-        "lucide-vue-next": "^0.553.0",
         "motion-v": "^1.10.2",
         "nuxt": "^4.4.8",
         "nuxt-resend": "^0.0.2",
@@ -44,7 +42,6 @@
         "@iconify-json/lucide": "^1.2.73",
         "@tailwindcss/typography": "^0.5.19",
         "@types/qrcode": "^1.5.6",
-        "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.4",
         "prettier": "^3.6.2",
         "zod": "^4.1.12",
@@ -853,8 +850,6 @@
     "@volar/typescript": ["@volar/typescript@2.4.28", "", { "dependencies": { "@volar/language-core": "2.4.28", "path-browserify": "^1.0.1", "vscode-uri": "^3.0.8" } }, "sha512-Ja6yvWrbis2QtN4ClAKreeUZPVYMARDYZl9LMEv1iQ1QdepB6wn0jTRxA9MftYmYa4DQ4k/DaSZpFPUfxl8giw=="],
 
     "@vorms/core": ["@vorms/core@1.1.0", "", { "dependencies": { "deepmerge": "^4.3.0", "fast-deep-equal": "^3.1.3", "klona": "^2.0.6" }, "peerDependencies": { "vue": "^3.0.0" } }, "sha512-+QSWcWX/DIbifEXp2WJrnjnCRk4+Q8rsEfOPqTTQ+oUGJTU/KWtToO5hB60vZAXyyAp3ZOJHJMgJ3/L5xprWgA=="],
-
-    "@vorms/resolvers": ["@vorms/resolvers@1.1.0", "", {}, "sha512-cGg9K+qBPK3D4ZikkAbxO50wbonOxpbhm27D4sxnDiYgKqJZV3yInJWjt3YQVlvJBYbRFI5QlcqD4PIMZBsFQw=="],
 
     "@vue-macros/common": ["@vue-macros/common@3.1.2", "", { "dependencies": { "@vue/compiler-sfc": "^3.5.22", "ast-kit": "^2.1.2", "local-pkg": "^1.1.2", "magic-string-ast": "^1.0.2", "unplugin-utils": "^0.3.0" }, "peerDependencies": { "vue": "^2.7.0 || ^3.2.25" }, "optionalPeers": ["vue"] }, "sha512-h9t4ArDdniO9ekYHAD95t9AZcAbb19lEGK+26iAjUODOIJKmObDNBSe4+6ELQAA3vtYiFPPBtHh7+cQCKi3Dng=="],
 
@@ -1769,8 +1764,6 @@
     "loose-envify": ["loose-envify@1.4.0", "", { "dependencies": { "js-tokens": "^3.0.0 || ^4.0.0" }, "bin": { "loose-envify": "cli.js" } }, "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="],
 
     "lru-cache": ["lru-cache@11.5.1", "", {}, "sha512-RPimw/7aMdv2oqRrxKwvZXcPfwBrn/JZ2xYcY9Hus/6LaS3VOAKVWKWgNLCFSiOm1ESXinjsDlidVU7JlnCN2A=="],
-
-    "lucide-vue-next": ["lucide-vue-next@0.553.0", "", { "peerDependencies": { "vue": ">=3.0.1" } }, "sha512-0tg9XT+VCElTT+7EXXbBRhWe1nU7Doa32Xv/dHP5/LCleFVgV6cAqziM3C7AetqmsYIsfAtNwRYdtvs4Ds7aUg=="],
 
     "magic-regexp": ["magic-regexp@0.10.0", "", { "dependencies": { "estree-walker": "^3.0.3", "magic-string": "^0.30.12", "mlly": "^1.7.2", "regexp-tree": "^0.1.27", "type-level-regexp": "~0.1.17", "ufo": "^1.5.4", "unplugin": "^2.0.0" } }, "sha512-Uly1Bu4lO1hwHUW0CQeSWuRtzCMNO00CmXtS8N6fyvB3B979GOEEeAkiTUDsmbYLAbvpUS/Kt5c4ibosAzVyVg=="],
 
