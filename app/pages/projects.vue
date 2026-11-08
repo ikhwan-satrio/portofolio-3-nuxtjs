@@ -1,285 +1,272 @@
 <template>
-  <main class="w-full min-h-screen bg-background text-foreground">
-    <!-- Hero Section -->
+  <main class="w-full">
+    <!-- Hero -->
     <section
-      class="relative w-full h-screen text-center flex flex-col items-center justify-center gap-8 overflow-hidden"
+      class="relative flex min-h-screen items-center overflow-hidden border-b border-border pt-16"
     >
-      <!-- Background Rays -->
-      <div class="absolute top-0 w-full h-full z-10">
-        <ClientOnly>
-          <BitsBackgroundsLightRays
-            rays-origin="top-center"
-            rays-color="oklch(from var(--color-foreground) l c h / 0.15)"
-            :rays-speed="1.0"
-            :light-spread="0.5"
-            :ray-length="0.8"
-            :follow-mouse="true"
-            :mouse-influence="0.06"
-            :noise-amount="0.15"
-            :distortion="0.02"
-            class="custom-rays pointer-events-none"
-          />
-        </ClientOnly>
-      </div>
-
-      <!-- Content -->
-      <div class="relative z-10 space-y-8">
-        <div
-          class="flex flex-col items-center justify-center text-center space-y-5"
-        >
-          <h2
-            class="font-poppins text-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground p-3"
+      <div
+        class="editorial-grid pointer-events-none absolute inset-0 opacity-50"
+      />
+      <div
+        class="relative mx-auto w-full max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28"
+      >
+        <div class="animate-fade-up flex items-center gap-4">
+          <span class="h-px w-10 bg-brand" />
+          <span
+            class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
           >
-            My Projects
-          </h2>
-
-          <p
-            class="font-inter text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-          >
-            A collection of projects I've worked on — from web apps to
-            open-source tools, built with Astro, Svelte, Tauri, and more.
-          </p>
-        </div>
-
-        <!-- Stats -->
-        <div class="flex flex-wrap justify-center gap-10 mt-12">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-foreground">
-              {{ projects.length }}+
-            </div>
-            <div
-              class="text-muted-foreground text-xs uppercase tracking-wider mt-1"
-            >
-              Projects
-            </div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-foreground">6+</div>
-            <div
-              class="text-muted-foreground text-xs uppercase tracking-wider mt-1"
-            >
-              Technologies
-            </div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-foreground">2+</div>
-            <div
-              class="text-muted-foreground text-xs uppercase tracking-wider mt-1"
-            >
-              Years Experience
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <div class="flex flex-col items-center animate-bounce">
-          <span class="text-muted-foreground text-xs mb-2">
-            Explore Projects
+            Index — 03
           </span>
-          <svg
-            class="w-5 h-5 text-muted-foreground"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        </div>
+
+        <div class="mt-8 grid grid-cols-12 items-end gap-8">
+          <h1
+            class="animate-fade-up col-span-12 font-display text-[clamp(3.5rem,11vw,10rem)] leading-[0.82] tracking-[-0.04em] lg:col-span-8"
+            style="animation-delay: 0.08s"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
+            Selected<br />
+            <span class="italic text-brand">work</span>
+          </h1>
+
+          <div
+            class="animate-fade-up col-span-12 space-y-6 lg:col-span-4"
+            style="animation-delay: 0.16s"
+          >
+            <p class="max-w-sm text-sm leading-relaxed text-muted-foreground">
+              A collection of projects I've worked on — web apps, desktop tools,
+              robotics experiments, and open-source work built with modern,
+              boring-in-a-good-way technology.
+            </p>
+
+            <dl
+              class="grid grid-cols-3 gap-4 border-t border-border pt-4 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              <div>
+                <dt>Projects</dt>
+                <dd class="mt-1 font-display text-2xl text-foreground">
+                  {{ pad(projects.length) }}
+                </dd>
+              </div>
+              <div>
+                <dt>Open source</dt>
+                <dd class="mt-1 font-display text-2xl text-foreground">
+                  {{ pad(openSourceCount) }}
+                </dd>
+              </div>
+              <div>
+                <dt>Ongoing</dt>
+                <dd class="mt-1 font-display text-2xl text-foreground">
+                  {{ pad(ongoingCount) }}
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- All Projects Section -->
-    <motion.section
-      class="w-full py-24"
-      :initial="{ opacity: 0, y: 50 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
-    >
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="text-center mb-14">
-          <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            All Projects
-          </h2>
-          <p class="text-muted-foreground text-base max-w-xl mx-auto">
-            Browse through all my projects by category
-          </p>
-        </div>
-
-        <!-- Category Filter -->
-        <div class="flex flex-wrap justify-center gap-2 mb-12">
-          <UiButton
+    <!-- Project index -->
+    <section class="mx-auto max-w-[1440px] px-5 sm:px-8">
+      <!-- Filters -->
+      <div
+        class="sticky top-16 z-30 -mx-5 border-b border-border bg-background/90 px-5 backdrop-blur-xl sm:-mx-8 sm:px-8"
+      >
+        <div
+          class="flex items-center gap-6 overflow-x-auto py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <span
+            class="shrink-0 font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground"
+          >
+            Filter
+          </span>
+          <button
             v-for="category in categories"
             :key="category.id"
-            :variant="selectedCategory === category.id ? 'default' : 'outline'"
-            size="sm"
+            type="button"
+            class="group relative shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+            :class="
+              selectedCategory === category.id
+                ? 'text-foreground'
+                : 'text-muted-foreground hover:text-foreground'
+            "
             @click="selectedCategory = category.id"
           >
             {{ category.name }}
-            <UiBadge variant="secondary" class="ml-1.5 text-xs">
-              {{ category.count }}
-            </UiBadge>
-          </UiButton>
-        </div>
-
-        <!-- Projects Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <motion.div
-            v-for="(project, index) in filteredProjects"
-            :key="project.id"
-            :initial="{ opacity: 0, y: 30 }"
-            :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }"
-            class="group flex flex-col"
-          >
-            <UiCard
-              class="h-full overflow-hidden hover:border-border transition-all duration-300 flex flex-col"
-            >
-              <!-- Project Image Placeholder -->
-              <div class="relative h-44 bg-muted/50">
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="text-3xl opacity-20">
-                    {{
-                      project.category === 'web'
-                        ? '🌐'
-                        : project.category === 'mobile'
-                          ? '📱'
-                          : project.category === 'ui'
-                            ? '🎨'
-                            : '🔧'
-                    }}
-                  </div>
-                </div>
-
-                <!-- Status Indicator -->
-                <div class="absolute top-3 left-3">
-                  <UiBadge
-                    :variant="
-                      project.status === 'completed' ? 'default' : 'secondary'
-                    "
-                    class="text-xs"
-                  >
-                    {{ project.status }}
-                  </UiBadge>
-                </div>
-              </div>
-
-              <!-- Content -->
-              <UiCardContent class="p-5 flex flex-col h-full">
-                <div class="flex-1 space-y-3">
-                  <h3
-                    class="text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors duration-200"
-                  >
-                    {{ project.title }}
-                  </h3>
-
-                  <p class="text-muted-foreground text-sm leading-relaxed">
-                    {{ project.description }}
-                  </p>
-
-                  <!-- Tech Stack -->
-                  <div class="flex flex-wrap gap-1">
-                    <UiBadge
-                      v-for="tech in project.technologies.slice(0, 3)"
-                      :key="tech"
-                      variant="outline"
-                      class="text-xs"
-                    >
-                      {{ tech }}
-                    </UiBadge>
-                    <span
-                      v-if="project.technologies.length > 3"
-                      class="px-2 py-0.5 text-muted-foreground/60 text-xs"
-                    >
-                      +{{ project.technologies.length - 3 }}
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Links -->
-                <div class="flex gap-2 mt-5">
-                  <a
-                    v-if="project.demoUrl"
-                    :href="project.demoUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1"
-                  >
-                    <UiButton size="sm" class="w-full"> Demo </UiButton>
-                  </a>
-                  <a
-                    v-if="project.githubUrl"
-                    :href="project.githubUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1"
-                    :class="{ 'flex-1 text-center': !project.demoUrl }"
-                  >
-                    <UiButton size="sm" variant="outline" class="w-full">
-                      Code
-                    </UiButton>
-                  </a>
-                </div>
-              </UiCardContent>
-            </UiCard>
-          </motion.div>
+            <sup class="ml-0.5 text-[8px] text-muted-foreground">
+              {{ pad(category.count) }}
+            </sup>
+            <span
+              class="absolute -bottom-[17px] left-0 h-px w-full origin-left bg-brand transition-transform duration-300"
+              :class="
+                selectedCategory === category.id
+                  ? 'scale-x-100'
+                  : 'scale-x-0 group-hover:scale-x-100'
+              "
+            />
+          </button>
         </div>
       </div>
-    </motion.section>
 
-    <!-- CTA Section -->
-    <motion.section
-      class="w-full py-24"
-      :initial="{ opacity: 0, y: 50 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
-    >
-      <div class="max-w-3xl mx-auto text-center px-6">
-        <UiCard class="bg-muted/30">
-          <UiCardContent class="pt-6">
-            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Have a Project in Mind?
+      <!-- Rows -->
+      <div class="border-b border-border">
+        <article
+          v-for="(project, index) in filteredProjects"
+          :key="project.id"
+          class="group grid grid-cols-12 items-start gap-x-4 gap-y-4 border-b border-border py-8 last:border-0 sm:py-10"
+        >
+          <div class="col-span-2 sm:col-span-1">
+            <span
+              class="font-mono text-[10px] tracking-[0.18em] text-muted-foreground"
+            >
+              {{ pad(index + 1) }}
+            </span>
+          </div>
+
+          <div class="col-span-10 sm:col-span-7 lg:col-span-5">
+            <h2
+              class="font-display text-3xl leading-[0.95] transition-colors group-hover:text-brand sm:text-4xl"
+            >
+              <a
+                v-if="project.demoUrl"
+                :href="project.demoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ project.title }}
+              </a>
+              <a
+                v-else-if="project.githubUrl"
+                :href="project.githubUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ project.title }}
+              </a>
+              <span v-else>{{ project.title }}</span>
             </h2>
             <p
-              class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
+              class="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground"
             >
-              I'm always excited to work on interesting projects and collaborate
-              with passionate people. Let's bring your ideas to life!
+              {{ project.description }}
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <NuxtLink to="/contact">
-                <UiButton class="min-w-36">Start a Project</UiButton>
-              </NuxtLink>
-              <NuxtLink to="/about">
-                <UiButton variant="outline" class="min-w-36">
-                  Learn More About Me
-                </UiButton>
-              </NuxtLink>
+
+            <div
+              class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.16em]"
+            >
+              <a
+                v-if="project.demoUrl"
+                :href="project.demoUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-brand transition-opacity hover:opacity-70"
+              >
+                Live <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                v-if="project.githubUrl"
+                :href="project.githubUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Code <span aria-hidden="true">↗</span>
+              </a>
             </div>
-          </UiCardContent>
-        </UiCard>
+          </div>
+
+          <div class="col-span-12 sm:col-span-4 lg:col-span-3 lg:col-start-7">
+            <ul
+              class="flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground"
+            >
+              <li v-for="tech in project.technologies" :key="tech">
+                {{ tech }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-span-8 sm:col-span-2 lg:col-span-2">
+            <span
+              class="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.16em]"
+              :class="
+                project.status === 'completed'
+                  ? 'text-muted-foreground'
+                  : 'text-brand'
+              "
+            >
+              <span
+                class="h-1 w-1 rounded-full"
+                :class="
+                  project.status === 'completed'
+                    ? 'bg-muted-foreground'
+                    : 'animate-pulse bg-brand'
+                "
+              />
+              {{ project.status }}
+            </span>
+          </div>
+
+          <div class="col-span-4 sm:col-span-1 text-right">
+            <a
+              :href="project.demoUrl || project.githubUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex h-8 w-8 items-center justify-center border border-border font-mono text-xs transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background"
+              :aria-label="`Open ${project.title}`"
+            >
+              ↗
+            </a>
+          </div>
+        </article>
+
+        <div
+          v-if="filteredProjects.length === 0"
+          class="py-24 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
+        >
+          Nothing here yet.
+        </div>
       </div>
-    </motion.section>
+    </section>
+
+    <!-- CTA -->
+    <section class="border-t border-border">
+      <NuxtLink
+        to="/contact"
+        class="group mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-20 sm:px-8 sm:py-28"
+      >
+        <span
+          class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
+        >
+          Next — 05
+        </span>
+        <div
+          class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <h2
+            class="font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.85] tracking-[-0.03em]"
+          >
+            Have something<br />
+            <span class="italic">in mind?</span>
+          </h2>
+          <span
+            class="inline-flex items-center gap-3 border border-border px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background"
+          >
+            Let's talk <span aria-hidden="true">↗</span>
+          </span>
+        </div>
+      </NuxtLink>
+    </section>
   </main>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { motion } from 'motion-v';
 
-// Data
 const categoryList = [
-  { id: 'all', name: 'All Projects' },
-  { id: 'web', name: 'Web Apps' },
+  { id: 'all', name: 'All' },
+  { id: 'web', name: 'Web' },
   { id: 'mobile', name: 'Mobile' },
   { id: 'ui', name: 'UI/UX' },
-  { id: 'opensource', name: 'Open Source' },
+  { id: 'opensource', name: 'Open source' },
 ];
 
 const projects = [
@@ -353,10 +340,17 @@ const projects = [
   },
 ];
 
-// State
 const selectedCategory = ref('all');
 
-// Computed
+const pad = (value: number) => String(value).padStart(2, '0');
+
+const openSourceCount = projects.filter(
+  project => project.category === 'opensource'
+).length;
+const ongoingCount = projects.filter(
+  project => project.status !== 'completed'
+).length;
+
 const categories = computed(() =>
   categoryList.map(c => ({
     ...c,
@@ -373,14 +367,13 @@ const filteredProjects = computed(() => {
     : projects.filter(p => p.category === selectedCategory.value);
 });
 
-// Meta
 useHead({
   title: 'projects',
   meta: [
     {
       name: 'description',
       content:
-        'Explore the portfolio of Ikhwan Satrio – Frontend Developer. Showcasing web apps, open-source tools, and more built with Astro, Svelte, Tauri, and modern web tech.',
+        'Explore the portfolio of Ikhwan Satrio — Fullstack Developer & Robotics Engineer. Showcasing web apps, desktop tools, robotics experiments, and open-source projects.',
     },
   ],
 });

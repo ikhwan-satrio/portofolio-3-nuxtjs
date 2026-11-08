@@ -7,7 +7,7 @@ useHead({
     {
       name: 'keywords',
       content:
-        'portofolio,portofolio ikhwan,portofolio ikhwan satrio,ikhwan,ikhwan satrio,young dev portofolio',
+        'portofolio,portofolio ikhwan,portofolio ikhwan satrio,ikhwan,ikhwan satrio,fullstack developer,robotics engineer,fullstack,robotics',
     },
     {
       name: 'google-site-verification',
@@ -22,9 +22,9 @@ useHead({
 </script>
 
 <template>
-  <SplashScreen />
-  <Header />
+  <LayoutSplashScreen />
+  <LayoutHeader />
   <NuxtPage />
-  <RespectTooltip />
-  <Footer />
+  <LayoutSolidarityBanner />
+  <LayoutFooter />
 </template>

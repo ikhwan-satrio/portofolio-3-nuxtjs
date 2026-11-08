@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { motion } from 'motion-v';
-import image from '~/assets/images/foto_kecil.jpg';
+import profileImage from '~/assets/images/portrait.jpg';
 
-// SEO Meta Tags
 useHead({
   title: 'about',
   meta: [
     {
       name: 'description',
       content:
-        'Learn more about Ikhwan Satrio - Young passionate programmer specializing in modern web development with Vue, Nuxt, and React',
+        'Learn more about Ikhwan Satrio — fullstack developer and robotics engineer building web systems, tools, and machines',
     },
     {
       name: 'keywords',
@@ -19,396 +17,381 @@ useHead({
   ],
 });
 
-// Skills data
+const pad = (value: number) => String(value).padStart(2, '0');
+
 const skills = [
-  { name: 'JavaScript', level: 90, color: 'bg-foreground' },
-  { name: 'TypeScript', level: 85, color: 'bg-foreground/80' },
-  { name: 'React', level: 75, color: 'bg-foreground/70' },
-  { name: 'Qwik', level: 80, color: 'bg-foreground/75' },
-  { name: 'Svelte', level: 80, color: 'bg-foreground/75' },
-  { name: 'Node.js', level: 85, color: 'bg-foreground/80' },
-  { name: 'UI/UX Design', level: 70, color: 'bg-foreground/65' },
-  { name: 'Database', level: 70, color: 'bg-foreground/65' },
+  { name: 'JavaScript', level: 90 },
+  { name: 'TypeScript', level: 85 },
+  { name: 'React', level: 75 },
+  { name: 'Qwik', level: 80 },
+  { name: 'Svelte', level: 80 },
+  { name: 'Node.js', level: 85 },
+  { name: 'Python', level: 80 },
+  { name: 'C++', level: 70 },
+  { name: 'Robotics', level: 75 },
+  { name: 'Database', level: 70 },
 ];
 
-// Interests data
-const interests = [
-  { emoji: '🎮', title: 'Gaming', desc: 'Strategy games and indie titles' },
-  { emoji: '📚', title: 'Learning', desc: 'Always exploring new tech' },
-  { emoji: '☕', title: 'Coffee', desc: 'Fuel for late-night coding' },
-  { emoji: '🎵', title: 'Music', desc: 'Lo-fi beats while coding' },
-  { emoji: '🌟', title: 'Open Source', desc: 'Contributing to community' },
-  { emoji: '🚀', title: 'Innovation', desc: 'Building the future' },
+const journey = [
+  {
+    title: 'Scratch',
+    text: 'It started with an old, barely functioning laptop and a pile of colorful blocks. I had no idea what I was doing — only that making something move on screen felt like magic.',
+  },
+  {
+    title: 'The first line',
+    text: 'Curiosity led me to VSCode and my first lines of HTML. Soon after came React, attempted long before JavaScript truly made sense. It failed, as it should have.',
+  },
+  {
+    title: 'Falling, then learning',
+    text: 'Through persistence and late nights, the pieces started to click. I fell in love with clean code, fast feedback loops, and interfaces that get out of the way.',
+  },
+  {
+    title: 'Now',
+    text: 'Today I build fullstack systems with TypeScript, NeoVim, Nuxt, SvelteKit, and AdonisJS — and robotics projects that connect code to the physical world. Still learning, still building, still chasing the same feeling from that first laptop.',
+  },
 ];
+
+const interests = [
+  { title: 'Gaming', desc: 'Strategy games and quiet indie titles.' },
+  { title: 'Learning', desc: 'Always exploring whatever comes next.' },
+  { title: 'Coffee', desc: 'Fuel for late-night coding sessions.' },
+  { title: 'Music', desc: 'Lo-fi beats, anime soundtracks, and silence.' },
+  { title: 'Open source', desc: 'Contributing to the commons, slowly.' },
+  { title: 'Robotics', desc: 'Bridging software with the physical world.' },
+];
+
+const facts = [
+  'A young programmer with big ambition.',
+  'A huge fan of anime — especially slice-of-life and romance.',
+  'Loves calisthenics every morning.',
+  'Bridges fullstack software and robotics.',
+];
+
+const traits = ['Creative thinker', 'Problem solver', 'Team player'];
 </script>
 
 <template>
-  <main class="w-full min-h-screen bg-background text-foreground">
-    <!-- Hero Section -->
+  <main class="w-full">
+    <!-- Hero -->
     <section
-      class="relative w-full h-screen text-center flex flex-col items-center justify-center gap-8 overflow-hidden"
+      class="relative flex min-h-screen items-center overflow-hidden border-b border-border pt-16"
     >
-      <!-- Profile Image -->
-      <div class="relative">
-        <BitsAnimationsGlareHover
-          width="150px"
-          height="150px"
-          border-radius="100%"
-          glare-color="oklch(from var(--color-foreground) l c h / 0.3)"
-          :glare-opacity="0.3"
-          :glare-angle="-30"
-          :glare-size="300"
-          :transition-duration="800"
-          :play-once="false"
-        >
-          <img
-            :src="image"
-            alt="Profile"
-            class="h-37.5 w-37.5 rounded-full object-cover shadow-2xl border-4 border-border/50"
-          />
-        </BitsAnimationsGlareHover>
-      </div>
+      <div
+        class="editorial-grid pointer-events-none absolute inset-0 opacity-50"
+      />
+      <div
+        class="relative mx-auto grid w-full max-w-[1440px] grid-cols-12 items-center gap-10 px-5 py-20 sm:px-8 sm:py-28"
+      >
+        <div class="animate-fade-up col-span-12 lg:col-span-7">
+          <div class="flex items-center gap-4">
+            <span class="h-px w-10 bg-brand" />
+            <span
+              class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
+            >
+              About — 02
+            </span>
+          </div>
 
-      <!-- Text Block -->
-      <div class="flex flex-col items-center gap-6 p-3 z-10">
-        <ClientOnly>
-          <BitsTextAnimationsSplitText
-            text="About Ikhwan Satrio"
-            class-name="font-poppins text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight"
-            ease="power3.out"
-            split-type="chars"
-            root-margin="-100px"
-            text-align="center"
-            :delay="100"
-            :duration="0.6"
-            :from="{ opacity: 0, y: 40 }"
-            :to="{ opacity: 1, y: 0 }"
-            :threshold="0.1"
-          />
-          <BitsTextAnimationsTextType
-            class="font-inter text-lg sm:text-xl md:text-2xl"
-            :text-colors="[
-              'var(--color-chart-1)',
-              'var(--color-chart-4)',
-              'var(--color-chart-3)',
-              'var(--color-chart-2)',
-            ]"
-            :text="[
-              'Passionate Developer',
-              'Problem Solver',
-              'Tech Enthusiast',
-              'Linux Enthusiast',
-            ]"
-            :typing-speed="80"
-            :pause-duration="1800"
-            show-cursor
-            cursor-character="|"
-          />
-        </ClientOnly>
-      </div>
+          <h1
+            class="mt-8 font-display text-[clamp(3.5rem,12vw,11rem)] leading-[0.8] tracking-[-0.04em]"
+          >
+            About<br />
+            <span class="italic text-brand">me</span>
+          </h1>
 
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg
-          class="w-5 h-5 text-muted-foreground"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+          <p
+            class="mt-8 max-w-lg font-display text-2xl italic leading-tight text-muted-foreground sm:text-3xl"
+          >
+            A fullstack developer and robotics engineer, still early in the
+            story — and in no particular hurry to rush it.
+          </p>
+        </div>
+
+        <div
+          class="animate-fade-up col-span-12 lg:col-span-5"
+          style="animation-delay: 0.12s"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          />
-        </svg>
+          <div class="ml-auto max-w-sm">
+            <div class="relative">
+              <div
+                class="absolute -left-3 -top-3 h-full w-full border border-brand"
+              />
+              <img
+                :src="profileImage"
+                alt="Portrait of Ikhwan Satrio"
+                class="relative aspect-[4/5] w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
+              />
+            </div>
+            <dl
+              class="mt-5 grid grid-cols-2 gap-4 border-t border-border pt-4 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              <div>
+                <dt>Role</dt>
+                <dd class="mt-1 text-[11px] text-foreground">
+                  Fullstack & robotics
+                </dd>
+              </div>
+              <div>
+                <dt>Base</dt>
+                <dd class="mt-1 text-[11px] text-foreground">Indonesia</dd>
+              </div>
+              <div>
+                <dt>Editor</dt>
+                <dd class="mt-1 text-[11px] text-foreground">NeoVim</dd>
+              </div>
+              <div>
+                <dt>Focus</dt>
+                <dd class="mt-1 text-[11px] text-foreground">
+                  Web systems & robotics
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Content Sections -->
-    <!-- Story Section -->
-    <motion.section
-      class="w-full py-28 flex items-center"
-      :initial="{ opacity: 0, y: 50 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
-    >
-      <div class="max-w-5xl mx-auto px-6 w-full">
-        <div class="space-y-16">
-          <div class="text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              My Story
-            </h2>
-          </div>
-
-          <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-              <div
-                class="space-y-4 text-muted-foreground leading-relaxed text-base"
-              >
-                <p>
-                  My journey started with an old, barely functioning laptop. I
-                  first touched programming through Scratch, dragging colorful
-                  blocks on screen. Curiosity led me to open VSCode and write my
-                  first lines of HTML. Soon, I jumped into React without fully
-                  understanding JavaScript — and failed, but kept going.
-                </p>
-                <p>
-                  Through persistence and late nights, I gradually built real
-                  apps. I fell in love with clean code and fast feedback loops.
-                  Today, I proudly craft projects using TypeScript, NeoVim, and
-                  modern frameworks like Nuxt, SvelteKit, and AdonisJS.
-                </p>
-                <p>
-                  I'm still learning, still building, and always excited to
-                  solve meaningful problems with code.
-                </p>
-              </div>
-
-              <div class="flex flex-wrap gap-2 mt-8">
-                <UiBadge variant="secondary">Creative Thinker</UiBadge>
-                <UiBadge variant="secondary">Problem Solver</UiBadge>
-                <UiBadge variant="secondary">Team Player</UiBadge>
-              </div>
-            </div>
-
-            <div class="relative">
-              <UiCard class="bg-muted/50">
-                <UiCardContent class="text-center space-y-5 pt-6">
-                  <div class="text-5xl">💭</div>
-                  <h3 class="text-xl font-semibold text-foreground">
-                    My Philosophy
-                  </h3>
-                  <blockquote
-                    class="text-muted-foreground text-base italic leading-relaxed"
-                  >
-                    "Code is my canvas, and ambition is my fuel."
-                  </blockquote>
-                </UiCardContent>
-              </UiCard>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.section>
-
-    <!-- Skills Section -->
-    <motion.section
-      class="w-full py-28 flex items-center bg-muted/30"
-      :initial="{ opacity: 0, y: 50 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
-    >
-      <div class="max-w-5xl mx-auto px-6 w-full">
-        <div class="space-y-14">
-          <div class="text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Skills & Technologies
-            </h2>
-            <p class="text-muted-foreground text-base max-w-xl mx-auto">
-              Here are the technologies I love working with and my proficiency
-              levels
-            </p>
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-6">
-            <UiCard v-for="skill in skills" :key="skill.name" class="p-5">
-              <div class="flex justify-between items-center mb-3">
-                <h3 class="font-medium text-foreground text-sm">
-                  {{ skill.name }}
-                </h3>
-                <span class="text-muted-foreground text-xs font-medium"
-                  >{{ skill.level }}%</span
-                >
-              </div>
-              <UiProgress :model-value="skill.level" class="h-1.5" />
-            </UiCard>
-          </div>
-
-          <UiCard class="text-center bg-muted/50 p-6">
-            <UiCardContent class="pt-6">
-              <p class="text-muted-foreground text-sm">
-                Always learning new technologies and staying up-to-date with the
-                latest trends in web development
-              </p>
-            </UiCardContent>
-          </UiCard>
-        </div>
-      </div>
-    </motion.section>
-
-    <!-- Journey Section -->
-    <motion.section
-      class="w-full py-28 flex items-center"
-      :initial="{ opacity: 0, y: 50 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
-    >
-      <div class="max-w-5xl mx-auto px-6 w-full">
-        <div class="space-y-14">
-          <div class="text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              My Journey
-            </h2>
-            <p class="text-muted-foreground text-base">
-              The path that led me to where I am today
-            </p>
-          </div>
-
-          <div class="max-w-2xl mx-auto text-center py-16">
-            <div class="space-y-6">
-              <div
-                class="w-20 h-20 mx-auto bg-muted rounded-full flex items-center justify-center"
-              >
-                <svg
-                  class="w-10 h-10 text-muted-foreground"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-
-              <div class="space-y-3">
-                <h3 class="text-xl font-semibold text-foreground">
-                  Journey Coming Soon
-                </h3>
-                <p class="text-muted-foreground text-base leading-relaxed">
-                  I'm currently building my professional timeline. Check back
-                  soon to see my journey unfold!
-                </p>
-              </div>
-
-              <div class="pt-4">
-                <NuxtLink to="/contact">
-                  <UiButton>
-                    <Icon name="lucide:message-circle" size="16" class="mr-2" />
-                    Let's Connect
-                  </UiButton>
-                </NuxtLink>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.section>
-
-    <!-- Interests Section -->
-    <motion.section
-      class="w-full py-28 flex items-center bg-muted/30"
-      :initial="{ opacity: 0, y: 50 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.8, ease: 'easeOut' }"
-    >
-      <div class="max-w-5xl mx-auto px-6 w-full">
-        <div class="space-y-14">
-          <div class="text-center">
-            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Beyond Code
-            </h2>
-            <p class="text-muted-foreground text-base">
-              What inspires and motivates me outside of programming
-            </p>
-          </div>
-
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <UiCard
-              v-for="interest in interests"
-              :key="interest.title"
-              class="p-5 text-center hover:border-border transition-all duration-300 group cursor-default"
+    <!-- Story -->
+    <section class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
+      <div class="grid grid-cols-12 gap-10">
+        <div class="col-span-12 lg:col-span-3">
+          <div class="lg:sticky lg:top-24">
+            <span
+              class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand"
             >
-              <UiCardContent class="pt-6">
-                <div
-                  class="text-4xl mb-3 group-hover:scale-105 transition-transform duration-300"
-                >
-                  {{ interest.emoji }}
-                </div>
-                <h3 class="text-base font-semibold text-foreground mb-1">
-                  {{ interest.title }}
-                </h3>
-                <p class="text-muted-foreground text-sm">{{ interest.desc }}</p>
-              </UiCardContent>
-            </UiCard>
+              01 / Story
+            </span>
+            <h2 class="mt-3 font-display text-3xl leading-none">
+              The short<br />version
+            </h2>
+          </div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-9">
+          <div
+            class="max-w-2xl space-y-6 text-base leading-relaxed text-muted-foreground"
+          >
+            <p
+              class="first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-7xl first-letter:leading-[0.72] first-letter:text-brand"
+            >
+              My journey started with an old, barely functioning laptop. I first
+              touched programming through Scratch, dragging colorful blocks on
+              screen. Curiosity led me to open VSCode and write my first lines
+              of HTML. Soon, I jumped into React without fully understanding
+              JavaScript — and failed, but kept going.
+            </p>
+            <p>
+              Through persistence and late nights, I gradually built real apps.
+              I fell in love with clean code and fast feedback loops. Today, I
+              build fullstack products with TypeScript, NeoVim, and modern
+              frameworks like Nuxt, SvelteKit, and AdonisJS — and I also work on
+              robotics, bridging software with the physical world.
+            </p>
+            <p>
+              I'm still learning, still building, and always excited to solve
+              meaningful problems with code.
+            </p>
           </div>
 
-          <UiCard class="bg-muted/50 p-8 text-center">
-            <UiCardContent class="pt-6">
-              <div class="text-3xl mb-3">🎯</div>
-              <h3 class="text-lg font-semibold text-foreground mb-3">
-                Current Focus
-              </h3>
-              <p
-                class="text-muted-foreground text-base leading-relaxed max-w-2xl mx-auto"
-              >
-                I'm currently diving deep into performance optimization with
-                Nuxt and exploring the intersection of AI and web development.
-                Always excited about pushing the boundaries of what's possible
-                on the web!
-              </p>
-            </UiCardContent>
-          </UiCard>
+          <div class="mt-10 flex flex-wrap gap-2">
+            <span
+              v-for="trait in traits"
+              :key="trait"
+              class="border border-border px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground"
+            >
+              {{ trait }}
+            </span>
+          </div>
         </div>
       </div>
-    </motion.section>
+    </section>
+
+    <!-- Skills -->
+    <section class="border-y border-border bg-muted/30">
+      <div class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
+        <div
+          class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <div>
+            <span
+              class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand"
+            >
+              02 / Toolkit
+            </span>
+            <h2 class="mt-3 font-display text-4xl leading-[0.9] sm:text-6xl">
+              Skills &<br />
+              <span class="italic">technologies</span>
+            </h2>
+          </div>
+          <p class="max-w-sm text-sm leading-relaxed text-muted-foreground">
+            Tools I reach for most often. The percentages are honest guesses,
+            not promises.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-x-16 md:grid-cols-2">
+          <div
+            v-for="(skill, index) in skills"
+            :key="skill.name"
+            class="group flex items-baseline gap-3 border-b border-border py-4"
+          >
+            <span class="font-mono text-[10px] text-muted-foreground">
+              {{ pad(index + 1) }}
+            </span>
+            <span
+              class="font-display text-2xl transition-colors group-hover:text-brand"
+            >
+              {{ skill.name }}
+            </span>
+            <span class="mb-1 flex-1 border-b border-dotted border-border/80" />
+            <span class="font-mono text-[11px] text-muted-foreground">
+              {{ skill.level }}<span class="text-[9px]">%</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey -->
+    <section class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
+      <div class="grid grid-cols-12 gap-10">
+        <div class="col-span-12 lg:col-span-3">
+          <div class="lg:sticky lg:top-24">
+            <span
+              class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand"
+            >
+              03 / Journey
+            </span>
+            <h2 class="mt-3 font-display text-3xl leading-none">
+              How I got<br />here
+            </h2>
+          </div>
+        </div>
+
+        <div class="col-span-12 grid gap-x-16 md:grid-cols-2 lg:col-span-9">
+          <div
+            v-for="(chapter, index) in journey"
+            :key="chapter.title"
+            class="grid grid-cols-[auto_1fr] gap-5 border-t border-border py-8"
+          >
+            <span class="font-mono text-[10px] tracking-[0.18em] text-brand">
+              {{ pad(index + 1) }}
+            </span>
+            <div>
+              <h3 class="font-display text-3xl leading-none">
+                {{ chapter.title }}
+              </h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {{ chapter.text }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interests -->
+    <section class="border-y border-border bg-muted/30">
+      <div class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
+        <div class="max-w-2xl">
+          <span
+            class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand"
+          >
+            04 / Beyond code
+          </span>
+          <h2 class="mt-3 font-display text-4xl leading-[0.9] sm:text-6xl">
+            What keeps me<br />
+            <span class="italic">curious</span>
+          </h2>
+        </div>
+
+        <div class="mt-14 grid gap-x-16 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            v-for="(interest, index) in interests"
+            :key="interest.title"
+            class="group border-t border-border py-6"
+          >
+            <span class="font-mono text-[10px] text-muted-foreground">
+              {{ pad(index + 1) }}
+            </span>
+            <h3
+              class="mt-4 font-display text-3xl leading-none transition-colors group-hover:text-brand"
+            >
+              {{ interest.title }}
+            </h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {{ interest.desc }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Music -->
-    <FavoriteMusicSection />
+    <MusicPlaylist />
 
-    <!-- Fun fact section -->
-    <section
-      class="w-full min-h-screen h-fit p-6 bg-background flex items-center text-foreground"
-    >
-      <div class="max-w-3xl mx-auto text-center px-4">
-        <h2 class="text-2xl font-bold mb-8 text-foreground">
-          Fun Facts About Me
-        </h2>
-        <ul class="text-base space-y-5 text-muted-foreground">
-          <li>A young programmer with big ambition</li>
-          <li>
-            Huge fan of anime (especially slice-of-life and romance genres)
-          </li>
-          <li>Loves doing calisthenics every morning</li>
-          <li>
-            Enjoys exploring new frameworks while listening to anime lo-fi
-          </li>
-        </ul>
+    <!-- Margin notes -->
+    <section class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
+      <div class="grid grid-cols-12 gap-10">
+        <div class="col-span-12 lg:col-span-3">
+          <div class="lg:sticky lg:top-24">
+            <span
+              class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand"
+            >
+              05 / Margin notes
+            </span>
+            <h2 class="mt-3 font-display text-3xl leading-none">
+              Fun facts,<br />loosely
+            </h2>
+          </div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-9">
+          <ul class="divide-y divide-border border-y border-border">
+            <li
+              v-for="(fact, index) in facts"
+              :key="fact"
+              class="flex items-baseline gap-5 py-6"
+            >
+              <span class="font-mono text-[10px] text-muted-foreground">
+                {{ pad(index + 1) }}
+              </span>
+              <span class="font-display text-2xl leading-snug sm:text-3xl">
+                {{ fact }}
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="w-full py-24">
-      <div class="max-w-3xl mx-auto text-center px-6">
-        <UiCard class="bg-muted/30">
-          <UiCardContent class="pt-6">
-            <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Let's Build Something Amazing
-            </h2>
-            <p
-              class="text-muted-foreground text-base mb-8 max-w-xl mx-auto leading-relaxed"
-            >
-              I'm always excited to work on interesting projects and collaborate
-              with passionate people. Whether it's a challenging technical
-              problem or an innovative idea, let's make it happen!
-            </p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <NuxtLink to="/projects">
-                <UiButton class="min-w-36">View My Work</UiButton>
-              </NuxtLink>
-              <NuxtLink to="/contact">
-                <UiButton variant="outline" class="min-w-36">
-                  Get In Touch
-                </UiButton>
-              </NuxtLink>
-            </div>
-          </UiCardContent>
-        </UiCard>
-      </div>
+    <!-- CTA -->
+    <section class="border-t border-border">
+      <NuxtLink
+        to="/contact"
+        class="group mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-20 sm:px-8 sm:py-28"
+      >
+        <span
+          class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
+        >
+          Next — 05 / Contact
+        </span>
+        <div
+          class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
+          <h2
+            class="font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.85] tracking-[-0.03em]"
+          >
+            If you want<br />
+            <span class="italic text-brand">just tell me.</span>
+          </h2>
+          <span
+            class="inline-flex items-center gap-3 border border-border px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background"
+          >
+            Start a conversation <span aria-hidden="true">↗</span>
+          </span>
+        </div>
+      </NuxtLink>
     </section>
   </main>
 </template>

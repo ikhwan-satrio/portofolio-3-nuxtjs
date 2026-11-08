@@ -52,7 +52,7 @@ ${message.trim()}
 
     <!-- Footer -->
     <div style="text-align:center; padding:20px; color:#94a3b8; font-size:12px; border-top:1px solid #f1f5f9; background:#fafafa;">
-      Dikirim otomatis dari portofolio Ikhwan Satrio — Frontend Developer
+      Dikirim otomatis dari portofolio Ikhwan Satrio — Fullstack Developer & Robotics Engineer
       <br />
       <em>"Code is my canvas, and ambition is my fuel."</em>
     </div>
