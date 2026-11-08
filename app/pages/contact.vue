@@ -1,140 +1,3 @@
-<template>
-  <main class="w-full">
-    <!-- Hero -->
-    <section
-      class="relative flex min-h-screen items-center overflow-hidden border-b border-border pt-16"
-    >
-      <div
-        class="editorial-grid pointer-events-none absolute inset-0 opacity-50"
-      />
-      <div
-        class="relative mx-auto w-full max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28"
-      >
-        <div class="animate-fade-up flex items-center gap-4">
-          <span class="h-px w-10 bg-brand" />
-          <span
-            class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
-          >
-            Contact — 05
-          </span>
-        </div>
-
-        <div class="mt-8 grid grid-cols-12 items-end gap-10">
-          <h1
-            class="animate-fade-up col-span-12 font-display text-[clamp(3.5rem,12vw,11rem)] leading-[0.8] tracking-[-0.04em] lg:col-span-8"
-            style="animation-delay: 0.08s"
-          >
-            Say<br />
-            <span class="italic text-brand">hello.</span>
-          </h1>
-
-          <div
-            class="animate-fade-up col-span-12 space-y-6 lg:col-span-4"
-            style="animation-delay: 0.16s"
-          >
-            <p class="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Have a project in mind, a question, or just a good link to share?
-              I'd love to hear from you. I usually reply within a day.
-            </p>
-
-            <div
-              class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
-            >
-              <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand" />
-              Available for new projects
-            </div>
-
-            <a
-              href="mailto:ikwansatria3974@gmail.com"
-              class="group inline-flex items-baseline gap-2 border-b border-foreground pb-1 font-mono text-[11px] tracking-[0.08em] transition-colors hover:border-brand hover:text-brand"
-            >
-              ikwansatria3974@gmail.com
-              <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Form & links -->
-    <section class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
-      <div class="grid grid-cols-12 gap-12 lg:gap-16">
-        <ContactForm />
-        <ContactMethods />
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="border-y border-border bg-muted/30">
-      <div class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
-        <div class="grid grid-cols-12 gap-10">
-          <div class="col-span-12 lg:col-span-3">
-            <div class="lg:sticky lg:top-24">
-              <span
-                class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand"
-              >
-                FAQ
-              </span>
-              <h2 class="mt-3 font-display text-3xl leading-none">
-                Questions,<br />answered
-              </h2>
-            </div>
-          </div>
-
-          <div
-            class="col-span-12 divide-y divide-border border-y border-border lg:col-span-9"
-          >
-            <div
-              v-for="(faq, index) in faqs"
-              :key="faq.question"
-              class="grid gap-3 py-6 sm:grid-cols-[1fr_1.5fr] sm:gap-10"
-            >
-              <h3 class="flex items-baseline gap-3 text-sm font-medium">
-                <span class="font-mono text-[10px] text-muted-foreground">
-                  {{ String(index + 1).padStart(2, '0') }}
-                </span>
-                {{ faq.question }}
-              </h3>
-              <p class="text-sm leading-relaxed text-muted-foreground">
-                {{ faq.answer }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="border-t border-border">
-      <a
-        href="mailto:ikwansatria3974@gmail.com"
-        class="group mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-20 sm:px-8 sm:py-28"
-      >
-        <span
-          class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
-        >
-          No brief required
-        </span>
-        <div
-          class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
-        >
-          <h2
-            class="font-display text-[clamp(2.5rem,8vw,7rem)] leading-[0.85] tracking-[-0.03em]"
-          >
-            Just send<br />
-            <span class="italic text-brand">a note.</span>
-          </h2>
-          <span
-            class="inline-flex items-center gap-3 border border-border px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background"
-          >
-            Email me <span aria-hidden="true">↗</span>
-          </span>
-        </div>
-      </a>
-    </section>
-  </main>
-</template>
-
 <script setup lang="ts">
 const faqs = [
   {
@@ -170,3 +33,109 @@ useHead({
   ],
 });
 </script>
+
+<template>
+  <main class="w-full overflow-x-hidden flex flex-col">
+    <!-- Hero -->
+    <section class="relative flex min-h-screen items-center overflow-hidden border-b border-border pt-16">
+      <div class="editorial-grid pointer-events-none absolute inset-0 opacity-50" />
+      <div class="relative mx-auto flex w-full max-w-[1440px] flex-col justify-center px-4 py-16 sm:px-8 sm:py-28">
+        <div class="animate-fade-up flex items-center gap-4">
+          <span class="h-px w-10 bg-brand shrink-0" />
+          <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground truncate">
+            Contact — 05
+          </span>
+        </div>
+
+        <div class="mt-8 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+          <h1
+            class="animate-fade-up font-display text-[clamp(2.75rem,10vw,10rem)] leading-[0.8] tracking-[-0.04em] break-words w-full lg:w-2/3"
+            style="animation-delay: 0.08s">
+            Say<br />
+            <span class="italic text-brand">hello.</span>
+          </h1>
+
+          <div class="animate-fade-up flex flex-col space-y-6 w-full lg:w-1/3 shrink-0" style="animation-delay: 0.16s">
+            <p class="max-w-sm text-xs sm:text-sm leading-relaxed text-muted-foreground break-words">
+              Have a project in mind, a question, or just a good link to share?
+              I'd love to hear from you. I usually reply within a day.
+            </p>
+
+            <div
+              class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-brand shrink-0" />
+              Available for new projects
+            </div>
+
+            <a href="mailto:ikwansatria3974@gmail.com"
+              class="group inline-flex items-baseline gap-2 border-b border-foreground pb-1 font-mono text-[11px] tracking-[0.08em] transition-colors hover:border-brand hover:text-brand break-all">
+              ikwansatria3974@gmail.com
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form & links -->
+    <section class="mx-auto w-full max-w-[1440px] px-4 py-16 sm:px-8 sm:py-28">
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+        <ContactForm />
+        <ContactMethods />
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="border-y border-border bg-muted/35">
+      <div class="mx-auto w-full max-w-[1440px] px-4 py-16 sm:px-8 sm:py-28">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
+          <div class="w-full lg:w-1/4 shrink-0">
+            <div class="lg:sticky lg:top-24">
+              <span class="font-mono text-[10px] uppercase tracking-[0.24em] text-brand">
+                FAQ
+              </span>
+              <h2 class="mt-3 font-display text-3xl leading-none">
+                Questions,<br />answered
+              </h2>
+            </div>
+          </div>
+
+          <div class="w-full lg:flex-1 divide-y divide-border border-y border-border min-w-0">
+            <div v-for="(faq, index) in faqs" :key="faq.question"
+              class="flex flex-col sm:flex-row gap-3 sm:gap-10 py-6">
+              <h3 class="flex items-baseline gap-3 text-sm font-medium w-full sm:w-1/2 shrink-0">
+                <span class="font-mono text-[10px] text-muted-foreground shrink-0">
+                  {{ String(index + 1).padStart(2, '0') }}
+                </span>
+                <span class="break-words">{{ faq.question }}</span>
+              </h3>
+              <p class="text-xs sm:text-sm leading-relaxed text-muted-foreground w-full sm:w-1/2 break-words">
+                {{ faq.answer }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="border-t border-border">
+      <a href="mailto:ikwansatria3974@gmail.com"
+        class="group mx-auto flex max-w-[1440px] flex-col gap-8 px-4 py-16 sm:px-8 sm:py-28">
+        <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+          No brief required
+        </span>
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 min-w-0">
+          <h2 class="font-display text-[clamp(2.25rem,7vw,7rem)] leading-[0.85] tracking-[-0.03em] break-words">
+            Just send<br />
+            <span class="italic text-brand">a note.</span>
+          </h2>
+          <span
+            class="inline-flex items-center justify-center gap-3 border border-border px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background shrink-0">
+            Email me <span aria-hidden="true">↗</span>
+          </span>
+        </div>
+      </a>
+    </section>
+  </main>
+</template>
