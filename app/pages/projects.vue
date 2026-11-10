@@ -121,7 +121,6 @@ useHead({
 
 <template>
   <main class="w-full overflow-x-hidden flex flex-col">
-    <!-- Hero -->
     <section class="relative flex min-h-screen items-center overflow-hidden border-b border-border pt-16">
       <div class="editorial-grid pointer-events-none absolute inset-0 opacity-50" />
       <div class="relative mx-auto flex w-full max-w-[1440px] flex-col justify-center px-4 py-16 sm:px-8 sm:py-28">
@@ -185,8 +184,8 @@ useHead({
           <button v-for="category in categories" :key="category.id" type="button"
             class="group relative shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors py-1"
             :class="selectedCategory === category.id
-                ? 'text-foreground'
-                : 'text-muted-foreground hover:text-foreground'
+              ? 'text-foreground'
+              : 'text-muted-foreground hover:text-foreground'
               " @click="selectedCategory = category.id">
             {{ category.name }}
             <sup class="ml-0.5 text-[8px] text-muted-foreground">
@@ -195,18 +194,16 @@ useHead({
             <span
               class="absolute -bottom-[17px] left-0 h-px w-full origin-left bg-brand transition-transform duration-300"
               :class="selectedCategory === category.id
-                  ? 'scale-x-100'
-                  : 'scale-x-0 group-hover:scale-x-100'
+                ? 'scale-x-100'
+                : 'scale-x-0 group-hover:scale-x-100'
                 " />
           </button>
         </div>
       </div>
 
-      <!-- Rows menggunakan Flexbox penuh untuk fluiditas maksimal di semua layar -->
       <div class="border-b border-border flex flex-col">
         <article v-for="(project, index) in filteredProjects" :key="project.id"
           class="group flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-border py-8 last:border-0 sm:py-10">
-          <!-- Kolom Nomor & Judul/Deskripsi -->
           <div class="flex items-start gap-4 sm:gap-6 flex-1 min-w-0">
             <span class="font-mono text-[10px] tracking-[0.18em] text-muted-foreground shrink-0 pt-1">
               {{ pad(index + 1) }}
@@ -241,7 +238,6 @@ useHead({
             </div>
           </div>
 
-          <!-- Kolom Teknologi, Status & Tombol Aksi -->
           <div
             class="flex flex-wrap md:flex-nowrap items-center gap-6 sm:gap-8 shrink-0 justify-between md:justify-end w-full md:w-auto">
             <!-- Teknologi -->
@@ -255,17 +251,16 @@ useHead({
             <!-- Status -->
             <div class="flex items-center gap-4">
               <span class="inline-flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.16em]" :class="project.status === 'completed'
-                  ? 'text-muted-foreground'
-                  : 'text-brand'
+                ? 'text-muted-foreground'
+                : 'text-brand'
                 ">
                 <span class="h-1 w-1 rounded-full shrink-0" :class="project.status === 'completed'
-                    ? 'bg-muted-foreground'
-                    : 'animate-pulse bg-brand'
+                  ? 'bg-muted-foreground'
+                  : 'animate-pulse bg-brand'
                   " />
                 {{ project.status }}
               </span>
 
-              <!-- Tombol Aksi Kanan -->
               <a :href="project.demoUrl || project.githubUrl" target="_blank" rel="noopener noreferrer"
                 class="inline-flex h-9 w-9 items-center justify-center border border-border font-mono text-xs transition-colors group-hover:border-foreground group-hover:bg-foreground group-hover:text-background shrink-0"
                 :aria-label="`Open ${project.title}`">
@@ -282,7 +277,6 @@ useHead({
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="border-t border-border">
       <NuxtLink to="/contact" class="group mx-auto flex max-w-[1440px] flex-col gap-8 px-4 py-16 sm:px-8 sm:py-28">
         <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
