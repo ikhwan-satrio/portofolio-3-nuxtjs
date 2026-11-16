@@ -4,20 +4,26 @@ const route = useRoute();
 const menuRef = ref<HTMLElement | null>(null);
 
 const links = [
-  { to: '/', label: 'Home', index: '01' },
-  { to: '/about', label: 'About', index: '02' },
-  { to: '/projects', label: 'Projects', index: '03' },
-  { to: '/blogs', label: 'Journal', index: '04' },
-  { to: '/contact', label: 'Contact', index: '05' },
+  { to: '/#home', label: 'Home', index: '01' },
+  { to: '/#about', label: 'About', index: '02' },
+  { to: '/#work', label: 'Work', index: '03' },
+  { to: '/#contact', label: 'Contact', index: '04' },
+  { to: '/blogs', label: 'Journal', index: '05' },
 ];
 
 function isActive(to: string) {
   if (to === '/') return route.path === '/';
+  if (to.startsWith('/#')) {
+    return (
+      route.path === '/' &&
+      (route.hash === to.slice(1) || (to === '/#home' && route.hash === ''))
+    );
+  }
   return route.path === to || route.path.startsWith(`${to}/`);
 }
 
 watch(
-  () => route.path,
+  () => route.fullPath,
   () => {
     isOpen.value = false;
   }
@@ -38,9 +44,9 @@ onMounted(() => {
 
 <template>
   <div ref="menuRef"
-    class="fixed inset-x-0 top-0 z-50 w-full overflow-x-hidden border-b border-border/70 bg-background/85 backdrop-blur-xl">
+    class="fixed inset-x-0 top-0 z-50 w-full overflow-x-clip border-b border-border/70 bg-background/85 backdrop-blur-xl">
     <!-- Menggunakan px-3 pada layar sangat kecil agar tidak ada gap/overflow -->
-    <div class="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8">
+    <div class="mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-4 sm:px-8">
       <!-- Identity -->
       <NuxtLink to="/" class="group flex min-w-0 items-center gap-2 sm:gap-3">
         <span
@@ -62,14 +68,20 @@ onMounted(() => {
       <nav class="hidden items-center gap-6 lg:gap-7 md:flex">
         <NuxtLink v-for="link in links" :key="link.to" :to="link.to"
           class="group relative flex items-baseline gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors py-1"
-          :class="isActive(link.to) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'">
+          :class="isActive(link.to)
+              ? 'text-foreground'
+              : 'text-muted-foreground hover:text-foreground'
+            ">
           <span class="text-[9px] text-muted-foreground/50">
             {{ link.index }}
           </span>
           <span>{{ link.label }}</span>
           <span
             class="absolute -bottom-[21px] left-0 h-px w-full origin-left bg-brand transition-transform duration-300"
-            :class="isActive(link.to) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'" />
+            :class="isActive(link.to)
+                ? 'scale-x-100'
+                : 'scale-x-0 group-hover:scale-x-100'
+              " />
         </NuxtLink>
       </nav>
 
@@ -97,11 +109,11 @@ onMounted(() => {
       enter-to-class="opacity-100 translate-y-0" leave-active-class="transition-all duration-200 ease-in"
       leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 -translate-y-2">
       <div v-if="isOpen" class="border-t border-border bg-background/95 backdrop-blur-xl md:hidden shadow-lg">
-        <nav class="mx-auto flex w-full max-w-7xl flex-col px-4 py-3">
+        <nav class="mx-auto flex w-full max-w-[1440px] flex-col px-4 py-3 sm:px-8">
           <NuxtLink v-for="link in links" :key="link.to" :to="link.to"
             class="flex items-baseline justify-between border-b border-border/60 py-3.5 last:border-0">
-            <span class="font-display text-2xl transition-colors"
-              :class="isActive(link.to) ? 'text-brand italic' : 'text-foreground'">
+            <span class="font-display text-2xl transition-colors" :class="isActive(link.to) ? 'text-brand italic' : 'text-foreground'
+              ">
               {{ link.label }}
             </span>
             <span class="font-mono text-[10px] text-muted-foreground">

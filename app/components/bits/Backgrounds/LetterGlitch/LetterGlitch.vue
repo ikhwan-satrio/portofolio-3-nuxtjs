@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   glitchSpeed: 50,
   centerVignette: false,
   outerVignette: false,
-  smooth: true
+  smooth: true,
 });
 
 const canvasRef = useTemplateRef<HTMLCanvasElement>('canvasRef');
@@ -109,15 +109,19 @@ const lettersAndSymbols = [
   '6',
   '7',
   '8',
-  '9'
+  '9',
 ];
 
 const getRandomChar = () => {
-  return lettersAndSymbols[Math.floor(Math.random() * lettersAndSymbols.length)];
+  return lettersAndSymbols[
+    Math.floor(Math.random() * lettersAndSymbols.length)
+  ];
 };
 
 const getRandomColor = () => {
-  return props.glitchColors[Math.floor(Math.random() * props.glitchColors.length)];
+  return props.glitchColors[
+    Math.floor(Math.random() * props.glitchColors.length)
+  ];
 };
 
 const hexToRgb = (hex: string) => {
@@ -131,7 +135,7 @@ const hexToRgb = (hex: string) => {
     ? {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
+        b: parseInt(result[3], 16),
       }
     : null;
 };
@@ -144,7 +148,7 @@ const interpolateColor = (
   const result = {
     r: Math.round(start.r + (end.r - start.r) * factor),
     g: Math.round(start.g + (end.g - start.g) * factor),
-    b: Math.round(start.b + (end.b - start.b) * factor)
+    b: Math.round(start.b + (end.b - start.b) * factor),
   };
   return `rgb(${result.r}, ${result.g}, ${result.b})`;
 };
@@ -162,7 +166,7 @@ const initializeLetters = (columns: number, rows: number) => {
     char: getRandomChar(),
     color: getRandomColor(),
     targetColor: getRandomColor(),
-    colorProgress: 1
+    colorProgress: 1,
   }));
 };
 
@@ -174,8 +178,14 @@ const resizeCanvas = () => {
 
   const dpr = window.devicePixelRatio || 1;
 
-  const parentWidth = parent.parentElement?.offsetWidth || parent.offsetWidth || window.innerWidth;
-  const parentHeight = parent.parentElement?.offsetHeight || parent.offsetHeight || window.innerHeight;
+  const parentWidth =
+    parent.parentElement?.offsetWidth ||
+    parent.offsetWidth ||
+    window.innerWidth;
+  const parentHeight =
+    parent.parentElement?.offsetHeight ||
+    parent.offsetHeight ||
+    window.innerHeight;
 
   const width = Math.max(parentWidth, 300);
   const height = Math.max(parentHeight, 300);

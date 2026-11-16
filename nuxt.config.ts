@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxt/eslint',
     'motion-v/nuxt',
+    '@nuxt/test-utils/module',
   ],
   future: {
     compatibilityVersion: 4,

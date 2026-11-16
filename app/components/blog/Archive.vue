@@ -44,7 +44,7 @@ const formatDate = (date: string) => {
   <div class="w-full">
     <!-- Filter -->
     <div
-      class="sticky top-16 z-30 -mx-5 border-y border-border bg-background/90 px-5 backdrop-blur-xl sm:-mx-8 sm:px-8"
+      class="sticky top-16 z-30 -mx-4 border-y border-border bg-background/90 px-4 backdrop-blur-xl sm:-mx-8 sm:px-8"
     >
       <div
         class="flex flex-col gap-3 py-3 [scrollbar-width:none] md:flex-row md:items-center md:justify-between [&::-webkit-scrollbar]:hidden"

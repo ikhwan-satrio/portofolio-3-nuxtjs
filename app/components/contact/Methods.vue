@@ -1,5 +1,5 @@
 <template>
-  <aside class="col-span-12 lg:col-span-5">
+  <aside class="w-full min-w-0 lg:flex-[5]">
     <div
       class="flex items-baseline justify-between border-b border-border pb-4"
     >

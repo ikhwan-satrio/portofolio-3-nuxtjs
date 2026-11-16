@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-12 lg:col-span-7">
+  <div class="w-full min-w-0 lg:flex-[7]">
     <div
       class="flex items-baseline justify-between border-b border-border pb-4"
     >

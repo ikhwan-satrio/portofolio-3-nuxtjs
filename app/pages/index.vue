@@ -1,4 +1,13 @@
 <script setup lang="ts">
+const sections = [
+  { id: 'home', title: 'Home' },
+  { id: 'about', title: 'About' },
+  { id: 'skills', title: 'Skills' },
+  { id: 'work', title: 'Work' },
+  { id: 'beyond', title: 'Beyond' },
+  { id: 'contact', title: 'Contact' },
+];
+
 useHead({
   title: 'home',
   meta: [
@@ -12,7 +21,13 @@ useHead({
 </script>
 
 <template>
-  <main class="w-full">
+  <main class="container-sections w-full overflow-x-clip">
+    <LayoutScrollSidebar :sections="sections" />
     <HomeHero />
+    <HomeAbout />
+    <HomeSkills />
+    <HomeWork />
+    <HomeBeyond />
+    <HomeContact />
   </main>
 </template>
