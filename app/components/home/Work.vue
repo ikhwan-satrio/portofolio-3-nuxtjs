@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+const { scrollToSection } = useSectionNavigation();
+
 const categoryList = [
   { id: 'all', name: 'All' },
   { id: 'web', name: 'Web' },
@@ -351,9 +353,10 @@ const filteredProjects = computed(() => {
     </section>
 
     <section class="border-t border-border">
-      <NuxtLink
-        to="/#contact"
-        class="group mx-auto flex max-w-[1440px] flex-col gap-8 px-4 py-16 sm:px-8 sm:py-28"
+      <button
+        type="button"
+        class="group mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-16 text-left sm:px-8 sm:py-28"
+        @click="scrollToSection('contact')"
       >
         <span
           class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
@@ -375,7 +378,7 @@ const filteredProjects = computed(() => {
             Let's talk <span aria-hidden="true">↗</span>
           </span>
         </div>
-      </NuxtLink>
+      </button>
     </section>
   </section>
 </template>

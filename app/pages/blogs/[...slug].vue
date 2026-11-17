@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
+const { scrollToSection } = useSectionNavigation();
 const { data: blog } = await useAsyncData('page-' + route.path, () => {
   return queryCollection('blogs').path(route.path).first();
 });
@@ -92,12 +93,13 @@ useHead({
           />
           More notes
         </NuxtLink>
-        <NuxtLink
-          to="/#contact"
+        <button
+          type="button"
           class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-brand"
+          @click="scrollToSection('contact')"
         >
           Say hello ↗
-        </NuxtLink>
+        </button>
       </div>
     </div>
   </main>

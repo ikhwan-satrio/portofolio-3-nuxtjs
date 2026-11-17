@@ -60,7 +60,7 @@ async function generateQRCode(url: string) {
 
 <template>
   <section class="border-y border-border bg-muted/30">
-    <div class="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28">
+    <div class="mx-auto max-w-[1440px] px-4 py-20 sm:px-8 sm:py-28">
       <div
         class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
       >
@@ -82,7 +82,7 @@ async function generateQRCode(url: string) {
       </div>
 
       <div
-        class="mt-12 grid gap-2 border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
+        class="mt-12 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
       >
         <div
           v-for="(track, index) in musicTracks"
@@ -101,7 +101,7 @@ async function generateQRCode(url: string) {
           </div>
 
           <div
-            class="mt-4 h-58.5 overflow-hidden border rounded-2xl border-border"
+            class="mt-4 h-20 overflow-hidden border rounded-2xl border-border"
           >
             <iframe
               :src="`https://open.spotify.com/embed/track/${track.spotifyTrackId}?utm_source=generator&theme=0`"

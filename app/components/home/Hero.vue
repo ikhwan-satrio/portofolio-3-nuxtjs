@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import profileImage from '~/assets/images/portrait.jpg';
 
+const { scrollToSection } = useSectionNavigation();
+
 const marquee = [
   'Fullstack',
   'Robotics',
@@ -68,24 +70,26 @@ const marquee = [
             </p>
 
             <div class="flex flex-wrap items-center gap-3">
-              <NuxtLink
-                to="/#work"
+              <button
+                type="button"
                 class="group inline-flex items-center gap-3 border border-foreground bg-foreground px-5 sm:px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-background transition-colors hover:bg-transparent hover:text-foreground"
+                @click="scrollToSection('work')"
               >
                 Selected work
                 <span class="transition-transform group-hover:translate-x-1">
                   →
                 </span>
-              </NuxtLink>
-              <NuxtLink
-                to="/#contact"
+              </button>
+              <button
+                type="button"
                 class="group inline-flex items-center gap-3 border border-border px-5 sm:px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground transition-colors hover:border-foreground"
+                @click="scrollToSection('contact')"
               >
                 Say hello
                 <span class="transition-transform group-hover:translate-x-1">
                   ↗
                 </span>
-              </NuxtLink>
+              </button>
             </div>
           </div>
         </div>

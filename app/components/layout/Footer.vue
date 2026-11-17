@@ -1,5 +1,8 @@
 <script setup lang="ts">
+type QuickLink = { name: string; to: string } | { name: string; id: string };
+
 const currentYear = new Date().getFullYear();
+const { scrollToSection } = useSectionNavigation();
 
 const socialLinks = [
   {
@@ -20,18 +23,22 @@ const socialLinks = [
   },
 ];
 
-const quickLinks = [
-  { name: 'Home', href: '/#home' },
-  { name: 'About', href: '/#about' },
-  { name: 'Work', href: '/#work' },
-  { name: 'Journal', href: '/blogs' },
-  { name: 'Contact', href: '/#contact' },
+const quickLinks: QuickLink[] = [
+  { name: 'Home', id: 'home' },
+  { name: 'About', id: 'about' },
+  { name: 'Work', id: 'work' },
+  { name: 'Journal', to: '/blogs' },
+  { name: 'Contact', id: 'contact' },
 ];
 
 const showTop = ref(false);
 
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleQuickLink(link: QuickLink) {
+  if ('id' in link) scrollToSection(link.id);
 }
 
 onMounted(() => {
@@ -50,9 +57,7 @@ onMounted(() => {
   <footer
     class="relative w-full overflow-x-clip border-t border-border bg-background"
   >
-    <!-- Menggunakan px-4 agar aman dan pas di layar handphone sangat kecil -->
     <div class="mx-auto w-full max-w-[1440px] px-4 sm:px-8">
-      <!-- CTA -->
       <div class="flex flex-col gap-10 border-b border-border py-16 sm:py-20">
         <div class="col-span-12 lg:col-span-7 min-w-0">
           <span
@@ -60,9 +65,10 @@ onMounted(() => {
           >
             Next step
           </span>
-          <NuxtLink
-            to="/#contact"
-            class="group mt-5 block font-display text-[clamp(2.25rem,7vw,6rem)] leading-[0.85] tracking-[-0.03em] break-words"
+          <button
+            type="button"
+            class="group mt-5 block text-left font-display text-[clamp(2.25rem,7vw,6rem)] leading-[0.85] tracking-[-0.03em] break-words"
+            @click="scrollToSection('contact')"
           >
             Let's make<br />
             <span
@@ -70,7 +76,7 @@ onMounted(() => {
             >
               something good.
             </span>
-          </NuxtLink>
+          </button>
         </div>
 
         <div
@@ -84,12 +90,15 @@ onMounted(() => {
             </h4>
             <ul class="mt-4 space-y-2">
               <li v-for="link in quickLinks" :key="link.name">
-                <NuxtLink
-                  :to="link.href"
+                <component
+                  :is="'to' in link ? 'NuxtLink' : 'button'"
+                  :to="'to' in link ? link.to : undefined"
+                  :type="'to' in link ? undefined : 'button'"
                   class="font-display text-xl leading-none text-foreground transition-colors hover:text-brand"
+                  @click="handleQuickLink(link)"
                 >
                   {{ link.name }}
-                </NuxtLink>
+                </component>
               </li>
             </ul>
           </div>
@@ -117,7 +126,6 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Oversized wordmark (Diatur agar tidak memicu overflow horizontal) -->
       <div class="overflow-hidden border-b border-border py-8 w-full">
         <p
           class="text-outline whitespace-nowrap font-display text-[clamp(2.5rem,11vw,11rem)] leading-[0.8] tracking-[-0.04em]"
@@ -126,7 +134,6 @@ onMounted(() => {
         </p>
       </div>
 
-      <!-- Colophon -->
       <div
         class="flex flex-col gap-3 py-6 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
       >
@@ -136,7 +143,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- Scroll to top button -->
     <Transition
       enter-active-class="transition-all duration-300 ease-out"
       enter-from-class="translate-y-2 opacity-0"

@@ -8,57 +8,56 @@ const props = defineProps<{
   sections: Section[];
 }>();
 
-const activeIndex = ref(0);
+const { activeSection, scrollToSection, observeSections } =
+  useSectionNavigation();
 const progressEl = ref<HTMLElement | null>(null);
 let cleanup: (() => void) | null = null;
+
+const activeIndex = computed(() =>
+  Math.max(
+    0,
+    props.sections.findIndex(section => section.id === activeSection.value)
+  )
+);
+
+const progressPercent = computed(() => {
+  const total = props.sections.length - 1;
+  return total > 0 ? (activeIndex.value / total) * 100 : 0;
+});
+
+function dotPosition(index: number) {
+  const total = props.sections.length - 1;
+  return total > 0 ? `${(index / total) * 100}%` : '0%';
+}
 
 onMounted(async () => {
   if (!import.meta.client) return;
 
-  const [{ gsap }, { ScrollTrigger }] = await Promise.all([
-    import('gsap'),
-    import('gsap/ScrollTrigger'),
-  ]);
+  const { gsap } = await import('gsap');
 
-  gsap.registerPlugin(ScrollTrigger);
   await nextTick();
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const index = props.sections.findIndex(
-          section => section.id === entry.target.id
-        );
-        if (index !== -1) activeIndex.value = index;
-      });
-    },
-    { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+  const stopObserver = observeSections(
+    props.sections.map(section => section.id)
   );
 
-  props.sections.forEach(section => {
-    const el = document.getElementById(section.id);
-    if (el) observer.observe(el);
-  });
+  if (progressEl.value) {
+    gsap.set(progressEl.value, { height: `${progressPercent.value}%` });
+  }
 
-  const context = gsap.context(() => {
+  const stopActiveWatch = watch(activeIndex, () => {
     if (!progressEl.value) return;
-
     gsap.to(progressEl.value, {
-      height: '100%',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.container-sections',
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.3,
-      },
+      height: `${progressPercent.value}%`,
+      duration: 0.3,
+      ease: 'power2.out',
+      overwrite: true,
     });
   });
 
   cleanup = () => {
-    observer.disconnect();
-    context.revert();
+    stopObserver();
+    stopActiveWatch();
   };
 });
 
@@ -79,19 +78,19 @@ onBeforeUnmount(() => {
         style="height: 0"
       />
 
-      <ul
-        class="absolute inset-y-0 left-1/2 flex -translate-x-1/2 list-none flex-col justify-between p-0"
-      >
+      <ul class="absolute inset-0 list-none p-0">
         <li
           v-for="(section, index) in sections"
           :key="section.id"
-          class="relative flex h-2.5 w-2.5 items-center justify-center"
+          class="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2"
+          :style="{ top: dotPosition(index) }"
         >
-          <a
-            :href="`#${section.id}`"
+          <button
+            type="button"
             class="group relative flex h-2.5 w-2.5 items-center justify-center"
             :aria-label="section.title"
             :aria-current="activeIndex === index ? 'true' : undefined"
+            @click="scrollToSection(section.id)"
           >
             <span
               class="h-1.5 w-1.5 rounded-full transition-all duration-300"
@@ -106,7 +105,7 @@ onBeforeUnmount(() => {
             >
               {{ section.title }}
             </span>
-          </a>
+          </button>
         </li>
       </ul>
     </div>
