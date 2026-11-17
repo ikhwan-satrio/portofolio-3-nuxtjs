@@ -1,6 +1,7 @@
 <script setup lang="ts">
 type QuickLink = { name: string; to: string } | { name: string; id: string };
 
+const NuxtLink = resolveComponent('NuxtLink');
 const currentYear = new Date().getFullYear();
 const { scrollToSection } = useSectionNavigation();
 
@@ -91,7 +92,7 @@ onMounted(() => {
             <ul class="mt-4 space-y-2">
               <li v-for="link in quickLinks" :key="link.name">
                 <component
-                  :is="'to' in link ? 'NuxtLink' : 'button'"
+                  :is="'to' in link ? NuxtLink : 'button'"
                   :to="'to' in link ? link.to : undefined"
                   :type="'to' in link ? undefined : 'button'"
                   class="font-display text-xl leading-none text-foreground transition-colors hover:text-brand"

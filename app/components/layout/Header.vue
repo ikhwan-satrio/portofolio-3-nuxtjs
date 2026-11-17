@@ -3,6 +3,7 @@ type NavLink =
   | { to: string; label: string; index: string }
   | { id: string; label: string; index: string };
 
+const NuxtLink = resolveComponent('NuxtLink');
 const isOpen = ref(false);
 const route = useRoute();
 const menuRef = ref<HTMLElement | null>(null);
@@ -80,7 +81,7 @@ onMounted(() => {
 
       <nav class="hidden items-center gap-6 lg:gap-7 md:flex">
         <component
-          :is="'to' in link ? 'NuxtLink' : 'button'"
+          :is="'to' in link ? NuxtLink : 'button'"
           v-for="link in links"
           :key="link.label"
           :to="'to' in link ? link.to : undefined"
@@ -148,7 +149,7 @@ onMounted(() => {
           class="mx-auto flex w-full max-w-[1440px] flex-col px-4 py-3 sm:px-8"
         >
           <component
-            :is="'to' in link ? 'NuxtLink' : 'button'"
+            :is="'to' in link ? NuxtLink : 'button'"
             v-for="link in links"
             :key="link.label"
             :to="'to' in link ? link.to : undefined"
